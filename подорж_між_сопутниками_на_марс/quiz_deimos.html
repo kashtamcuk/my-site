@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>DEIMOS Mission - Full Synchronized Style</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Базові змінні, які будуть змінені через JS */
+            --accent: #00d4ff; 
+            --glow: rgba(0, 212, 255, 0.25);
+            --correct: #58cc02; /* Duolingo Green */
+            --wrong: #ff4b4b;   /* Duolingo Red */
+            --bg: #000810;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--bg);
+            color: white;
+            font-family: 'Rajdhani', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            transition: background 0.4s ease;
+        }
+
+        /* Глобальні стани фону при відповідях */
+        body.global-correct {
+            background: radial-gradient(circle, rgba(0, 50, 0, 0.4) 0%, #000 100%);
+        }
+
+        body.global-wrong {
+            background: radial-gradient(circle, #300 0%, #000 100%);
+            animation: alarmFlash 0.6s infinite;
+        }
+
+        @keyframes alarmFlash { 50% { opacity: 0.7; } }
+
+        /* Трясіння при помилці */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+        .shake { animation: shake 0.2s ease-in-out 0s 2; }
+
+        .grid-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 212, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            transition: opacity 0.4s;
+        }
+
+        .quiz-container {
+            width: 850px;
+            background: rgba(0, 5, 15, 0.95);
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 40px var(--glow), inset 0 0 20px var(--glow);
+            backdrop-filter: blur(15px);
+            padding: 45px;
+            position: relative;
+            border-radius: 15px;
+            transition: border-color 0.4s, box-shadow 0.4s;
+        }
+
+        /* Стилізація картки при результаті */
+        body.global-correct .quiz-container { border-color: var(--correct); box-shadow: 0 0 40px rgba(88,204,2,0.3); }
+        body.global-wrong .quiz-container { border-color: var(--wrong); box-shadow: 0 0 40px rgba(255,75,75,0.3); }
+
+        /* Кутові елементи */
+        .corner { position: absolute; width: 20px; height: 20px; border: 2px solid var(--accent); transition: border-color 0.4s; }
+        .tl { top: -2px; left: -2px; border-right: 0; border-bottom: 0; }
+        .tr { top: -2px; right: -2px; border-left: 0; border-bottom: 0; }
+        .bl { bottom: -2px; left: -2px; border-right: 0; border-top: 0; }
+        .br { bottom: -2px; right: -2px; border-left: 0; border-top: 0; }
+
+        body.global-correct .corner { border-color: var(--correct); }
+        body.global-wrong .corner { border-color: var(--wrong); }
+
+        .header {
+            font-family: 'Orbitron';
+            color: var(--accent);
+            letter-spacing: 4px;
+            margin-bottom: 35px;
+            border-bottom: 1px solid var(--glow);
+            padding-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            transition: color 0.4s;
+        }
+
+        .question-text {
+            font-size: 1.8rem;
+            font-family: 'Orbitron';
+            margin-bottom: 40px;
+            min-height: 90px;
+            color: #e0faff;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .option-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid var(--accent);
+            border-bottom: 5px solid var(--accent); /* Ефект об'ємної кнопки */
+            color: white;
+            padding: 22px;
+            font-family: 'Share Tech Mono';
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.1s;
+            border-radius: 12px;
+            text-align: left;
+        }
+
+        .option-btn:hover:not(:disabled) { background: var(--glow); transform: translateY(-2px); }
+        .option-btn:active:not(:disabled) { transform: translateY(2px); border-bottom-width: 2px; }
+
+        /* Кольори відповідей Duolingo */
+        .option-btn.correct { background: #d7ffb8 !important; color: #58cc02; border-color: #58cc02; border-bottom-color: #46a302; }
+        .option-btn.wrong { background: #ffdfe0 !important; color: #ff4b4b; border-color: #ff4b4b; border-bottom-color: #d13d3d; }
+
+        .fact-panel {
+            margin-top: 25px;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-left: 4px solid var(--accent);
+            display: none;
+            font-size: 1.1rem;
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .next-btn {
+            margin-top: 35px; width: 100%; background: var(--accent);
+            border: none; border-bottom: 4px solid rgba(0,0,0,0.2);
+            color: black; padding: 18px; font-family: 'Orbitron'; 
+            font-size: 1.1rem; font-weight: bold;
+            cursor: pointer; display: none; border-radius: 12px;
+            text-transform: uppercase;
+        }
+        body.global-correct .next-btn { background: var(--correct); }
+        body.global-wrong .next-btn { background: var(--wrong); }
+
+        #progress-fill {
+            position: absolute; bottom: 0; left: 0; height: 6px;
+            background: var(--accent); transition: width 0.5s, background 0.4s; 
+            width: 0%; border-radius: 0 0 0 15px;
+        }
+        body.global-correct #progress-fill { background: var(--correct); }
+        body.global-wrong #progress-fill { background: var(--wrong); }
+    </style>
+</head>
+<body>
+
+    <div class="grid-bg"></div>
+
+    <div class="quiz-container" id="main-card">
+        <div class="corner tl"></div><div class="corner tr"></div>
+        <div class="corner bl"></div><div class="corner br"></div>
+
+        <div class="header">
+            <span>ARES-CORE // DEIMOS_SYNC</span>
+            <span id="counter">КРОК: 1 / 6</span>
+        </div>
+
+        <div id="quiz-box">
+            <div class="question-text" id="question">_</div>
+            <div class="options-grid" id="options-container"></div>
+            
+            <div class="fact-panel" id="fact-box">
+                <span id="fact-label" style="font-weight:bold; color:var(--accent)">[ ANALYSIS ]:</span>
+                <p id="fact-text"></p>
+            </div>
+
+            <button class="next-btn" id="next-button" onclick="handleNext()">Наступний сектор</button>
+        </div>
+
+        <div id="progress-fill"></div>
+    </div>
+
+    <audio id="fact-player"></audio>
+    <audio id="sfx-correct" src="correct.mp3"></audio>
+    <audio id="sfx-error" src="error.mp3"></audio>
+
+    <script>
+        const questions = [
+            { q: "Яка головна візуальна відмінність Деймоса від Фобоса?", options: ["Має яскраво-червоний колір", "На ньому зовсім немає кратерів", "Поверхня набагато гладкіша через пил", "Має ідеальну кулясту форму"], correctAnswer: "Поверхня набагато гладкіша через пил", fact: "На Деймосі шар пилу (реголіту) ховає нерівності кратерів, роблячи його поверхню гладкою.", audio: "deimos1.mp3" },
+            { q: "Яка доля чекає на Деймос у далекому майбутньому?", options: ["Впаде на Марс", "Поступово віддаляється від планети", "Перетвориться на кільце", "Зіткнеться з Сонцем"], correctAnswer: "Поступово віддаляється від планети", fact: "Деймос знаходиться вище критичної позначки і поступово летить геть від Марса.", audio: "deimos2.mp3" },
+            { q: "Скільки часу потрібно Деймосу для одного оберту?", options: ["7 годин", "Приблизно 30 годин", "88 днів", "1 годину"], correctAnswer: "Приблизно 30 годин", fact: "Один оберт триває близько 1.26 доби.", audio: "deimos3.mp3" },
+            { q: "Хто офіційно відкрив Деймос у 1877 році?", options: ["Нікола Тесла", "Йоганн Кеплер", "Асаф Голл", "Галілео Галілей"], correctAnswer: "Асаф Голл", fact: "Асаф Голл відкрив обидва супутники Марса у серпні 1877 року.", audio: "deimos4.mp3" },
+            { q: "Що означає назва «Деймос»?", options: ["Жах", "Темрява", "Швидкість", "Камінь"], correctAnswer: "Жах", fact: "Деймос перекладається як 'Жах' — вірний супутник бога війни.", audio: "deimos5.mp3" },
+            { q: "Який приблизний діаметр цього супутника?", options: ["Понад 100 км", "Близько 12 км", "1 метр", "3474 км"], correctAnswer: "Близько 12 км", fact: "Це один із найдрібніших супутників — його радіус лише 6.2 км.", audio: "deimos6.mp3" }
+        ];
+
+        let currentIdx = 0;
+        const factAudio = document.getElementById('fact-player');
+        const sfxCorrect = document.getElementById('sfx-correct');
+        const sfxError = document.getElementById('sfx-error');
+        const mainCard = document.getElementById('main-card');
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function init() {
+            shuffle(questions);
+            
+            // Завантаження теми та гучності
+            const themeColor = localStorage.getItem('marsTheme') || '#00d4ff';
+            document.documentElement.style.setProperty('--accent', themeColor);
+            document.documentElement.style.setProperty('--glow', themeColor + '40');
+
+            const userVol = (localStorage.getItem('marsVol') || 70) / 100;
+            factAudio.volume = userVol;
+            sfxCorrect.volume = userVol;
+            sfxError.volume = userVol;
+
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const data = questions[currentIdx];
+            document.getElementById('question').innerText = data.q;
+            document.getElementById('counter').innerText = `КРОК: ${currentIdx + 1} / ${questions.length}`;
+            document.getElementById('progress-fill').style.width = ((currentIdx + 1) / questions.length * 100) + "%";
+            
+            const optionsBox = document.getElementById('options-container');
+            optionsBox.innerHTML = '';
+            
+            shuffle([...data.options]).forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = `> ${opt}`;
+                btn.onclick = () => checkChoice(opt, btn);
+                optionsBox.appendChild(btn);
+            });
+
+            document.getElementById('next-button').style.display = 'none';
+            document.getElementById('fact-box').style.display = 'none';
+            document.body.classList.remove('global-correct', 'global-wrong');
+            mainCard.classList.remove('shake');
+        }
+
+        function checkChoice(selectedText, btn) {
+            const data = questions[currentIdx];
+            const allBtns = document.querySelectorAll('.option-btn');
+            allBtns.forEach(b => b.disabled = true);
+
+            if (selectedText.includes(data.correctAnswer)) {
+                btn.classList.add('correct');
+                document.body.classList.add('global-correct');
+                sfxCorrect.play().catch(()=>{});
+            } else {
+                btn.classList.add('wrong');
+                document.body.classList.add('global-wrong');
+                mainCard.classList.add('shake');
+                sfxError.play().catch(()=>{});
+                allBtns.forEach(b => {
+                    if(b.innerText.includes(data.correctAnswer)) b.classList.add('correct');
+                });
+            }
+
+            // Озвучка та показ факту
+            document.getElementById('fact-text').innerText = data.fact;
+            document.getElementById('fact-box').style.display = 'block';
+            
+            factAudio.src = data.audio;
+            factAudio.play().catch(()=>{});
+            
+            document.getElementById('next-button').style.display = 'block';
+        }
+
+        function handleNext() {
+            // МИТТЄВА ЗУПИНКА ПОПЕРЕДНЬОГО ЗВУКУ
+            factAudio.pause();
+            factAudio.currentTime = 0;
+
+            if (currentIdx < questions.length - 1) {
+                currentIdx++;
+                showQuestion();
+            } else {
+                localStorage.setItem('deimos_complete', 'true');
+                document.getElementById('quiz-box').innerHTML = `
+                    <h2 style="color:var(--accent); text-align:center; font-family:Orbitron;">DEIMOS SYNC SUCCESS</h2>
+                    <p style="text-align:center; margin: 20px 0;">Усі дані супутника Жаху успішно дешифровано.</p>
+                    <button class="next-btn" style="display:block" onclick="window.location.href='game.html'">Return to Bridge</button>
+                `;
+                document.body.classList.add('global-correct');
+            }
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>

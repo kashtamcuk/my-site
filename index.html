@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mars OS - Main Terminal v2.0</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --accent-color: #ff5722;
+            --bg-color-1: #1a0800;
+            --glow: rgba(255, 87, 34, 0.4);
+        }
+
+        /* Повністю прибираємо видимі повзунки */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: crosshair;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        *::-webkit-scrollbar { display: none; }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            font-family: 'Orbitron', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: white;
+        }
+
+        #mars-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, var(--bg-color-1) 0%, #000 100%);
+            z-index: -1;
+            transition: background 0.5s ease;
+        }
+
+        .dust {
+            position: absolute;
+            width: 100%; height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png');
+            opacity: 0.15;
+            animation: drift 60s linear infinite;
+        }
+
+        @keyframes drift {
+            from { background-position: 0 0; }
+            to { background-position: 1000px 1000px; }
+        }
+
+        .scanlines {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(0deg, rgba(0,0,0,0.2) 0px, rgba(0,0,0,0.2) 1px, transparent 1px, transparent 2px);
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        #main-menu {
+            position: relative;
+            background: rgba(10, 5, 0, 0.9);
+            padding: clamp(30px, 5vh, 60px) clamp(40px, 8vw, 100px);
+            border: 1px solid var(--accent-color);
+            box-shadow: 0 0 40px rgba(0,0,0,1), inset 0 0 30px var(--glow);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            z-index: 10;
+            max-width: 95vw;
+            max-height: 95vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: opacity 0.4s, transform 0.4s, border 0.5s;
+        }
+
+        .hud-info {
+            position: absolute;
+            font-family: 'Share Tech Mono';
+            font-size: 10px;
+            color: var(--accent-color);
+            opacity: 0.5;
+            text-transform: uppercase;
+        }
+        .top-left { top: 10px; left: 15px; }
+        .top-right { top: 10px; right: 15px; }
+
+        .logo-section h1 {
+            font-size: clamp(2.5rem, 6vh, 4.5rem);
+            letter-spacing: clamp(10px, 3vw, 20px);
+            color: var(--accent-color);
+            text-shadow: 0 0 20px var(--accent-color), 2px 2px #000;
+            margin-bottom: 5px;
+            position: relative;
+            transition: color 0.5s, text-shadow 0.5s;
+        }
+
+        .logo-section p {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            color: #00d4ff;
+            letter-spacing: 8px;
+            margin-bottom: clamp(20px, 5vh, 50px);
+            opacity: 0.7;
+        }
+
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(10px, 2.5vh, 25px);
+            align-items: center;
+        }
+
+        button {
+            font-family: 'Orbitron', sans-serif;
+            width: clamp(280px, 40vw, 420px);
+            padding: clamp(12px, 2vh, 20px);
+            background: rgba(255, 87, 34, 0.03);
+            border: 1px solid var(--accent-color);
+            color: white;
+            cursor: pointer;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-transform: uppercase;
+            font-size: clamp(0.8rem, 1.5vh, 1.1rem);
+            letter-spacing: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:hover:not(.is-locked) {
+            background: var(--accent-color);
+            color: black;
+            box-shadow: 0 0 40px var(--accent-color);
+            transform: scale(1.05);
+        }
+
+        button.is-locked {
+            opacity: 0.3;
+            border-color: #555 !important;
+            color: #777 !important;
+            cursor: not-allowed;
+            background: rgba(0,0,0,0.2);
+        }
+
+        button.unlocked-btn {
+            animation: glow-pulse 2s infinite;
+        }
+
+        @keyframes glow-pulse {
+            0% { box-shadow: 0 0 5px var(--accent-color); }
+            50% { box-shadow: 0 0 20px var(--accent-color); }
+            100% { box-shadow: 0 0 5px var(--accent-color); }
+        }
+
+        #lock-warning {
+            color: #ff3333;
+            font-family: 'Share Tech Mono';
+            font-size: 0.7rem;
+            margin-bottom: 5px;
+            height: 10px;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .corner {
+            position: absolute;
+            width: 30px; height: 30px;
+            border: 3px solid var(--accent-color);
+            animation: corner-glow 2s infinite;
+            transition: border 0.5s;
+        }
+        @keyframes corner-glow {
+            50% { opacity: 0.5; box-shadow: 0 0 15px var(--accent-color); }
+        }
+        .tl { top: -5px; left: -5px; border-right: none; border-bottom: none; }
+        .tr { top: -5px; right: -5px; border-left: none; border-bottom: none; }
+        .bl { bottom: -5px; left: -5px; border-right: none; border-top: none; }
+        .br { bottom: -5px; right: -5px; border-left: none; border-top: none; }
+
+        .footer-status {
+            margin-top: clamp(20px, 5vh, 50px);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            display: flex;
+            justify-content: space-between;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,87,34,0.2);
+            transition: color 0.5s;
+        }
+
+        .telemetry { color: #00d4ff; }
+        @keyframes blinker { 50% { opacity: 0; } }
+    </style>
+</head>
+<body>
+
+    <div id="mars-bg"><div class="dust"></div></div>
+    <div class="scanlines"></div>
+
+    <main id="main-menu">
+        <div class="hud-info top-left">Ares-III // System_Core_v4.2</div>
+        <div class="hud-info top-right" id="live-clock">00:00:00</div>
+
+        <div class="corner tl"></div><div class="corner tr"></div>
+        <div class="corner bl"></div><div class="corner br"></div>
+
+        <div class="logo-section">
+            <h1>MARS OS</h1>
+            <p>Ares Settlement Initiative</p>
+        </div>
+
+        <nav class="nav-buttons">
+            <button onclick="navigate('подорж_між_сопутниками_на_марс/game.html')">ІНІЦІАЛІЗУВАТИ МІСІЮ</button>
+            
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div id="lock-warning">ДОСТУП ЗАБОРОНЕНО: СПЕРШУ ПРОЙДІТЬ ТЕСТУВАННЯ</div>
+                <button id="hub-btn" onclick="tryEnterHub()">МУЛЬТИМЕДІЙНИЙ ХАБ</button>
+            </div>
+
+            <button onclick="navigate('settings.html')">КОНФІГУРАЦІЯ СИСТЕМИ</button>
+            <button onclick="navigate('mars.html')">АРХІВ ДАНИХ</button>
+            <button onclick="navigate('videos.html')">ВІЗУАЛЬНА РОЗВІДКА</button>
+        </nav>
+
+        <div class="footer-status">
+            <span>COORD: <span class="telemetry" id="coords">18.44°N 77.45°E</span></span>
+            <span>TEMP: <span class="telemetry">-63°C</span></span>
+            <span style="animation: blinker 1.5s linear infinite;">TERMINAL ACTIVE</span>
+        </div>
+    </main>
+
+<script>
+    const bgMusic = new Audio('fon_menu.mp3');
+    bgMusic.loop = true;
+
+    // 1. ПРИЙНЯТТЯ НАЛАШТУВАНЬ КОЛЬОРУ
+    function applySavedTheme() {
+        const theme = localStorage.getItem('marsTheme') || '#ff5722';
+        document.documentElement.style.setProperty('--accent-color', theme);
+        
+        const bgMap = {
+            "#ff5722":"#1a0800", 
+            "#00d4ff":"#000a1a", 
+            "#4caf50":"#051a05", 
+            "#e91e63":"#1a0008"  
+        };
+        document.documentElement.style.setProperty('--bg-color-1', bgMap[theme] || "#1a0800");
+
+        const hexToRgb = (hex) => {
+            let r = parseInt(hex.slice(1, 3), 16),
+                g = parseInt(hex.slice(3, 5), 16),
+                b = parseInt(hex.slice(5, 7), 16);
+            return `${r}, ${g}, ${b}`;
+        }
+        document.documentElement.style.setProperty('--glow', `rgba(${hexToRgb(theme)}, 0.4)`);
+    }
+
+    // 2. ПЕРЕВІРКА СТАТУСУ ТЕСТУ
+    function checkMissionStatus() {
+        // Перевіряємо ключ mars_complete (який ставиться у фіналі тесту)
+        const isPassed = localStorage.getItem('mars_complete') === 'true';
+        const hubBtn = document.getElementById('hub-btn');
+        
+        if (!isPassed) {
+            hubBtn.classList.add('is-locked');
+            hubBtn.innerHTML = "🔒 ХАБ ЗАБЛОКОВАНО";
+        } else {
+            hubBtn.classList.remove('is-locked');
+            hubBtn.classList.add('unlocked-btn');
+            hubBtn.innerText = "МУЛЬТИМЕДІЙНИЙ ХАБ";
+            hubBtn.style.color = "white"; 
+        }
+    }
+
+    function tryEnterHub() {
+        if (localStorage.getItem('mars_complete') === 'true') {
+            navigate('colony.html'); // Перехід на сторінку колонії
+        } else {
+            const warning = document.getElementById('lock-warning');
+            warning.style.opacity = "1";
+            setTimeout(() => warning.style.opacity = "0", 3000);
+            new Audio('error.mp3').play().catch(() => {});
+        }
+    }
+
+    function navigate(url) {
+        new Audio('click-effect.mp3').play().catch(() => {});
+        document.getElementById('main-menu').style.opacity = '0';
+        document.getElementById('main-menu').style.transform = 'scale(0.9)';
+        setTimeout(() => window.location.href = url, 400);
+    }
+
+    // Годинник та координати
+    setInterval(() => {
+        document.getElementById('live-clock').innerText = new Date().toLocaleTimeString();
+        const lat = (18.44 + Math.random() * 0.01).toFixed(2);
+        const lon = (77.45 + Math.random() * 0.01).toFixed(2);
+        document.getElementById('coords').innerText = `${lat}°N ${lon}°E`;
+    }, 1000);
+
+    window.onload = () => {
+        applySavedTheme();
+        checkMissionStatus();
+    };
+
+    document.addEventListener('click', () => { bgMusic.play().catch(() => {}); }, { once: true });
+</script>
+
+</body>
+</html>

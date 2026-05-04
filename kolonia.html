@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mars Genesis | Арсенал Майбутнього</title>
+    <style>
+        /* ОСНОВНІ НАЛАШТУВАННЯ */
+        :root {
+            --mars: #e2703a;
+            --dark: #0b0c10;
+            --surface: #1f2833;
+            --cyan: #66fcf1;
+            --text: #c5c6c7;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Плавний скрол без JS */
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--text);
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* НАВІГАЦІЯ */
+        header {
+            background: rgba(11, 12, 16, 0.95);
+            border-bottom: 2px solid var(--mars);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: var(--mars);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--cyan);
+        }
+
+        /* ГОЛОВНИЙ БЛОК З АНІМАЦІЄЮ */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            color: white;
+            margin-bottom: 10px;
+            animation: fadeInDown 1.5s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            animation: fadeInUp 2s ease-out;
+        }
+
+        /* СЕКЦІЇ */
+        section {
+            padding: 100px 5%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            color: var(--mars);
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+        }
+
+        /* КАРТКИ ТЕХНОЛОГІЙ */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--surface);
+            padding: 30px;
+            border-radius: 10px;
+            border-bottom: 4px solid transparent;
+            transition: all 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--cyan);
+            box-shadow: 0 10px 30px rgba(102, 252, 241, 0.1);
+        }
+
+        .card h3 {
+            color: var(--cyan);
+            margin-top: 0;
+        }
+
+        /* АНІМАЦІЇ */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: #050505;
+            border-top: 1px solid var(--surface);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">Mars<span>Genesis</span></div>
+            <ul>
+                <li><a href="#colony">Колонія</a></li>
+                <li><a href="#tech">Технології</a></li>
+                <li><a href="#mission">Місія</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <h1>MARS GENESIS</h1>
+        <p>Архітектура виживання. Проєкт першого поселення.</p>
+    </div>
+
+    <section id="colony">
+        <h2>Модульна Колонія</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Hab-Unit A</h3>
+                <p>Житловий модуль з посиленим захистом від радіації. Внутрішній простір оптимізовано для психологічного комфорту екіпажу.</p>
+            </div>
+            <div class="card">
+                <h3>Greenhouse-01</h3>
+                <p>Автоматизована теплиця. Тут ми використовуємо гідропоніку для вирощування свіжої їжі та регенерації кисню.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="tech">
+        <h2>Технології</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Енергія</h3>
+                <p>Сонячні масиви та компактні термоядерні реактори забезпечують базу безперебійним живленням.</p>
+            </div>
+            <div class="card">
+                <h3>Вода</h3>
+                <p>Системи глибокого буріння видобувають лід з-під реголіту, перетворюючи його на питну воду та паливо.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Розроблено Архітектором Майбутнього &copy; 2026</p>
+    </footer>
+
+</body>
+</html>

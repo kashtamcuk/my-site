@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>MARS ARCHIVE v2.0 - JUDGE EDITION</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@300;600&display=swap');
+
+        :root {
+            --neon-orange: #ff5f00;
+            --neon-blue: #00f2ff;
+            --glass: rgba(0, 20, 30, 0.85);
+            --border: rgba(0, 242, 255, 0.3);
+        }
+
+        body {
+            background: #020508;
+            color: #e0faff;
+            font-family: 'Exo 2', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+        }
+
+        /* Ефект сканування монітора */
+        body::before {
+            content: " ";
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 4px, 3px 100%;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        /* Рухома полоса сканера */
+        .scanner-line {
+            position: fixed;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, rgba(0, 242, 255, 0.1), transparent);
+            z-index: 99;
+            animation: scan 8s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { top: -100%; }
+            100% { top: 100%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        /* Заголовок */
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            letter-spacing: 15px;
+            margin: 0;
+            background: linear-gradient(to right, #00f2ff, #ff5f00);
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 10px rgba(0, 242, 255, 0.5));
+        }
+
+        .archive-id {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-blue);
+            letter-spacing: 3px;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        /* Сітка блоків */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        /* Стиль блоку-секції */
+        .section-box {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 30px;
+            position: relative;
+            backdrop-filter: blur(10px);
+            transition: 0.4s;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 90% 100%, 0 100%);
+        }
+
+        .section-box:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+            transform: scale(1.02);
+        }
+
+        .section-box h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-blue);
+            font-size: 1.4rem;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-box h2::before {
+            content: "";
+            width: 10px;
+            height: 10px;
+            background: var(--neon-orange);
+            box-shadow: 0 0 10px var(--neon-orange);
+        }
+
+        .data-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .data-item {
+            margin-bottom: 15px;
+            border-left: 2px solid var(--neon-orange);
+            padding-left: 15px;
+            font-weight: 300;
+        }
+
+        .label {
+            color: var(--neon-blue);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* Спеціальні віджети */
+        .stat-flex {
+            display: flex;
+            justify-content: space-between;
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            margin-top: 10px;
+        }
+
+        .stat-val {
+            text-align: center;
+        }
+
+        .stat-val big {
+            display: block;
+            font-size: 1.8rem;
+            font-family: 'Orbitron', sans-serif;
+            color: white;
+        }
+
+        .sunset-box {
+            background: linear-gradient(45deg, #001a33, #004d99);
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 15px;
+            text-align: center;
+            border: 1px dashed var(--neon-blue);
+        }
+
+        /* Кнопка </div> </div> <a href="index.html" class="back-link">RETURN TO BASE OFFICE</a>*/
+        .back-link {
+            display: block;
+            width: fit-content;
+            margin: 50px auto;
+            color: var(--neon-blue);
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            border: 1px solid var(--neon-blue);
+            padding: 15px 40px;
+            transition: 0.3s;
+        }
+
+        .back-link:hover {
+            background: var(--neon-blue);
+            color: black;
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
+
+        @media (max-width: 900px) {
+            .info-grid { grid-template-columns: 1fr; }
+        }
+
+        .read-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.6rem;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 10;
+        }
+
+        .read-btn:hover {
+            background: rgba(0, 242, 255, 0.1);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        @keyframes pulse-border {
+            0% { box-shadow: 0 0 0px var(--neon-orange); }
+            50% { box-shadow: 0 0 15px var(--neon-orange); }
+            100% { box-shadow: 0 0 0px var(--neon-orange); }
+        }
+
+        .pulse {
+            animation: pulse-border 1.5s infinite;
+            color: var(--neon-orange) !important;
+        }
+    </style>
+
+<script>
+    let currentAudio = null; // Змінна для збереження поточного аудіо
+    let currentBtn = null;   // Змінна для поточної активної кнопки
+
+    function playAudio(file, btn) {
+        // Якщо цей же файл уже грає — зупиняємо його
+        if (currentAudio && !currentAudio.paused && currentBtn === btn) {
+            stopAll();
+            return;
+        }
+
+        // Зупиняємо попередній файл, якщо він грав
+        stopAll();
+
+        // Створюємо та запускаємо нове аудіо
+        currentAudio = new Audio(file);
+        currentBtn = btn;
+
+        currentAudio.play();
+
+        // Візуал кнопки при старті
+        btn.innerHTML = "<span>⏹ STOP</span>";
+        btn.classList.add('active-voice');
+
+        // Коли аудіо закінчиться — повертаємо кнопку в норму
+        currentAudio.onended = () => {
+            resetButton(btn);
+        };
+    }
+
+    function stopAll() {
+        if (currentAudio) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
+            resetButton(currentBtn);
+        }
+    }
+
+    function resetButton(btn) {
+        if (btn) {
+            btn.innerHTML = "<span>🔊 PLAY_VOICE</span>";
+            btn.classList.remove('active-voice');
+        }
+    }
+</script>
+
+</head>
+<body>
+
+    <div class="scanner-line"></div>
+
+    <div class="container">
+        <header>
+            <div class="archive-id">DATABASE ACCESS: GRANTED // SOL: 3422</div>
+            <h1>MARS ARCHIVE</h1>
+            <p>Централізований архів даних планети Марс для місії "ARES"</p>
+        </header>
+
+        <div class="info-grid">
+            
+            <div class="section-box">
+                <h2>GENERAL_INFO</h2>
+                <div class="data-list">
+                    <div class="data-item">
+                        <span class="label">Назва</span>
+                        Марс (на честь бога війни). Червоний колір спричинений високим вмістом оксиду заліза (іржі).
+                    </div>
+                    <div class="stat-flex">
+                        <div class="stat-val">
+                            <span class="label">ДОБА</span>
+                            <big>24h 37m</big>
+                        </div>
+                        <div class="stat-val">
+                            <span class="label">РІК</span>
+                            <big>687d</big>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-box">
+                    <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/1_x.mp3', this)">🔊 PLAY_VOICE</button>
+                    <h2>GENERAL_INFO</h2>
+                </div>
+    </div>
+
+            <div class="section-box">
+                <h2>PLANETARY_RECORDS</h2>
+                <div class="data-list">
+                    <div class="data-item">
+                        <span class="label">Вулкан Олімп</span>
+                        Висота 22 км. Найвищий у Сонячній системі. У 3 рази вищий за Еверест.
+                    </div>
+                    <div class="data-item">
+                        <span class="label">Долина Марінера</span>
+                        Каньйон довжиною 4000 км. Відстань еквівалентна шляху від України до Іспанії.
+                    </div>
+                </div>
+                <div class="section-box">
+                    <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/6_x.mp3', this)">🔊 PLAY_VOICE</button>
+                    <h2>GENERAL_INFO</h2>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <h2>H2O_ANALYSIS</h2>
+                <div class="data-list">
+                    <div class="data-item">
+                        <span class="label">Стан</span>
+                        Вода присутня переважно у формі льоду на полюсах та під ґрунтом.
+                    </div>
+                    <div class="data-item">
+                        <span class="label">Склад шапок</span>
+                        Суміш водяного льоду та замерзлого CO₂ (сухий лід).
+                    </div>
+                </div>
+                <div class="section-box">
+                    <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/2_x.mp3', this)">🔊 PLAY_VOICE</button>
+                    <h2>GENERAL_INFO</h2>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <h2>WEATHER_REPORT</h2>
+                <div class="stat-flex">
+                    <div class="stat-val" style="color: #ffcc00;">
+                        <span class="label">MAX TEMP</span>
+                        <big>+20°C</big>
+                    </div>
+                    <div class="stat-val" style="color: #00f2ff;">
+                        <span class="label">MIN TEMP</span>
+                        <big>-100°C</big>
+                    </div>
+                </div>
+                <div class="data-item" style="margin-top:15px;">
+                    <span class="label">Феномен</span>
+                    Глобальні пилові бурі, що можуть тривати місяцями.
+                </div>
+
+                <div class="section-box">
+                    <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/3_x.mp3', this)">🔊 PLAY_VOICE</button>
+                    <h2>GENERAL_INFO</h2>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <h2>MISSION_LOGS</h2>
+                <div class="data-list">
+                    <div class="data-item">
+                        <span class="label">Curiosity</span>
+                        Виявив складні органічні молекули в кратері Гейл.
+                    </div>
+                    <div class="data-item">
+                        <span class="label">Perseverance</span>
+                        Збирає зразки ґрунту для відправки на Землю у 2030-х роках.
+                    </div>
+                </div>
+                <div class="section-box">
+                    <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/4_x.mp3', this)">🔊 PLAY_VOICE</button>
+                    <h2>GENERAL_INFO</h2>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <h2>ANOMALIES</h2>
+                <div class="sunset-box">
+                    <span class="label">СВІТЛОВИЙ ЕФЕКТ</span>
+                    Захід Сонця на Марсі має <strong>СИНІЙ</strong> колір.
+                </div>
+                <div class="data-item" style="margin-top:15px;">
+                    <span class="label">Супутники</span>
+                    Фобос та Деймос (схожі на астероїди, захоплені гравітацією).
+                </div>
+                <div class="section-box">
+                    <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/5_x.mp3', this)">🔊 PLAY_VOICE</button>
+                    <h2>GENERAL_INFO</h2>
+                </div>
+            </div>
+
+            <div class="section-box" style="grid-column: span 2;">
+                <h2>GRAVITY_WELL</h2>
+                <div style="display:flex; align-items:center; justify-content: space-around;">
+                    <p style="max-width: 400px;">Гравітація на Марсі складає лише <strong>38%</strong> від земної. Це означає, що людина може стрибати значно вище, а вантажі переносити легше.</p>
+                    <div class="stat-val" style="background: var(--neon-orange); padding: 20px; color: black; clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);">
+                        <span class="label" style="color: black;">Ваша вага (Земля 70кг)</span>
+                        <big>≈ 26.6 кг</big>
+                    </div>
+                </div>
+                <div class="section-box">
+                    <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/18_x.mp3', this)">🔊 PLAY_VOICE</button>
+                    <h2>GENERAL_INFO</h2>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="grid-column: span 2; margin: 60px 0 30px 0; position: relative;">
+    <div style="position: absolute; left: -20px; top: 0; bottom: 0; width: 4px; background: var(--neon-orange); box-shadow: 0 0 15px var(--neon-orange);"></div>
+    <h2 style="font-family: 'Orbitron'; color: var(--neon-orange); letter-spacing: 6px; margin: 0 0 5px 20px; text-transform: uppercase;">
+        X-FILES: Anomalous Discoveries
+    </h2>
+    <p style="color: var(--neon-blue); opacity: 0.8; font-family: 'Orbitron'; font-size: 0.75rem; margin-left: 20px;">
+        DATABASE_PATH: /ROOT/ARCHIVE/UNEXPLAINED_SIGNS/
+    </p>
+</div>
+
+<div class="anomaly-file">
+    <div class="file-status">DEBUNKED</div>
+    <div class="anomaly-body">
+        <div class="anomaly-image">
+            <img src="вікіпедія_озвучка/двері.webp" alt="Двері">
+            <div class="scan-bar"></div>
+        </div>
+        <div class="anomaly-content">
+            <span class="file-id">LOG_ID: #CURI-7721</span>
+            <h3>"Портал" у скелі Гетьман</h3>
+            <p>Геологічна структура, що спричинила світовий ажіотаж. Хоча на знімку об'єкт виглядає як вхід для гуманоїда, лазерне сканування підтвердило: це **ерозійний розлом**. Прямокутна форма — результат ідеального кута падіння тіні на природні шари пісковика.</p>
+        </div>
+    </div>
+    <div class="section-box">
+        <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/7_x.mp3', this)">🔊 PLAY_VOICE</button>
+        <h2>GENERAL_INFO</h2>
+    </div>
+</div>
+
+<div class="anomaly-file">
+    <div class="file-status" style="border-color: #00f2ff; color: #00f2ff;">ATMOSPHERIC</div>
+    <div class="anomaly-body">
+        <div class="anomaly-image">
+            <img src="вікіпедія_озвучка/дим.webp" alt="Дим">
+            <div class="scan-bar"></div>
+        </div>
+        <div class="anomaly-content">
+            <span class="file-id">LOG_ID: #ESA-CLOUD-V1</span>
+            <h3>Шлейф гори Арсія</h3>
+            <p>Гігантський "дим", що тягнеться на 1500 км від згаслого вулкана. Попри вулканічний вигляд, це **орографічна хмара**. Вона виникає, коли вологі маси повітря стикаються з підніжжям гори та замерзають у високих шарах атмосфери, утворюючи крижаний слід.</p>
+        </div>
+    </div>
+    <div class="section-box">
+        <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/8_x.mp3', this)">🔊 PLAY_VOICE</button>
+        <h2>GENERAL_INFO</h2>
+    </div>
+</div>
+
+<div class="anomaly-file">
+    <div class="file-status" style="border-color: #ff3333; color: #ff3333;">GEOLOGICAL</div>
+    <div class="anomaly-body">
+        <div class="anomaly-image">
+            <img src="вікіпедія_озвучка/ангел.webp" alt="Ангел">
+            <div class="scan-bar"></div>
+        </div>
+        <div class="anomaly-content">
+            <span class="file-id">LOG_ID: #MARS-ANGEL-03</span>
+            <h3>Полярний "Охоронець"</h3>
+            <p>Містична постать на південному полюсі. Аналіз показує, що "голова" ангела — це стародавній **ударний кратер**, а темний колір фігури обумовлений сумішшю піску та льоду, що оголилися під час сублімації (випаровування) замороженого діоксиду вуглецю.</p>
+        </div>
+    </div>
+    <div class="section-box">
+        <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/9_x.mp3', this)">🔊 PLAY_VOICE</button>
+        <h2>GENERAL_INFO</h2>
+    </div>
+</div>
+
+<div class="anomaly-file">
+    <div class="file-status">CLASSIC_MYTH</div>
+    <div class="anomaly-body">
+        <div class="anomaly-image">
+            <img src="вікіпедія_озвучка/леце.webp" alt="Обличчя">
+            <div class="scan-bar"></div>
+        </div>
+        <div class="anomaly-content">
+            <span class="file-id">LOG_ID: #VIK-1976</span>
+            <h3>Обличчя регіону Сідонія</h3>
+            <p>Легенда космічної ери. Світова сенсація 1976 року виявилася лице **мезою** (столовою горою). Завдяки новітнім камерам ми знаємо: очі та рот — це просто пагорби та западини, які при низькому сонці створюють ілюзію людських рис.</p>
+        </div>
+    </div>
+    <div class="section-box">
+        <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/10_x.mp3', this)">🔊 PLAY_VOICE</button>
+        <h2>GENERAL_INFO</h2>
+    </div>
+</div>
+
+<style>
+    /* Головний контейнер файлу */
+    /* --- ОСНОВНІ НАЛАШТУВАННЯ ДЛЯ РОЗДІЛУ АНОМАЛІЙ --- */
+
+/* Контейнер кожної "архівної справи" */
+.anomaly-file {
+    grid-column: span 2;
+    background: rgba(0, 20, 30, 0.6);
+    border: 1px solid rgba(0, 242, 255, 0.15);
+    margin-bottom: 40px; /* Чітка відстань між блоками */
+    padding: 25px;
+    position: relative;
+    transition: 0.4s ease;
+    border-left: 4px solid var(--neon-blue);
+    display: block; /* Гарантує правильне відображення */
+}
+
+/* Ефект при наведенні на всю картку */
+.anomaly-file:hover {
+    background: rgba(0, 30, 45, 0.85);
+    border-color: var(--neon-blue);
+    transform: translateX(10px); /* Легке зміщення вбік */
+    box-shadow: -10px 0 20px rgba(0, 242, 255, 0.1);
+}
+
+/* Ярлик статусу (DEBUNKED, ATMOSPHERIC тощо) */
+.file-status {
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    background: #020508;
+    border: 1px solid var(--neon-orange);
+    color: var(--neon-orange);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.65rem;
+    padding: 2px 10px;
+    letter-spacing: 2px;
+    z-index: 5;
+}
+
+/* Внутрішня структура: фото + текст */
+.anomaly-body {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+/* --- КОНТЕЙНЕР ФОТО (ІКОНКИ) --- */
+.anomaly-image {
+    flex: 0 0 180px; /* Фіксований розмір */
+    height: 180px;
+    position: relative;
+    border: 1px solid var(--border);
+    overflow: hidden; /* КРИТИЧНО для ефекту збільшення (ховає те, що вилазить) */
+    cursor: zoom-in; /* Курсор-лупа */
+    background: #000;
+}
+
+/* САМЕ ФОТО ТА ЙОГО ЗБІЛЬШЕННЯ */
+.anomaly-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.8) grayscale(20%);
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.4s;
+}
+
+/* Ефект при наведенні на фото: ЗБІЛЬШЕННЯ */
+.anomaly-image:hover img {
+    transform: scale(1.6); /* Збільшуємо на 60% */
+    filter: brightness(1.2) grayscale(0%); /* Робимо кольоровим та яскравим */
+}
+
+/* --- ТЕКСТОВА ЧАСТИНА --- */
+.anomaly-content {
+    flex: 1;
+}
+
+.file-id {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.7rem;
+    color: var(--neon-orange);
+    display: block;
+    margin-bottom: 5px;
+    opacity: 0.8;
+}
+
+.anomaly-content h3 {
+    font-family: 'Orbitron', sans-serif;
+    margin: 0 0 12px 0;
+    font-size: 1.4rem;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(0, 242, 255, 0.3);
+}
+
+.anomaly-content p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #b0e0f0;
+}
+
+/* Виділення важливих слів у тексті */
+.anomaly-content b, .anomaly-content strong {
+    color: var(--neon-blue);
+    font-weight: 600;
+}
+
+/* --- АНІМАЦІЯ ЛІНІЇ СКАНЕРА --- */
+.scan-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--neon-blue);
+    box-shadow: 0 0 15px var(--neon-blue);
+    z-index: 3;
+    pointer-events: none; /* Щоб лінія не заважала натискати */
+    animation: scanAnim 3s infinite linear;
+}
+
+/* При наведенні робимо лінію прозорою, щоб не заважала розглядати деталі */
+.anomaly-image:hover .scan-bar {
+    opacity: 0.1;
+}
+
+@keyframes scanAnim {
+    0% { top: 0; }
+    100% { top: 100%; }
+}
+
+/* АДАПТИВНІСТЬ ДЛЯ МОБІЛЬНИХ ПРИСТРОЇВ */
+@media (max-width: 768px) {
+    .anomaly-body {
+        flex-direction: column;
+        text-align: center;
+    }
+    .anomaly-image {
+        width: 100%;
+        max-width: 300px;
+        height: 200px;
+    }
+    .anomaly-file:hover {
+        transform: translateY(-5px); /* На мобільних краще вгору, ніж вбік */
+    }
+}
+</style>
+
+<div style="grid-column: span 2; margin: 80px 0 40px 0; text-align: center;">
+    <div class="mission-header">
+        <span class="header-line"></span>
+        <h2>CHRONOLOGY OF MARS EXPLORATION</h2>
+        <span class="header-line"></span>
+    </div>
+    <p style="color: var(--neon-blue); font-family: 'Orbitron'; font-size: 0.8rem; letter-spacing: 3px; opacity: 0.6;">SCANNING HISTORICAL DATA...</p>
+</div>
+
+<div class="timeline-container">
+    
+    <div class="timeline-item">
+        <div class="timeline-dot"><div class="pulse"></div></div>
+        <div class="timeline-date">1965</div>
+        <div class="timeline-content">
+            <div class="corner top-left"></div>
+            <div class="corner bottom-right"></div>
+            <span class="mission-tag">DATA_STREAM: MARINER_4</span>
+            <h3>Перші очі людства</h3>
+            <p>21 знімок, що розвіяв міфи про канали та цивілізації. Ми побачили мертву, вкриту кратерами пустелю, схожу на Місяць.</p>
+        </div>
+        <div class="section-box">
+        <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/11_x.mp3', this)">🔊 PLAY_VOICE</button>
+        <h2>GENERAL_INFO</h2>
+    </div>
+    </div>
+    
+
+    <div class="timeline-item">
+        <div class="timeline-dot"><div class="pulse"></div></div>
+        <div class="timeline-date">1971</div>
+        <div class="timeline-content">
+            <div class="corner top-left"></div>
+            <div class="corner bottom-right"></div>
+            <span class="mission-tag">ORBITAL_SCAN</span>
+            <h3>Mariner 9: Масштаб</h3>
+            <p>Перший апарат на орбіті. Саме він відкрив **Valles Marineris** (велетенський каньйон) та вулкан **Олімп**, коли пил нарешті влігся.</p>
+        </div>
+        <div class="section-box">
+        <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/12_x.mp3', this)">🔊 PLAY_VOICE</button>
+        <h2>GENERAL_INFO</h2>
+    </div>
+    </div>
+
+    <div class="timeline-item">
+        <div class="timeline-dot"><div class="pulse"></div></div>
+        <div class="timeline-date">1976</div>
+        <div class="timeline-content">
+            <div class="corner top-left"></div>
+            <div class="corner bottom-right"></div>
+            <span class="mission-tag">SURFACE_BIO_TEST</span>
+            <h3>Viking 1: Десант</h3>
+            <p>Перша тривала робота на поверхні. Світ побачив перші панорами іржавих скель та рожевого марсіанського неба.</p>
+        </div>
+        <div class="section-box">
+        <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/13_x.mp3', this)">🔊 PLAY_VOICE</button>
+        <h2>GENERAL_INFO</h2>
+    </div>
+    </div>
+
+    <div class="timeline-item highlight">
+        <div class="timeline-dot orange"><div class="pulse"></div></div>
+        <div class="timeline-date">1997-2012</div>
+        <div class="timeline-content orange-border">
+            <div class="corner top-left orange"></div>
+            <div class="corner bottom-right orange"></div>
+            <span class="mission-tag" style="color: var(--neon-orange);">MOBILE_LABS</span>
+            <h3>Епоха марсоходів</h3>
+            <p>Від "мікрохвильовки" **Sojourner** до гіганта **Curiosity**. Доведено: Марс мав рідку воду, стабільні озера та органіку.</p>
+        </div>
+        <div class="section-box">
+        <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/14_x.mp3', this)">🔊 PLAY_VOICE</button>
+        <h2>GENERAL_INFO</h2>
+    </div>
+    </div>
+
+    <div class="timeline-item">
+        <div class="timeline-dot"><div class="pulse"></div></div>
+        <div class="timeline-date">2021+</div>
+        <div class="timeline-content">
+            <div class="corner top-left"></div>
+            <div class="corner bottom-right"></div>
+            <span class="mission-tag">PRESENT_DAY</span>
+            <h3>Perseverance & Ingenuity</h3>
+            <p>Збір ґрунту для повернення на Землю та перші польоти гвинтокрила. Ми вчимося жити та працювати на іншій планеті.</p>
+        </div>
+        <div class="section-box">
+        <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/15_x.mp3', this)">🔊 PLAY_VOICE</button>
+        <h2>GENERAL_INFO</h2>
+    </div>
+    </div>
+</div>
+
+<style>
+    /* Головні налаштування заголовка */
+    .mission-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 10px;
+    }
+    .mission-header h2 {
+        font-family: 'Orbitron';
+        color: white;
+        letter-spacing: 5px;
+        margin: 0;
+        text-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+    }
+    .header-line {
+        flex: 1;
+        max-width: 100px;
+        height: 2px;
+        background: linear-gradient(to right, transparent, var(--neon-blue));
+    }
+    .header-line:last-child { background: linear-gradient(to left, transparent, var(--neon-blue)); }
+
+    /* Timeline Container */
+    .timeline-container {
+        grid-column: span 2;
+        position: relative;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 0;
+    }
+    .timeline-container::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(to bottom, transparent, var(--neon-blue), var(--neon-orange), transparent);
+        transform: translateX(-50%);
+    }
+
+    /* Елементи списку */
+    .timeline-item {
+        margin-bottom: 60px;
+        position: relative;
+        width: 50%;
+        padding: 0 50px;
+        box-sizing: border-box;
+    }
+    .timeline-item:nth-child(odd) { left: 0; text-align: right; }
+    .timeline-item:nth-child(even) { left: 50%; text-align: left; }
+
+    /* Крапки (Вузли) */
+    .timeline-dot {
+        position: absolute;
+        top: 20px;
+        width: 12px;
+        height: 12px;
+        background: var(--neon-blue);
+        border-radius: 50%;
+        z-index: 5;
+        box-shadow: 0 0 10px var(--neon-blue);
+    }
+    .timeline-item:nth-child(odd) .timeline-dot { right: -6px; }
+    .timeline-item:nth-child(even) .timeline-dot { left: -6px; }
+
+    .timeline-dot.orange { background: var(--neon-orange); box-shadow: 0 0 10px var(--neon-orange); }
+
+    /* Анімація пульсації */
+    .pulse {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: inherit;
+        animation: pulseWave 2s infinite;
+        opacity: 0.5;
+    }
+    @keyframes pulseWave {
+        0% { transform: scale(1); opacity: 0.5; }
+        100% { transform: scale(3); opacity: 0; }
+    }
+
+    /* Картки з контентом */
+    .timeline-content {
+        background: rgba(0, 15, 25, 0.8);
+        border: 1px solid rgba(0, 242, 255, 0.2);
+        padding: 25px;
+        position: relative;
+        backdrop-filter: blur(10px);
+        transition: 0.4s;
+    }
+    .timeline-content:hover {
+        border-color: var(--neon-blue);
+        box-shadow: 0 0 20px rgba(0, 242, 255, 0.15);
+        transform: translateY(-5px);
+    }
+    .orange-border { border-color: rgba(255, 95, 0, 0.3); }
+    .orange-border:hover { border-color: var(--neon-orange); box-shadow: 0 0 20px rgba(255, 95, 0, 0.15); }
+
+    /* Декоративні куточки */
+    .corner {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border: 2px solid var(--neon-blue);
+    }
+    .top-left { top: -2px; left: -2px; border-right: 0; border-bottom: 0; }
+    .bottom-right { bottom: -2px; right: -2px; border-left: 0; border-top: 0; }
+    .corner.orange { border-color: var(--neon-orange); }
+
+    .timeline-date {
+        font-family: 'Orbitron';
+        color: white;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    @media (max-width: 768px) {
+        .timeline-container::before { left: 20px; }
+        .timeline-item { width: 100%; text-align: left !important; padding-left: 50px; padding-right: 20px; }
+        .timeline-dot { left: 14px !important; }
+    }
+</style>
+
+<div style="grid-column: span 2; margin: 80px 0 30px 0; text-align: center;">
+    <h2 style="font-family: 'Orbitron'; color: white; letter-spacing: 8px; text-transform: uppercase; margin-bottom: 10px;">
+        NATURAL_SATELLITES_SCAN
+    </h2>
+    <div style="width: 200px; height: 1px; background: linear-gradient(to right, transparent, var(--neon-orange), var(--neon-blue), transparent); margin: 0 auto;"></div>
+</div>
+
+<div class="satellites-grid">
+    
+    <div class="sat-card phobos">
+        <div class="sat-header">
+            <div class="sat-icon">PH</div>
+            <div class="sat-title">
+                <h3>PHOBOS</h3>
+                <span>"Страх" // Об'єкт приречений</span>
+            </div>
+        </div>
+        
+        <div class="sat-stats">
+            <div class="stat-row">
+                <span>Діаметр: 22 км</span>
+                <div class="stat-bar"><div style="width: 80%; background: var(--neon-orange);"></div></div>
+            </div>
+            <div class="stat-row">
+                <span>Висота від марса до сопутника: 6000 км</span>
+                <div class="stat-bar"><div style="width: 20%; background: var(--neon-orange);"></div></div>
+            </div>
+        </div>
+
+        <div class="sat-info">
+            <p><strong>Форма:</strong> "Космічна картопля" 🥔. Нерівний, пухкий об'єкт, вкритий борознами.</p>
+            <p><strong>Аномалія:</strong> Найближчий супутник у Сонячній системі. Сходить і заходить двічі на добу.</p>
+            <p><strong>Кратер Стікні:</strong> Займає майже половину поверхні. Удар ледве не розколов супутник.</p>
+        </div>
+
+        <div class="danger-zone">
+            <span>TERMINATION_ALERT:</span>
+            Фобос падає на Марс. Через 30-50 млн років він перетвориться на кільце або вріжеться в планету.
+        </div>
+        <div class="section-box">
+        <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/16_x.mp3', this)">🔊 PLAY_VOICE</button>
+        <h2>GENERAL_INFO</h2>
+    </div>
+    </div>
+
+    <div class="sat-card deimos">
+        <div class="sat-header">
+            <div class="sat-icon">DE</div>
+            <div class="sat-title">
+                <h3>DEIMOS</h3>
+                <span>"Жах" // Стабільна орбіта</span>
+            </div>
+        </div>
+
+        <div class="sat-stats">
+            <div class="stat-row">
+                <span>Діаметр: 12 км</span>
+                <div class="stat-bar"><div style="width: 40%; background: var(--neon-blue);"></div></div>
+            </div>
+            <div class="stat-row">
+                <span>Висота від марса до сопутника: 23 000 км</span>
+                <div class="stat-bar"><div style="width: 75%; background: var(--neon-blue);"></div></div>
+            </div>
+        </div>
+
+        <div class="sat-info">
+            <p><strong>Форма:</strong> Гладкий та округлий. Вкритий товстим шаром пилу (реголіту), що приховує кратери.</p>
+            <p><strong>Вид з Марса:</strong> Виглядає як дуже яскрава зірка. Рухається по небу повільно (30 годин).</p>
+            <p><strong>Походження:</strong> Ймовірно, колишній астероїд, захоплений гравітацією Марса мільярди років тому.</p>
+        </div>
+
+        <div class="safe-zone">
+            <span>ORBITAL_STATUS:</span>
+            Стабільний. Поступово віддаляється від планети.
+        </div>
+        <div class="section-box">
+        <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/17_x.mp3', this)">🔊 PLAY_VOICE</button>
+        <h2>GENERAL_INFO</h2>
+    </div>
+    </div>
+</div>
+
+<style>
+    .satellites-grid {
+        grid-column: span 2;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin-bottom: 50px;
+    }
+
+    .sat-card {
+        background: rgba(0, 10, 20, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 30px;
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+        transition: 0.4s;
+    }
+
+    /* Кольорові теми */
+    .phobos { border-top: 4px solid var(--neon-orange); }
+    .deimos { border-top: 4px solid var(--neon-blue); }
+
+    .sat-card:hover {
+        transform: translateY(-10px);
+        background: rgba(0, 20, 35, 0.9);
+    }
+
+    .sat-header {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 25px;
+    }
+
+    .sat-icon {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Orbitron';
+        font-weight: bold;
+        border: 2px solid;
+        clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    }
+
+    .phobos .sat-icon { border-color: var(--neon-orange); color: var(--neon-orange); }
+    .deimos .sat-icon { border-color: var(--neon-blue); color: var(--neon-blue); }
+
+    .sat-title h3 {
+        margin: 0;
+        font-family: 'Orbitron';
+        font-size: 1.8rem;
+        letter-spacing: 3px;
+    }
+
+    .sat-title span {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        opacity: 0.6;
+    }
+
+    /* Шкали статистики */
+    .sat-stats {
+        margin-bottom: 25px;
+    }
+
+    .stat-row {
+        margin-bottom: 10px;
+        font-size: 0.8rem;
+        font-family: 'Orbitron';
+    }
+
+    .stat-bar {
+        width: 100%;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.1);
+        margin-top: 5px;
+    }
+
+    .stat-bar div { height: 100%; box-shadow: 0 0 10px currentColor; }
+
+    .sat-info p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        color: #b0e0f0;
+        margin-bottom: 15px;
+        padding-left: 15px;
+        border-left: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Спеціальні зони статусу */
+    .danger-zone, .safe-zone {
+        margin-top: 20px;
+        padding: 15px;
+        font-size: 0.85rem;
+        background: rgba(255, 95, 0, 0.1);
+        border-left: 3px solid var(--neon-orange);
+    }
+
+    .safe-zone {
+        background: rgba(0, 242, 255, 0.1);
+        border-left-color: var(--neon-blue);
+    }
+
+    .danger-zone span, .safe-zone span {
+        display: block;
+        font-family: 'Orbitron';
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    @media (max-width: 900px) {
+        .satellites-grid { grid-template-columns: 1fr; }
+    }
+</style>
+
+<div style="grid-column: span 2; margin-top: 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+    
+    <div class="section-box future-card" style="border-color: var(--neon-blue);">
+        <h2 style="font-family: 'Orbitron'; font-size: 1.2rem; color: var(--neon-blue);">[GRAVITY_CALC]</h2>
+        <p style="font-size: 0.9rem; color: #b0e0f0;">Скільки ти важитимеш на Марсі?</p>
+        
+        <div style="margin-top: 20px;">
+            <input type="number" id="earthWeight" placeholder="Твоя вага (кг)" 
+                   style="background: rgba(0,0,0,0.5); border: 1px solid var(--neon-blue); color: white; padding: 10px; font-family: 'Orbitron'; width: 120px;">
+            <button onclick="calcWeight()" 
+                    style="background: var(--neon-blue); border: none; color: black; padding: 10px 20px; font-family: 'Orbitron'; cursor: pointer; font-weight: bold; transition: 0.3s;">
+                CALCULATE
+            </button>
+        </div>
+        
+        <div id="marsResult" style="margin-top: 20px; font-family: 'Orbitron'; font-size: 1.5rem; color: var(--neon-orange); display: none;">
+            RESULT: <span id="weightValue">0</span> KG
+        </div>
+    </div>
+
+    <div class="section-box future-card" style="border-color: var(--neon-orange); background: rgba(255, 95, 0, 0.05);">
+        <h2 style="font-family: 'Orbitron'; font-size: 1.2rem; color: var(--neon-orange);">[MISSION_MARS_2030]</h2>
+        <p style="font-size: 0.85rem; line-height: 1.4;">
+            Наступний крок — висадка людини. <br>
+            <strong>Мета:</strong> Створення автономної колонії. <br>
+            <strong>Транспорт:</strong> Starship (SpaceX) або SLS (NASA).
+        </p>
+        <div style="margin-top: 15px; border-top: 1px dashed var(--neon-orange); padding-top: 10px; font-size: 0.7rem; font-family: 'Orbitron'; opacity: 0.6;">
+            BOARDING PASS: UNKNOWN_EXPLORER
+        </div>
+    </div>
+</div>
+
+<div id="mars-audio-module" class="audio-control-panel">
+    <div class="audio-status">
+        <span class="status-dot"></span>
+        <span id="status-text">SIGNAL_OFFLINE</span>
+    </div>
+    
+    <div class="visualizer" id="audio-viz">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+
+    <button id="playPauseBtn" onclick="toggleMarsMusic()">
+        CONNECT_TO_ORBITER
+    </button>
+
+    <audio id="marsOrbitAudio" loop>
+        <source src="вікіпедія_озвучка/mars_sound.mp3" type="audio/mpeg">
+        Ваш браузер не підтримує аудіо.
+    </audio>
+</div>
+
+<script>
+function calcWeight() {
+    const earth = document.getElementById('earthWeight').value;
+    if (earth > 0) {
+        const mars = (earth * 0.38).toFixed(1);
+        document.getElementById('weightValue').innerText = mars;
+        document.getElementById('marsResult').style.display = 'block';
+    }
+}
+function toggleMarsMusic() {
+    const audio = document.getElementById("marsOrbitAudio");
+    const panel = document.getElementById("mars-audio-module");
+    const btn = document.getElementById("playPauseBtn");
+    const statusText = document.getElementById("status-text");
+
+    if (audio.paused) {
+        audio.play();
+        panel.classList.add("active");
+        btn.innerText = "TERMINATE_SIGNAL";
+        statusText.innerText = "SIGNAL_STABLE_100%";
+    } else {
+        audio.pause();
+        panel.classList.remove("active");
+        btn.innerText = "RECONNECT_ORBITER";
+        statusText.innerText = "SIGNAL_LOST";
+    }
+}
+</script>
+
+<script>
+    function applyGlobalSettings() {
+        // 1. Отримуємо дані з пам'яті
+        const themeColor = localStorage.getItem('marsTheme') || '#ff5722'; // колір за замовчуванням - помаранчевий
+        const isFXEnabled = localStorage.getItem('marsFX') !== 'false';
+        const volume = localStorage.getItem('marsVol') || 70;
+
+        // 2. Застосовуємо колірну схему
+        // Ми змінюємо головну змінну --neon-blue (або ту, яку ти використовував як основну)
+        document.documentElement.style.setProperty('--neon-blue', themeColor);
+        // Також можна змінити колір помаранчевих елементів, якщо хочеш повну зміну
+        document.documentElement.style.setProperty('--neon-orange', themeColor);
+
+        // 3. Застосовуємо ефекти (сканування)
+        const scanline = document.querySelector('.scan-bar'); // твоя лінія на фото
+        if (scanline) {
+            scanline.style.display = isFXEnabled ? 'block' : 'none';
+        }
+
+        // 4. Керування звуком
+        const mainAudio = document.getElementById('marsOrbitAudio');
+        if (mainAudio) {
+            mainAudio.volume = (volume / 100) * 0.5; // встановлюємо рівень гучності
+        }
+        
+        console.log("Налаштування Mars OS застосовано: ", { themeColor, volume, fx: isFXEnabled });
+    }
+
+    // Запускаємо перевірку при завантаженні сторінки
+    window.onload = applyGlobalSettings;
+
+    // Додатково: слухаємо зміни в localStorage (якщо налаштування змінені в іншій вкладці)
+    window.addEventListener('storage', (e) => {
+        applyGlobalSettings();
+    });
+</script>
+
+<style>
+    .future-card {
+        padding: 30px;
+        background: rgba(0, 15, 25, 0.8) !important;
+        border: 1px solid;
+        transition: 0.3s;
+    }
+    .future-card:hover {
+        transform: scale(1.02);
+        box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
+    }
+    button:hover {
+        box-shadow: 0 0 15px var(--neon-blue);
+        transform: scale(1.05);
+    }
+
+    /* ПАНЕЛЬ КЕРУВАННЯ ЗВУКОМ */
+.audio-control-panel {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    background: rgba(0, 15, 25, 0.9);
+    border: 1px solid var(--neon-blue);
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 9999;
+    backdrop-filter: blur(8px);
+    border-left: 4px solid var(--neon-blue);
+    transition: all 0.4s ease;
+}
+
+.audio-control-panel.active {
+    border-color: var(--neon-orange);
+    border-left-color: var(--neon-orange);
+    box-shadow: 0 0 20px rgba(255, 95, 0, 0.2);
+}
+
+/* СТАТУС СИГНАЛУ */
+.audio-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    background: #555;
+    border-radius: 50%;
+}
+
+.active .status-dot {
+    background: var(--neon-orange);
+    box-shadow: 0 0 8px var(--neon-orange);
+    animation: blink 1s infinite;
+}
+
+/* ВІЗУАЛІЗАТОР (СМУЖКИ) */
+.visualizer {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 20px;
+    opacity: 0.3;
+}
+
+.active .visualizer {
+    opacity: 1;
+}
+
+.bar {
+    width: 3px;
+    height: 4px;
+    background: var(--neon-blue);
+    transition: 0.2s;
+}
+
+.active .bar {
+    background: var(--neon-orange);
+    animation: barGrow 1.2s infinite ease-in-out;
+}
+
+.bar:nth-child(2) { animation-delay: 0.2s; }
+.bar:nth-child(3) { animation-delay: 0.4s; }
+.bar:nth-child(4) { animation-delay: 0.1s; }
+.bar:nth-child(5) { animation-delay: 0.3s; }
+
+/* КНОПКА */
+#playPauseBtn {
+    background: transparent;
+    border: 1px solid rgba(0, 242, 255, 0.3);
+    color: var(--neon-blue);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.7rem;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#playPauseBtn:hover {
+    background: var(--neon-blue);
+    color: black;
+}
+
+.active #playPauseBtn {
+    border-color: var(--neon-orange);
+    color: var(--neon-orange);
+}
+
+.active #playPauseBtn:hover {
+    background: var(--neon-orange);
+    color: black;
+}
+
+/* АНІМАЦІЇ */
+@keyframes barGrow {
+    0%, 100% { height: 4px; }
+    50% { height: 20px; }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+@keyframes barGrow {
+    0%, 100% { height: 5px; }
+    50% { height: 20px; }
+}
+</style>
+
+
+
+        <a href="index.html" class="back-link">RETURN TO BASE OFFICE</a>
+    </div>
+
+    
+
+</body>
+</html>

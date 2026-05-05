@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>MARS Protocol - Core Sync</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="подорж_між_сопутниками_на_марс/style_mars.css">
+</head>
+<body>
+
+    <div id="music-ui">🔊</div>
+    <div class="grid-bg"></div>
+
+    <div class="quiz-container" id="main-card">
+        <div class="corner tl"></div><div class="corner tr"></div>
+        <div class="corner bl"></div><div class="corner br"></div>
+
+        <div class="header">
+            <span>ARES-CORE // MARS_SYNC</span>
+            <span id="counter">КРОК: 1 / 10</span>
+        </div>
+
+        <div id="quiz-box">
+            <div class="question-text" id="question">Завантаження протоколу...</div>
+            <div class="options-grid" id="options-container"></div>
+            
+            <div class="fact-panel" id="fact-box">
+                <span style="font-weight:bold; color:var(--accent)">[ DATA ANALYSIS ]:</span>
+                <p id="fact-text"></p>
+            </div>
+
+            <button class="next-btn" id="next-button" onclick="handleNext()">Наступний сектор</button>
+        </div>
+
+        <div id="progress-fill"></div>
+    </div>
+
+    <!-- Аудіо ресурси -->
+    <audio id="bg-music" loop src="mars_ambient.mp3"></audio>
+    <audio id="fact-player"></audio>
+    <audio id="sfx-correct" src="загальна_озвучка/correct.mp3"></audio>
+    <audio id="sfx-error" src="загальна_озвучка/error.mp3"></audio>
+
+    <script src="подорж_між_сопутниками_на_марс/code_mars.js"></script>
+</body>
+</html>

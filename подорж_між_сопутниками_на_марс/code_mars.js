@@ -1,269 +1,74 @@
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <title>MARS Protocol - Core Sync</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --accent: #ff4d00; /* Основний колір Марса */
-            --glow: rgba(255, 77, 0, 0.25);
-            --correct: #58cc02;
-            --wrong: #ff4b4b;
-            --bg: #0a0400;
-        }
 
-        /* Прибираємо смуги прокрутки */
-        * { margin: 0; padding: 0; box-sizing: border-box; scrollbar-width: none; -ms-overflow-style: none; }
-        *::-webkit-scrollbar { display: none; }
-
-        body {
-            background: var(--bg);
-            color: white;
-            font-family: 'Rajdhani', sans-serif;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            transition: background 0.4s ease;
-        }
-
-        body.global-correct { background: radial-gradient(circle, rgba(0, 50, 0, 0.4) 0%, #000 100%); }
-        body.global-wrong { background: radial-gradient(circle, #300 0%, #000 100%); animation: alarmFlash 0.6s infinite; }
-
-        @keyframes alarmFlash { 50% { opacity: 0.7; } }
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
-        }
-        .shake { animation: shake 0.2s ease-in-out 0s 2; }
-
-        .grid-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                linear-gradient(rgba(255, 77, 0, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 77, 0, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
-            z-index: -1;
-        }
-
-        .quiz-container {
-            width: 90%;
-            max-width: 850px;
-            max-height: 95vh;
-            background: rgba(15, 5, 0, 0.95);
-            border: 2px solid var(--accent);
-            box-shadow: 0 0 40px var(--glow), inset 0 0 20px var(--glow);
-            backdrop-filter: blur(15px);
-            padding: clamp(20px, 5vh, 45px);
-            position: relative;
-            border-radius: 15px;
-            transition: all 0.4s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        body.global-correct .quiz-container { border-color: var(--correct); box-shadow: 0 0 40px rgba(88,204,2,0.3); }
-        body.global-wrong .quiz-container { border-color: var(--wrong); box-shadow: 0 0 40px rgba(255,75,75,0.3); }
-
-        .corner { position: absolute; width: 25px; height: 25px; border: 2px solid var(--accent); transition: 0.4s; }
-        .tl { top: -2px; left: -2px; border-right: 0; border-bottom: 0; }
-        .tr { top: -2px; right: -2px; border-left: 0; border-bottom: 0; }
-        .bl { bottom: -2px; left: -2px; border-right: 0; border-top: 0; }
-        .br { bottom: -2px; right: -2px; border-left: 0; border-top: 0; }
-
-        .header {
-            font-family: 'Orbitron';
-            color: var(--accent);
-            letter-spacing: 3px;
-            margin-bottom: 25px;
-            border-bottom: 1px solid var(--glow);
-            padding-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            font-size: clamp(0.7rem, 2vw, 1rem);
-        }
-
-        .question-text {
-            font-size: clamp(1.2rem, 3vh, 1.8rem);
-            font-family: 'Orbitron';
-            margin-bottom: 30px;
-            min-height: 80px;
-            color: #fff4f0;
-        }
-
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        @media (max-width: 600px) { .options-grid { grid-template-columns: 1fr; } }
-
-        .option-btn {
-            background: rgba(255, 255, 255, 0.03);
-            border: 2px solid var(--accent);
-            border-bottom: 5px solid var(--accent);
-            color: white;
-            padding: 20px;
-            font-family: 'Share Tech Mono';
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: 0.1s;
-            border-radius: 12px;
-            text-align: left;
-        }
-
-        .option-btn:hover:not(:disabled) { background: var(--glow); transform: translateY(-2px); }
-        .option-btn:active:not(:disabled) { transform: translateY(2px); border-bottom-width: 2px; }
-
-        .option-btn.correct { background: #d7ffb8 !important; color: #58cc02; border-color: #58cc02; border-bottom-color: #46a302; }
-        .option-btn.wrong { background: #ffdfe0 !important; color: #ff4b4b; border-color: #ff4b4b; border-bottom-color: #d13d3d; }
-
-        .fact-panel {
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(255,255,255,0.05);
-            border-left: 4px solid var(--accent);
-            display: none;
-            font-size: 1.1rem;
-            animation: fadeIn 0.5s;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        .next-btn {
-            margin-top: 25px; width: 100%; background: var(--accent);
-            border: none; border-bottom: 4px solid rgba(0,0,0,0.2);
-            color: black; padding: 18px; font-family: 'Orbitron'; 
-            font-size: 1.1rem; font-weight: bold;
-            cursor: pointer; display: none; border-radius: 12px;
-            text-transform: uppercase;
-        }
-        body.global-correct .next-btn { background: var(--correct); }
-        body.global-wrong .next-btn { background: var(--wrong); }
-
-        #progress-fill {
-            position: absolute; bottom: 0; left: 0; height: 6px;
-            background: var(--accent); transition: width 0.5s; 
-            width: 0%; border-radius: 0 0 0 15px;
-        }
-
-        #music-ui {
-            position: fixed; top: 20px; right: 20px;
-            cursor: pointer; font-size: 1.5rem; z-index: 100;
-            background: rgba(0,0,0,0.5); padding: 10px; border-radius: 50%;
-        }
-    </style>
-</head>
-<body>
-
-    <div id="music-ui">🔊</div>
-    <div class="grid-bg"></div>
-
-    <div class="quiz-container" id="main-card">
-        <div class="corner tl"></div><div class="corner tr"></div>
-        <div class="corner bl"></div><div class="corner br"></div>
-
-        <div class="header">
-            <span>ARES-CORE // MARS_SYNC</span>
-            <span id="counter">КРОК: 1 / 4</span>
-        </div>
-
-        <div id="quiz-box">
-            <div class="question-text" id="question">Завантаження протоколу...</div>
-            <div class="options-grid" id="options-container"></div>
-            
-            <div class="fact-panel" id="fact-box">
-                <span style="font-weight:bold; color:var(--accent)">[ DATA ANALYSIS ]:</span>
-                <p id="fact-text"></p>
-            </div>
-
-            <button class="next-btn" id="next-button" onclick="handleNext()">Наступний сектор</button>
-        </div>
-
-        <div id="progress-fill"></div>
-    </div>
-
-    <audio id="bg-music" loop src="mars_ambient.mp3"></audio>
-    <audio id="fact-player"></audio>
-    <audio id="sfx-correct" src="correct.mp3"></audio>
-    <audio id="sfx-error" src="error.mp3"></audio>
-
-    <script>
 let questions = [
             { 
                 q: "Чому Марс називають «Червоною планетою»?", 
                 options: ["Через високу температуру", "Через оксид заліза (іржу)", "Через червоні рослини", "Це колір атмосфери"], 
                 correctAnswer: "Через оксид заліза (іржу)", 
                 fact: "Поверхня Марса вкрита реголітом, багатим на залізо, яке окислюється і надає планеті характерного іржавого кольору.",
-                audio: "mars_fact1.mp3" 
+                audio: "подорж_між_сопутниками_на_марс/mars_fact1.mp3" 
             },
             { 
                 q: "Як називається найвища гора Марса (та всієї Сонячної системи)?", 
                 options: ["Еверест", "Гора Стікні", "Олімп", "Марінер"], 
                 correctAnswer: "Олімп", 
                 fact: "Олімп — це згаслий вулкан висотою понад 21 км, що втричі вище за Еверест.",
-                audio: "mars_fact2.mp3" 
+                audio: "подорж_між_сопутниками_на_марс/mars_fact2.mp3" 
             },
             { 
                 q: "Скільки часу триває один рік на Марсі?", 
                 options: ["365 днів", "687 днів", "120 днів", "2 роки"], 
                 correctAnswer: "687 днів", 
                 fact: "Марс знаходиться далі від Сонця, тому йому потрібно майже вдвічі більше часу, ніж Землі, щоб зробити повний оберт.",
-                audio: "mars_fact3.mp3" 
+                audio: "подорж_між_сопутниками_на_марс/mars_fact3.mp3" 
             },
             { 
                 q: "Який газ складає 95% атмосфери Марса?", 
                 options: ["Кисень", "Азот", "Вуглекислий газ", "Метан"], 
                 correctAnswer: "Вуглекислий газ", 
                 fact: "Атмосфера Марса дуже розріджена і складається переважно з CO2, що робить дихання без скафандра неможливим.",
-                audio: "mars_fact4.mp3" 
+                audio: "подорж_між_сопутниками_на_марс/mars_fact4.mp3" 
             },
             { 
                 q: "Яка гравітація на Марсі порівняно із земною?", 
                 options: ["Така сама", "У 2 рази сильніша", "Приблизно 38% від земної", "Гравітації немає"], 
                 correctAnswer: "Приблизно 38% від земної", 
                 fact: "Через меншу масу планети, на Марсі ви могли б стрибнути у три рази вище, ніж на Землі.",
-                audio: "mars_fact5.mp3" 
+                audio: "подорж_між_сопутниками_на_марс/mars_fact5.mp3" 
             },
             { 
                 q: "Як називаються два супутники Марса?", 
                 options: ["Місяць та Сонце", "Фобос та Деймос", "Титан та Європа", "Іо та Каллісто"], 
                 correctAnswer: "Фобос та Деймос", 
                 fact: "Їхні назви перекладаються з грецької як «Страх» та «Жах» — вічні супутники бога війни Ареса.",
-                audio: "mars_fact6.mp3" 
+                audio: "подорж_між_сопутниками_на_марс/mars_fact6.mp3" 
             },
             { 
                 q: "Як називається грандіозна система каньйонів на Марсі?", 
                 options: ["Великий каньйон", "Долина Марінера", "Рівнина Утопія", "Затока Райдуги"], 
                 correctAnswer: "Долина Марінера", 
                 fact: "Це найбільший каньйон у Сонячній системі. Він у 10 разів довший і в 3 рази глибший за Великий каньйон у США.",
-                audio: "mars_fact7.mp3" 
+                audio: "подорж_між_сопутниками_на_марс/mars_fact7.mp3" 
             },
             { 
                 q: "Яка середня температура на поверхні Марса?", 
                 options: ["+20°C", "-63°C", "+100°C", "-150°C"], 
                 correctAnswer: "-63°C", 
                 fact: "Хоча вдень на екваторі може бути +20°C, вночі температура падає до екстремальних -125°C.",
-                audio: "mars_fact8.mp3" 
+                audio: "подорж_між_сопутниками_на_марс/mars_fact8.mp3" 
             },
             { 
                 q: "Що знаходиться на полюсах Марса?", 
                 options: ["Активні вулкани", "Крижані шапки", "Ліси", "Океани рідкої води"], 
                 correctAnswer: "Крижані шапки", 
                 fact: "Вони складаються із суміші водяного льоду та замерзлого вуглекислого газу (сухого льоду).",
-                audio: "mars_fact9.mp3" 
+                audio: "подорж_між_сопутниками_на_марс/mars_fact9.mp3" 
             },
             { 
                 q: "Яка тривалість марсіанської доби (сола)?", 
                 options: ["12 годин", "24 години 37 хвилин", "48 годин", "10 годин"], 
                 correctAnswer: "24 години 37 хвилин", 
                 fact: "Марсіанська доба дуже схожа на земну, тому колоністам буде легше адаптувати свій біологічний годинник.",
-                audio: "mars_fact10.mp3" 
+                audio: "подорж_між_сопутниками_на_марс/mars_fact10.mp3" 
             }
         ];
 
@@ -375,6 +180,4 @@ let questions = [
 
         document.addEventListener('click', () => { if (bgMusic.paused) bgMusic.play().catch(()=>{}); }, { once: true });
         window.onload = init;
-    </script>
-</body>
-</html>
+    

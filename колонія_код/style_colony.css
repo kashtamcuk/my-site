@@ -1,0 +1,158 @@
+
+
+:root {
+    --accent: #ff5722;
+    --glow: rgba(255, 87, 34, 0.4);
+    --bg-dark: #0a0400;
+    --card-bg: #111827; 
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000;
+    color: white;
+    font-family: 'Rajdhani', sans-serif; 
+    height: 100vh;
+    overflow: hidden;
+}
+
+
+#mars-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at center, var(--bg-dark) 0%, #000 100%);
+    z-index: -1;
+}
+
+
+.main-layout {
+    display: flex;
+    height: 100vh;
+    padding: 20px;
+    gap: 20px;
+}
+
+nav {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.nav-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 87, 34, 0.3);
+    color: #fff;
+    padding: 15px;
+    font-family: 'Orbitron';
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+}
+
+.nav-btn.active, .nav-btn:hover {
+    background: var(--accent);
+    color: #000;
+    box-shadow: 0 0 15px var(--glow);
+}
+
+
+.terminal {
+    flex-grow: 1;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--accent);
+    padding: 30px;
+    overflow-y: auto;
+    position: relative;
+}
+
+.terminal-title {
+    font-family: 'Orbitron';
+    color: var(--accent);
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+
+
+.team-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.team-item {
+    background: var(--card-bg);
+    border-radius: 12px; 
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.team-item:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+}
+
+
+.team-item img {
+    width: 100%;
+    height: 250px; 
+    object-fit: cover;
+    display: block;
+}
+
+
+.team-content {
+    padding: 20px;
+}
+
+.team-item h3 {
+    font-family: 'Orbitron';
+    color: #f87171; 
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+}
+
+.team-item .role {
+    color: #fbbf24; 
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.team-item p {
+    color: #9ca3af; 
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+
+.section-stats {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.stat-block {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 15px;
+    border-left: 3px solid var(--accent);
+    font-family: 'Share Tech Mono';
+}
+
+
+.terminal::-webkit-scrollbar { width: 5px; }
+.terminal::-webkit-scrollbar-thumb { background: var(--accent); }
+   

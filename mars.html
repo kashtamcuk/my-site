@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>MARS ARCHIVE v2.0 - JUDGE EDITION</title>
+    <!-- Підключаю свої стилі з окремої папки -->
     <link rel="stylesheet" href="код_архіву_даних/style_arhiv.css">
-
-
-
 </head>
 <body>
-
+    <!-- Декоративна лінія, що їздить по екрану -->
     <div class="scanner-line"></div>
-
+    
     <div class="container">
         <header>
             <div class="archive-id">DATABASE ACCESS: GRANTED // SOL: 3422</div>
@@ -19,8 +17,8 @@
             <p>Централізований архів даних планети Марс для місії "ARES"</p>
         </header>
 
-        <div class="info-grid">
-            
+        <div class="info-grid">           
+            <!-- Секція з базовими фактами про Марс -->
             <div class="section-box">
                 <h2>GENERAL_INFO</h2>
                 <div class="data-list">
@@ -28,6 +26,7 @@
                         <span class="label">Назва</span>
                         Марс (на честь бога війни). Червоний колір спричинений високим вмістом оксиду заліза (іржі).
                     </div>
+                    <!-- Блок з порівнянням часу -->
                     <div class="stat-flex">
                         <div class="stat-val">
                             <span class="label">ДОБА</span>
@@ -39,12 +38,14 @@
                         </div>
                     </div>
                 </div>
+                <!-- Кнопка озвучки для цього блоку -->
                 <div class="section-box">
                     <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/1_x.mp3', this)">🔊 PLAY_VOICE</button>
                     <h2>GENERAL_INFO</h2>
                 </div>
-    </div>
+            </div>
 
+            <!-- Рекорди планети (вулкани та каньйони) -->
             <div class="section-box">
                 <h2>PLANETARY_RECORDS</h2>
                 <div class="data-list">
@@ -63,6 +64,7 @@
                 </div>
             </div>
 
+            <!-- Дані про воду та льодовики -->
             <div class="section-box">
                 <h2>H2O_ANALYSIS</h2>
                 <div class="data-list">
@@ -81,6 +83,7 @@
                 </div>
             </div>
 
+            <!-- Блок з погодою (температурні максимуми та мінімуми) -->
             <div class="section-box">
                 <h2>WEATHER_REPORT</h2>
                 <div class="stat-flex">
@@ -97,13 +100,13 @@
                     <span class="label">Феномен</span>
                     Глобальні пилові бурі, що можуть тривати місяцями.
                 </div>
-
                 <div class="section-box">
                     <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/3_x.mp3', this)">🔊 PLAY_VOICE</button>
                     <h2>GENERAL_INFO</h2>
                 </div>
             </div>
 
+            <!-- Інфо про відомі марсоходи -->
             <div class="section-box">
                 <h2>MISSION_LOGS</h2>
                 <div class="data-list">
@@ -122,6 +125,7 @@
                 </div>
             </div>
 
+            <!-- Цікаві факти та супутники -->
             <div class="section-box">
                 <h2>ANOMALIES</h2>
                 <div class="sunset-box">
@@ -138,12 +142,13 @@
                 </div>
             </div>
 
+            <!-- Блок про гравітацію (на всю ширину) -->
             <div class="section-box" style="grid-column: span 2;">
                 <h2>GRAVITY_WELL</h2>
                 <div style="display:flex; align-items:center; justify-content: space-around;">
-                    <p style="max-width: 400px;">Гравітація на Марсі складає лише <strong>38%</strong> від земної. Це означає, що людина може стрибати значно вище, а вантажі переносити легше.</p>
-                    <div class="stat-val" style="background: var(--neon-orange); padding: 20px; color: black; clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);">
-                        <span class="label" style="color: black;">Ваша вага (Земля 70кг)</span>
+                    <p style="max-width: 400px; color: white;">Гравітація на Марсі складає лише <strong>38%</strong> від земної. Це означає, що людина може стрибати значно вище, а вантажі переносити легше.</p>
+                    <div class="stat-val" style="background: var(--neon-orange); padding: 20px; color: rgb(255, 255, 255); clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);">
+                        <span class="label" style="color: rgb(255, 255, 255);">Ваша вага (Земля 70кг)</span>
                         <big>≈ 26.6 кг</big>
                     </div>
                 </div>
@@ -152,339 +157,333 @@
                     <h2>GENERAL_INFO</h2>
                 </div>
             </div>
-
         </div>
 
+        <!-- РОЗДІЛ "X-FILES" (Аномалії) -->
         <div style="grid-column: span 2; margin: 60px 0 30px 0; position: relative;">
-    <div style="position: absolute; left: -20px; top: 0; bottom: 0; width: 4px; background: var(--neon-orange); box-shadow: 0 0 15px var(--neon-orange);"></div>
-    <h2 style="font-family: 'Orbitron'; color: var(--neon-orange); letter-spacing: 6px; margin: 0 0 5px 20px; text-transform: uppercase;">
-        X-FILES: Anomalous Discoveries
-    </h2>
-    <p style="color: var(--neon-blue); opacity: 0.8; font-family: 'Orbitron'; font-size: 0.75rem; margin-left: 20px;">
-        DATABASE_PATH: /ROOT/ARCHIVE/UNEXPLAINED_SIGNS/
-    </p>
-</div>
-
-<div class="anomaly-file">
-    <div class="file-status">DEBUNKED</div>
-    <div class="anomaly-body">
-        <div class="anomaly-image">
-            <img src="вікіпедія_озвучка/двері.webp" alt="Двері">
-            <div class="scan-bar"></div>
+            <div style="position: absolute; left: -20px; top: 0; bottom: 0; width: 4px; background: var(--neon-orange); box-shadow: 0 0 15px var(--neon-orange);"></div>
+            <h2 style="font-family: 'Orbitron'; color: var(--neon-orange); letter-spacing: 6px; margin: 0 0 5px 20px; text-transform: uppercase;">
+                X-FILES: Anomalous Discoveries
+            </h2>
+            <p style="color: var(--neon-blue); opacity: 0.8; font-family: 'Orbitron'; font-size: 0.75rem; margin-left: 20px;">
+                DATABASE_PATH: /ROOT/ARCHIVE/UNEXPLAINED_SIGNS/
+            </p>
         </div>
-        <div class="anomaly-content">
-            <span class="file-id">LOG_ID: #CURI-7721</span>
-            <h3>"Портал" у скелі Гетьман</h3>
-            <p>Геологічна структура, що спричинила світовий ажіотаж. Хоча на знімку об'єкт виглядає як вхід для гуманоїда, лазерне сканування підтвердило: це **ерозійний розлом**. Прямокутна форма — результат ідеального кута падіння тіні на природні шари пісковика.</p>
-        </div>
-    </div>
-    <div class="section-box">
-        <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/7_x.mp3', this)">🔊 PLAY_VOICE</button>
-        <h2>GENERAL_INFO</h2>
-    </div>
-</div>
 
-<div class="anomaly-file">
-    <div class="file-status" style="border-color: #00f2ff; color: #00f2ff;">ATMOSPHERIC</div>
-    <div class="anomaly-body">
-        <div class="anomaly-image">
-            <img src="вікіпедія_озвучка/дим.webp" alt="Дим">
-            <div class="scan-bar"></div>
-        </div>
-        <div class="anomaly-content">
-            <span class="file-id">LOG_ID: #ESA-CLOUD-V1</span>
-            <h3>Шлейф гори Арсія</h3>
-            <p>Гігантський "дим", що тягнеться на 1500 км від згаслого вулкана. Попри вулканічний вигляд, це **орографічна хмара**. Вона виникає, коли вологі маси повітря стикаються з підніжжям гори та замерзають у високих шарах атмосфери, утворюючи крижаний слід.</p>
-        </div>
-    </div>
-    <div class="section-box">
-        <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/8_x.mp3', this)">🔊 PLAY_VOICE</button>
-        <h2>GENERAL_INFO</h2>
-    </div>
-</div>
-
-<div class="anomaly-file">
-    <div class="file-status" style="border-color: #ff3333; color: #ff3333;">GEOLOGICAL</div>
-    <div class="anomaly-body">
-        <div class="anomaly-image">
-            <img src="вікіпедія_озвучка/ангел.webp" alt="Ангел">
-            <div class="scan-bar"></div>
-        </div>
-        <div class="anomaly-content">
-            <span class="file-id">LOG_ID: #MARS-ANGEL-03</span>
-            <h3>Полярний "Охоронець"</h3>
-            <p>Містична постать на південному полюсі. Аналіз показує, що "голова" ангела — це стародавній **ударний кратер**, а темний колір фігури обумовлений сумішшю піску та льоду, що оголилися під час сублімації (випаровування) замороженого діоксиду вуглецю.</p>
-        </div>
-    </div>
-    <div class="section-box">
-        <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/9_x.mp3', this)">🔊 PLAY_VOICE</button>
-        <h2>GENERAL_INFO</h2>
-    </div>
-</div>
-
-<div class="anomaly-file">
-    <div class="file-status">CLASSIC_MYTH</div>
-    <div class="anomaly-body">
-        <div class="anomaly-image">
-            <img src="вікіпедія_озвучка/леце.webp" alt="Обличчя">
-            <div class="scan-bar"></div>
-        </div>
-        <div class="anomaly-content">
-            <span class="file-id">LOG_ID: #VIK-1976</span>
-            <h3>Обличчя регіону Сідонія</h3>
-            <p>Легенда космічної ери. Світова сенсація 1976 року виявилася лице **мезою** (столовою горою). Завдяки новітнім камерам ми знаємо: очі та рот — це просто пагорби та западини, які при низькому сонці створюють ілюзію людських рис.</p>
-        </div>
-    </div>
-    <div class="section-box">
-        <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/10_x.mp3', this)">🔊 PLAY_VOICE</button>
-        <h2>GENERAL_INFO</h2>
-    </div>
-</div>
-
-
-
-<div style="grid-column: span 2; margin: 80px 0 40px 0; text-align: center;">
-    <div class="mission-header">
-        <span class="header-line"></span>
-        <h2>CHRONOLOGY OF MARS EXPLORATION</h2>
-        <span class="header-line"></span>
-    </div>
-    <p style="color: var(--neon-blue); font-family: 'Orbitron'; font-size: 0.8rem; letter-spacing: 3px; opacity: 0.6;">SCANNING HISTORICAL DATA...</p>
-</div>
-
-<div class="timeline-container">
-    
-    <div class="timeline-item">
-        <div class="timeline-dot"><div class="pulse"></div></div>
-        <div class="timeline-date">1965</div>
-        <div class="timeline-content">
-            <div class="corner top-left"></div>
-            <div class="corner bottom-right"></div>
-            <span class="mission-tag">DATA_STREAM: MARINER_4</span>
-            <h3>Перші очі людства</h3>
-            <p>21 знімок, що розвіяв міфи про канали та цивілізації. Ми побачили мертву, вкриту кратерами пустелю, схожу на Місяць.</p>
-        </div>
-        <div class="section-box">
-        <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/11_x.mp3', this)">🔊 PLAY_VOICE</button>
-        <h2>GENERAL_INFO</h2>
-    </div>
-    </div>
-    
-
-    <div class="timeline-item">
-        <div class="timeline-dot"><div class="pulse"></div></div>
-        <div class="timeline-date">1971</div>
-        <div class="timeline-content">
-            <div class="corner top-left"></div>
-            <div class="corner bottom-right"></div>
-            <span class="mission-tag">ORBITAL_SCAN</span>
-            <h3>Mariner 9: Масштаб</h3>
-            <p>Перший апарат на орбіті. Саме він відкрив **Valles Marineris** (велетенський каньйон) та вулкан **Олімп**, коли пил нарешті влігся.</p>
-        </div>
-        <div class="section-box">
-        <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/12_x.mp3', this)">🔊 PLAY_VOICE</button>
-        <h2>GENERAL_INFO</h2>
-    </div>
-    </div>
-
-    <div class="timeline-item">
-        <div class="timeline-dot"><div class="pulse"></div></div>
-        <div class="timeline-date">1976</div>
-        <div class="timeline-content">
-            <div class="corner top-left"></div>
-            <div class="corner bottom-right"></div>
-            <span class="mission-tag">SURFACE_BIO_TEST</span>
-            <h3>Viking 1: Десант</h3>
-            <p>Перша тривала робота на поверхні. Світ побачив перші панорами іржавих скель та рожевого марсіанського неба.</p>
-        </div>
-        <div class="section-box">
-        <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/13_x.mp3', this)">🔊 PLAY_VOICE</button>
-        <h2>GENERAL_INFO</h2>
-    </div>
-    </div>
-
-    <div class="timeline-item highlight">
-        <div class="timeline-dot orange"><div class="pulse"></div></div>
-        <div class="timeline-date">1997-2012</div>
-        <div class="timeline-content orange-border">
-            <div class="corner top-left orange"></div>
-            <div class="corner bottom-right orange"></div>
-            <span class="mission-tag" style="color: var(--neon-orange);">MOBILE_LABS</span>
-            <h3>Епоха марсоходів</h3>
-            <p>Від "мікрохвильовки" **Sojourner** до гіганта **Curiosity**. Доведено: Марс мав рідку воду, стабільні озера та органіку.</p>
-        </div>
-        <div class="section-box">
-        <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/14_x.mp3', this)">🔊 PLAY_VOICE</button>
-        <h2>GENERAL_INFO</h2>
-    </div>
-    </div>
-
-    <div class="timeline-item">
-        <div class="timeline-dot"><div class="pulse"></div></div>
-        <div class="timeline-date">2021+</div>
-        <div class="timeline-content">
-            <div class="corner top-left"></div>
-            <div class="corner bottom-right"></div>
-            <span class="mission-tag">PRESENT_DAY</span>
-            <h3>Perseverance & Ingenuity</h3>
-            <p>Збір ґрунту для повернення на Землю та перші польоти гвинтокрила. Ми вчимося жити та працювати на іншій планеті.</p>
-        </div>
-        <div class="section-box">
-        <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/15_x.mp3', this)">🔊 PLAY_VOICE</button>
-        <h2>GENERAL_INFO</h2>
-    </div>
-    </div>
-</div>
-
-
-
-<div style="grid-column: span 2; margin: 80px 0 30px 0; text-align: center;">
-    <h2 style="font-family: 'Orbitron'; color: white; letter-spacing: 8px; text-transform: uppercase; margin-bottom: 10px;">
-        NATURAL_SATELLITES_SCAN
-    </h2>
-    <div style="width: 200px; height: 1px; background: linear-gradient(to right, transparent, var(--neon-orange), var(--neon-blue), transparent); margin: 0 auto;"></div>
-</div>
-
-<div class="satellites-grid">
-    
-    <div class="sat-card phobos">
-        <div class="sat-header">
-            <div class="sat-icon">PH</div>
-            <div class="sat-title">
-                <h3>PHOBOS</h3>
-                <span>"Страх" // Об'єкт приречений</span>
+        <!-- Картка аномалії: Двері -->
+        <div class="anomaly-file">
+            <div class="file-status">DEBUNKED</div>
+            <div class="anomaly-body">
+                <div class="anomaly-image">
+                    <img src="вікіпедія_озвучка/двері.webp" alt="Двері">
+                    <div class="scan-bar"></div>
+                </div>
+                <div class="anomaly-content">
+                    <span class="file-id">LOG_ID: #CURI-7721</span>
+                    <h3>"Портал" у скелі Гетьман</h3>
+                    <p>Геологічна структура, що спричинила світовий ажіотаж. Хоча на знімку об'єкт виглядає як вхід для гуманоїда, лазерне сканування підтвердило: це **ерозійний розлом**. Прямокутна форма — результат ідеального кута падіння тіні на природні шари пісковика.</p>
+                </div>
             </div>
-        </div>
-        
-        <div class="sat-stats">
-            <div class="stat-row">
-                <span>Діаметр: 22 км</span>
-                <div class="stat-bar"><div style="width: 80%; background: var(--neon-orange);"></div></div>
-            </div>
-            <div class="stat-row">
-                <span>Висота від марса до сопутника: 6000 км</span>
-                <div class="stat-bar"><div style="width: 20%; background: var(--neon-orange);"></div></div>
+            <div class="section-box">
+                <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/7_x.mp3', this)">🔊 PLAY_VOICE</button>
+                <h2>GENERAL_INFO</h2>
             </div>
         </div>
 
-        <div class="sat-info">
-            <p><strong>Форма:</strong> "Космічна картопля" 🥔. Нерівний, пухкий об'єкт, вкритий борознами.</p>
-            <p><strong>Аномалія:</strong> Найближчий супутник у Сонячній системі. Сходить і заходить двічі на добу.</p>
-            <p><strong>Кратер Стікні:</strong> Займає майже половину поверхні. Удар ледве не розколов супутник.</p>
-        </div>
-
-        <div class="danger-zone">
-            <span>TERMINATION_ALERT:</span>
-            Фобос падає на Марс. Через 30-50 млн років він перетвориться на кільце або вріжеться в планету.
-        </div>
-        <div class="section-box">
-        <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/16_x.mp3', this)">🔊 PLAY_VOICE</button>
-        <h2>GENERAL_INFO</h2>
-    </div>
-    </div>
-
-    <div class="sat-card deimos">
-        <div class="sat-header">
-            <div class="sat-icon">DE</div>
-            <div class="sat-title">
-                <h3>DEIMOS</h3>
-                <span>"Жах" // Стабільна орбіта</span>
+        <!-- Картка аномалії: Дим -->
+        <div class="anomaly-file">
+            <div class="file-status" style="border-color: #00f2ff; color: #00f2ff;">ATMOSPHERIC</div>
+            <div class="anomaly-body">
+                <div class="anomaly-image">
+                    <img src="вікіпедія_озвучка/дим.webp" alt="Дим">
+                    <div class="scan-bar"></div>
+                </div>
+                <div class="anomaly-content">
+                    <span class="file-id">LOG_ID: #ESA-CLOUD-V1</span>
+                    <h3>Шлейф гори Арсія</h3>
+                    <p>Гігантський "дим", що тягнеться на 1500 км від згаслого вулкана. Попри вулканічний вигляд, це **орографічна хмара**. Вона виникає, коли вологі маси повітря стикаються з підніжжям гори та замерзають у високих шарах атмосфери, утворюючи крижаний слід.</p>
+                </div>
+            </div>
+            <div class="section-box">
+                <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/8_x.mp3', this)">🔊 PLAY_VOICE</button>
+                <h2>GENERAL_INFO</h2>
             </div>
         </div>
 
-        <div class="sat-stats">
-            <div class="stat-row">
-                <span>Діаметр: 12 км</span>
-                <div class="stat-bar"><div style="width: 40%; background: var(--neon-blue);"></div></div>
+        <!-- Картка аномалії: Ангел -->
+        <div class="anomaly-file">
+            <div class="file-status" style="border-color: #ff3333; color: #ff3333;">GEOLOGICAL</div>
+            <div class="anomaly-body">
+                <div class="anomaly-image">
+                    <img src="вікіпедія_озвучка/ангел.webp" alt="Ангел">
+                    <div class="scan-bar"></div>
+                </div>
+                <div class="anomaly-content">
+                    <span class="file-id">LOG_ID: #MARS-ANGEL-03</span>
+                    <h3>Полярний "Охоронець"</h3>
+                    <p>Містична постать на південному полюсі. Аналіз показує, що "голова" ангела — це стародавній **ударний кратер**, а темний колір фігури обумовлений сумішшю піску та льоду, що оголилися під час сублімації (випаровування) замороженого діоксиду вуглецю.</p>
+                </div>
             </div>
-            <div class="stat-row">
-                <span>Висота від марса до сопутника: 23 000 км</span>
-                <div class="stat-bar"><div style="width: 75%; background: var(--neon-blue);"></div></div>
+            <div class="section-box">
+                <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/9_x.mp3', this)">🔊 PLAY_VOICE</button>
+                <h2>GENERAL_INFO</h2>
             </div>
         </div>
 
-        <div class="sat-info">
-            <p><strong>Форма:</strong> Гладкий та округлий. Вкритий товстим шаром пилу (реголіту), що приховує кратери.</p>
-            <p><strong>Вид з Марса:</strong> Виглядає як дуже яскрава зірка. Рухається по небу повільно (30 годин).</p>
-            <p><strong>Походження:</strong> Ймовірно, колишній астероїд, захоплений гравітацією Марса мільярди років тому.</p>
+        <!-- Картка аномалії: Обличчя -->
+        <div class="anomaly-file">
+            <div class="file-status">CLASSIC_MYTH</div>
+            <div class="anomaly-body">
+                <div class="anomaly-image">
+                    <img src="вікіпедія_озвучка/леце.webp" alt="Обличчя">
+                    <div class="scan-bar"></div>
+                </div>
+                <div class="anomaly-content">
+                    <span class="file-id">LOG_ID: #VIK-1976</span>
+                    <h3>Обличчя регіону Сідонія</h3>
+                    <p>Легенда космічної ери. Світова сенсація 1976 року виявилася лице **мезою** (столовою горою). Завдяки новітнім камерам ми знаємо: очі та рот — це просто пагорби та западини, які при низькому сонці створюють ілюзію людських рис.</p>
+                </div>
+            </div>
+            <div class="section-box">
+                <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/10_x.mp3', this)">🔊 PLAY_VOICE</button>
+                <h2>GENERAL_INFO</h2>
+            </div>
         </div>
 
-        <div class="safe-zone">
-            <span>ORBITAL_STATUS:</span>
-            Стабільний. Поступово віддаляється від планети.
+        <!-- ХРОНОЛОГІЯ ДОСЛІДЖЕНЬ -->
+        <div style="grid-column: span 2; margin: 80px 0 40px 0; text-align: center;">
+            <div class="mission-header">
+                <span class="header-line"></span>
+                <h2>CHRONOLOGY OF MARS EXPLORATION</h2>
+                <span class="header-line"></span>
+            </div>
+            <p style="color: var(--neon-blue); font-family: 'Orbitron'; font-size: 0.8rem; letter-spacing: 3px; opacity: 0.6;">SCANNING HISTORICAL DATA...</p>
         </div>
-        <div class="section-box">
-        <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/17_x.mp3', this)">🔊 PLAY_VOICE</button>
-        <h2>GENERAL_INFO</h2>
-    </div>
-    </div>
-</div>
 
+        <!-- Таймлайн з важливими роками -->
+        <div class="timeline-container">   
+            <div class="timeline-item">
+                <div class="timeline-dot"><div class="pulse"></div></div>
+                <div class="timeline-date">1965</div>
+                <div class="timeline-content">
+                    <div class="corner top-left"></div>
+                    <div class="corner bottom-right"></div>
+                    <span class="mission-tag">DATA_STREAM: MARINER_4</span>
+                    <h3>Перші очі людства</h3>
+                    <p>21 знімок, що розвіяв міфи про канали та цивілізації. Ми побачили мертву, вкриту кратерами пустелю, схожу на Місяць.</p>
+                </div>
+                <div class="section-box">
+                    <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/11_x.mp3', this)">🔊 PLAY_VOICE</button>
+                    <h2>GENERAL_INFO</h2>
+                </div>
+            </div>
 
+            <div class="timeline-item">
+                <div class="timeline-dot"><div class="pulse"></div></div>
+                <div class="timeline-date">1971</div>
+                <div class="timeline-content">
+                    <div class="corner top-left"></div>
+                    <div class="corner bottom-right"></div>
+                    <span class="mission-tag">ORBITAL_SCAN</span>
+                    <h3>Mariner 9: Масштаб</h3>
+                    <p>Перший апарат на орбіті. Саме він відкрив **Valles Marineris** (велетенський каньйон) та вулкан **Олімп**, коли пил нарешті влігся.</p>
+                </div>
+                <div class="section-box">
+                    <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/12_x.mp3', this)">🔊 PLAY_VOICE</button>
+                    <h2>GENERAL_INFO</h2>
+                </div>
+            </div>
 
-<div style="grid-column: span 2; margin-top: 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
-    
-    <div class="section-box future-card" style="border-color: var(--neon-blue);">
-        <h2 style="font-family: 'Orbitron'; font-size: 1.2rem; color: var(--neon-blue);">[GRAVITY_CALC]</h2>
-        <p style="font-size: 0.9rem; color: #b0e0f0;">Скільки ти важитимеш на Марсі?</p>
-        
-        <div style="margin-top: 20px;">
-            <input type="number" id="earthWeight" placeholder="Твоя вага (кг)" 
-                   style="background: rgba(0,0,0,0.5); border: 1px solid var(--neon-blue); color: white; padding: 10px; font-family: 'Orbitron'; width: 120px;">
-            <button onclick="calcWeight()" 
-                    style="background: var(--neon-blue); border: none; color: black; padding: 10px 20px; font-family: 'Orbitron'; cursor: pointer; font-weight: bold; transition: 0.3s;">
-                CALCULATE
+            <div class="timeline-item">
+                <div class="timeline-dot"><div class="pulse"></div></div>
+                <div class="timeline-date">1976</div>
+                <div class="timeline-content">
+                    <div class="corner top-left"></div>
+                    <div class="corner bottom-right"></div>
+                    <span class="mission-tag">SURFACE_BIO_TEST</span>
+                    <h3>Viking 1: Десант</h3>
+                    <p>Перша тривала робота на поверхні. Світ побачив перші панорами іржавих скель та рожевого марсіанського неба.</p>
+                </div>
+                <div class="section-box">
+                    <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/13_x.mp3', this)">🔊 PLAY_VOICE</button>
+                    <h2>GENERAL_INFO</h2>
+                </div>
+            </div>
+
+            <!-- Акцент на сучасному періоді -->
+            <div class="timeline-item highlight">
+                <div class="timeline-dot orange"><div class="pulse"></div></div>
+                <div class="timeline-date">1997-2012</div>
+                <div class="timeline-content orange-border">
+                    <div class="corner top-left orange"></div>
+                    <div class="corner bottom-right orange"></div>
+                    <span class="mission-tag" style="color: var(--neon-orange);">MOBILE_LABS</span>
+                    <h3>Епоха марсоходів</h3>
+                    <p>Від "мікрохвильовки" **Sojourner** до гіганта **Curiosity**. Доведено: Марс мав рідку воду, стабільні озера та органіку.</p>
+                </div>
+                <div class="section-box">
+                    <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/14_x.mp3', this)">🔊 PLAY_VOICE</button>
+                    <h2>GENERAL_INFO</h2>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"><div class="pulse"></div></div>
+                <div class="timeline-date">2021+</div>
+                <div class="timeline-content">
+                    <div class="corner top-left"></div>
+                    <div class="corner bottom-right"></div>
+                    <span class="mission-tag">PRESENT_DAY</span>
+                    <h3>Perseverance & Ingenuity</h3>
+                    <p>Збір ґрунту для повернення на Землю та перші польоти гвинтокрила. Ми вчимося жити та працювати на іншій планеті.</p>
+                </div>
+                <div class="section-box">
+                    <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/15_x.mp3', this)">🔊 PLAY_VOICE</button>
+                    <h2>GENERAL_INFO</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- РОЗДІЛ ПРО СУПУТНИКИ -->
+        <div style="grid-column: span 2; margin: 80px 0 30px 0; text-align: center;">
+            <h2 style="font-family: 'Orbitron'; color: white; letter-spacing: 8px; text-transform: uppercase; margin-bottom: 10px;">
+                NATURAL_SATELLITES_SCAN
+            </h2>
+            <div style="width: 200px; height: 1px; background: linear-gradient(to right, transparent, var(--neon-orange), var(--neon-blue), transparent); margin: 0 auto;"></div>
+        </div>
+
+        <!-- Сітка для Фобоса та Деймоса -->
+        <div class="satellites-grid">  
+            <!-- Картка Фобоса -->
+            <div class="sat-card phobos">
+                <div class="sat-header">
+                    <div class="sat-icon">PH</div>
+                    <div class="sat-title">
+                        <h3>PHOBOS</h3>
+                        <span>"Страх" // Об'єкт приречений</span>
+                    </div>
+                </div>      
+                <div class="sat-stats">
+                    <div class="stat-row">
+                        <span>Діаметр: 22 км</span>
+                        <div class="stat-bar"><div style="width: 80%; background: var(--neon-orange);"></div></div>
+                    </div>
+                    <div class="stat-row">
+                        <span>Висота від марса до сопутника: 6000 км</span>
+                        <div class="stat-bar"><div style="width: 20%; background: var(--neon-orange);"></div></div>
+                    </div>
+                </div>
+                <div class="sat-info">
+                    <p><strong>Форма:</strong> "Космічна картопля" 🥔. Нерівний, пухкий об'єкт, вкритий борознами.</p>
+                    <p><strong>Аномалія:</strong> Найближчий супутник у Сонячній системі. Сходить і заходить двічі на добу.</p>
+                    <p><strong>Кратер Стікні:</strong> Займає майже половину поверхні. Удар ледве не розколов супутник.</p>
+                </div>
+                <div class="danger-zone">
+                    <span>TERMINATION_ALERT:</span>
+                    Фобос падає на Марс. Через 30-50 млн років він перетвориться на кільце або вріжеться в планету.
+                </div>
+                <div class="section-box">
+                    <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/16_x.mp3', this)">🔊 PLAY_VOICE</button>
+                    <h2>GENERAL_INFO</h2>
+                </div>
+            </div>
+
+            <!-- Картка Деймоса -->
+            <div class="sat-card deimos">
+                <div class="sat-header">
+                    <div class="sat-icon">DE</div>
+                    <div class="sat-title">
+                        <h3>DEIMOS</h3>
+                        <span>"Жах" // Стабільна орбіта</span>
+                    </div>
+                </div>
+                <div class="sat-stats">
+                    <div class="stat-row">
+                        <span>Діаметр: 12 км</span>
+                        <div class="stat-bar"><div style="width: 40%; background: var(--neon-blue);"></div></div>
+                    </div>
+                    <div class="stat-row">
+                        <span>Висота від марса до сопутника: 23 000 км</span>
+                        <div class="stat-bar"><div style="width: 75%; background: var(--neon-blue);"></div></div>
+                    </div>
+                </div>
+                <div class="sat-info">
+                    <p><strong>Форма:</strong> Гладкий та округлий. Вкритий товстим шаром пилу (реголіту), що приховує кратери.</p>
+                    <p><strong>Вид з Марса:</strong> Виглядає як дуже яскрава зірка. Рухається по небу повільно (30 годин).</p>
+                    <p><strong>Походження:</strong> Ймовірно, колишній астероїд, захоплений гравітацією Марса мільярди років тому.</p>
+                </div>
+                <div class="safe-zone">
+                    <span>ORBITAL_STATUS:</span>
+                    Стабільний. Поступово віддаляється від планети.
+                </div>
+                <div class="section-box">
+                    <button class="read-btn" onclick="playAudio('вікіпедія_озвучка/17_x.mp3', this)">🔊 PLAY_VOICE</button>
+                    <h2>GENERAL_INFO</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- ІНТЕРАКТИВНІ ВІДЖЕТИ ТА МАЙБУТНЄ -->
+        <div style="grid-column: span 2; margin-top: 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">    
+            <!-- Калькулятор ваги -->
+            <div class="section-box future-card" style="border-color: var(--neon-blue);">
+                <h2 style="font-family: 'Orbitron'; font-size: 1.2rem; color: var(--neon-blue);">[GRAVITY_CALC]</h2>
+                <p style="font-size: 0.9rem; color: #b0e0f0;">Скільки ти важитимеш на Марсі?</p>       
+                <div style="margin-top: 20px;">
+                    <input type="number" id="earthWeight" placeholder="Твоя вага (кг)" 
+                           style="background: rgba(0,0,0,0.5); border: 1px solid var(--neon-blue); color: white; padding: 10px; font-family: 'Orbitron'; width: 120px;">
+                    <button onclick="calcWeight()" 
+                            style="background: var(--neon-blue); border: none; color: black; padding: 10px 20px; font-family: 'Orbitron'; cursor: pointer; font-weight: bold; transition: 0.3s;">
+                        CALCULATE
+                    </button>
+                </div>       
+                <div id="marsResult" style="margin-top: 20px; font-family: 'Orbitron'; font-size: 1.5rem; color: var(--neon-orange); display: none;">
+                    RESULT: <span id="weightValue">0</span> KG
+                </div>
+            </div>
+
+            <!-- Плани на 2030-ті роки -->
+            <div class="section-box future-card" style="border-color: var(--neon-orange); background: rgba(255, 95, 0, 0.05);">
+                <h2 style="font-family: 'Orbitron'; font-size: 1.2rem; color: white;">[MISSION_MARS_2030]</h2>
+                <p style="font-size: 0.85rem; line-height: 1.4; color: white;">
+                    Наступний крок — висадка людини. <br>
+                    <strong >Мета:</strong> Створення автономної колонії. <br>
+                    <strong>Транспорт:</strong> Starship (SpaceX) або SLS (NASA).
+                </p>
+                <div style="margin-top: 15px; border-top: 1px dashed var(--neon-orange); padding-top: 10px; font-size: 0.7rem; font-family: 'Orbitron'; opacity: 0.6;">
+                    BOARDING PASS: UNKNOWN_EXPLORER
+                </div>
+            </div>
+        </div>
+
+        <!-- МОДУЛЬ ДЛЯ ФОНОВОЇ МУЗИКИ -->
+        <div id="mars-audio-module" class="audio-control-panel">
+            <div class="audio-status">
+                <span class="status-dot"></span>
+                <span id="status-text">SIGNAL_OFFLINE</span>
+            </div>  
+            <div class="visualizer" id="audio-viz">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <button id="playPauseBtn" onclick="toggleMarsMusic()">
+                CONNECT_TO_ORBITER
             </button>
+            <!-- Саме аудіо, зациклене -->
+            <audio id="marsOrbitAudio" loop>
+                <source src="вікіпедія_озвучка/mars_sound.mp3" type="audio/mpeg">
+                Ваш браузер не підтримує аудіо.
+            </audio>
         </div>
-        
-        <div id="marsResult" style="margin-top: 20px; font-family: 'Orbitron'; font-size: 1.5rem; color: var(--neon-orange); display: none;">
-            RESULT: <span id="weightValue">0</span> KG
-        </div>
-    </div>
 
-    <div class="section-box future-card" style="border-color: var(--neon-orange); background: rgba(255, 95, 0, 0.05);">
-        <h2 style="font-family: 'Orbitron'; font-size: 1.2rem; color: var(--neon-orange);">[MISSION_MARS_2030]</h2>
-        <p style="font-size: 0.85rem; line-height: 1.4;">
-            Наступний крок — висадка людини. <br>
-            <strong>Мета:</strong> Створення автономної колонії. <br>
-            <strong>Транспорт:</strong> Starship (SpaceX) або SLS (NASA).
-        </p>
-        <div style="margin-top: 15px; border-top: 1px dashed var(--neon-orange); padding-top: 10px; font-size: 0.7rem; font-family: 'Orbitron'; opacity: 0.6;">
-            BOARDING PASS: UNKNOWN_EXPLORER
-        </div>
-    </div>
-</div>
-
-<div id="mars-audio-module" class="audio-control-panel">
-    <div class="audio-status">
-        <span class="status-dot"></span>
-        <span id="status-text">SIGNAL_OFFLINE</span>
-    </div>
-    
-    <div class="visualizer" id="audio-viz">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-    </div>
-
-    <button id="playPauseBtn" onclick="toggleMarsMusic()">
-        CONNECT_TO_ORBITER
-    </button>
-
-    <audio id="marsOrbitAudio" loop>
-        <source src="вікіпедія_озвучка/mars_sound.mp3" type="audio/mpeg">
-        Ваш браузер не підтримує аудіо.
-    </audio>
-</div>
-
-
-
+        <!-- Кнопка повернення -->
         <a href="index.html" class="back-link">RETURN TO BASE OFFICE</a>
     </div>
 
-<script src="код_архіву_даних/cod_arhiv.js"></script>   
-
+    <!-- Мій скрипт для всієї логіки -->
+    <script src="код_архіву_даних/cod_arhiv.js"></script>   
 </body>
 </html>

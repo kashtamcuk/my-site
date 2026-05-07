@@ -1,7 +1,7 @@
- 
-        const content = {
-            main: `
-
+// Тут тримаю весь текст і верстку для різних розділів
+const content = {
+    // Головна сторінка управління з інфою про місію та команду
+    main: `
         <h2 class="terminal-title">Про Головне управління</h2>
         <div class="about-wrapper" style="display: flex; gap: 30px; margin-bottom: 40px; align-items: stretch; height: auto;">
             
@@ -12,298 +12,266 @@
                 <div style="position: absolute; bottom: 0; right: 0; width: 20px; height: 20px; background: var(--accent); clip-path: polygon(100% 0, 100% 100%, 0 100%);"></div>
             </div>
 
-
-        <div class="about-text" style="flex: 1.2; font-family: 'Rajdhani', sans-serif; line-height: 1.6; font-size: 1.1rem;">
-            <p>Центральний вузол <span style="color: var(--accent); font-weight: bold;">ARES-1</span> — це серце колонії на Марсі. Управління було засноване як перший автономний форпост людства в секторі Рівнини Елізій.</p>
-            <p style="margin: 15px 0;">Завдяки передовим технологіям, штаб-квартира забезпечує зв'язок із Землею, координацію всіх життєзабезпечуючих модулів та контроль за безпекою екіпажу 24/7.</p>
-            <p><b>Головне управління</b> першим впровадило систему ШІ для прогнозування пилових бурь, що дозволило зберегти 100% працездатність сонячних панелей.</p>
-            <p style="margin-top: 20px; color: var(--accent); font-family: 'Orbitron'; font-size: 0.9rem; letter-spacing: 1px;">
-                <i>// СТАТУС: КОМАНДНИЙ ЦЕНТР АКТИВНИЙ</i>
-            </p>
-        </div>
-    </div>
-</section>
-
-<hr style="border: 0; border-top: 1px solid rgba(255,87,34,0.2); margin: 40px 0;">
-
-<!-- Розділ: Керівна Команда (СТИЛЬ ЯК НА ФОТО З АРТЕМОМ) -->
-<section class="section-team">
-    <h2 class="terminal-title" style="margin-bottom: 30px;">Керівний склад</h2>
-    <div class="team-wrapper">
-        
-        <!-- Ти — Командир -->
-        <div class="team-item">
-            <img src="фото_місія_марс/chief_maryan.png" alt="Мар'ян">
-            <div class="team-content">
-                <h3>Мар'ян</h3>
-                <span class="role">Doctor of Sciences / Командир</span>
-                <p>Засновник колонії та головний архітектор систем автоматизації. Відповідає за стратегічні рішення та цілісність місії.</p>
+            <div class="about-text" style="flex: 1.2; font-family: 'Rajdhani', sans-serif; line-height: 1.6; font-size: 1.1rem;">
+                <p>Центральний вузол <span style="color: var(--accent); font-weight: bold;">ARES-1</span> — це серце колонії на Марсі. Управління було засноване як перший автономний форпост людства в секторі Рівнини Елізій.</p>
+                <p style="margin: 15px 0;">Завдяки передовим технологіям, штаб-квартира забезпечує зв'язок із Землею, координацію всіх життєзабезпечуючих модулів та контроль за безпекою екіпажу 24/7.</p>
+                <p><b>Головне управління</b> першим впровадило систему ШІ для прогнозування пилових бурь, що дозволило зберегти 100% працездатність сонячних панелей.</p>
+                <p style="margin-top: 20px; color: var(--accent); font-family: 'Orbitron'; font-size: 0.9rem; letter-spacing: 1px;">
+                    <i>// СТАТУС: КОМАНДНИЙ ЦЕНТР АКТИВНИЙ</i>
+                </p>
             </div>
         </div>
 
-        <!-- Олексій -->
-        <div class="team-item">
-            <img src="фото_місія_марс/alex_it.png" alt="Олексій">
-            <div class="team-content">
-                <h3>Олексій</h3>
-                <span class="role">Head of IT Systems</span>
-                <p>Спеціаліст з кібербезпеки та підтримки стабільності Mars OS. Слідкує за безперебійною роботою серверів та зв'язком.</p>
+        <hr style="border: 0; border-top: 1px solid rgba(255,87,34,0.2); margin: 40px 0;">
+
+        <!-- Розділ з керівниками. Зробив картки як на дизайні з Артемом -->
+        <section class="section-team">
+            <h2 class="terminal-title" style="margin-bottom: 30px;">Керівний склад</h2>
+            <div class="team-wrapper">
+                
+                <!-- Моя картка (Командир) -->
+                <div class="team-item">
+                    <img src="фото_місія_марс/chief_maryan.png" alt="Мар'ян">
+                    <div class="team-content">
+                        <h3>Мар'ян</h3>
+                        <span class="role">Doctor of Sciences / Командир</span>
+                        <p>Засновник колонії та головний архітектор систем автоматизації. Відповідає за стратегічні рішення та цілісність місії.</p>
+                    </div>
+                </div>
+
+                <!-- Картка Олексія (Айті) -->
+                <div class="team-item">
+                    <img src="фото_місія_марс/alex_it.png" alt="Олексій">
+                    <div class="team-content">
+                        <h3>Олексій</h3>
+                        <span class="role">Head of IT Systems</span>
+                        <p>Спеціаліст з кібербезпеки та підтримки стабільності Mars OS. Слідкує за безперебійною роботою серверів та зв'язком.</p>
+                    </div>
+                </div>
+
+                <!-- Картка Олени (Біологія) -->
+                <div class="team-item">
+                    <img src="фото_місія_марс/elena_bio.png" alt="Олена">
+                    <div class="team-content">
+                        <h3>Олена</h3>
+                        <span class="role">Головний Біолог</span>
+                        <p>Експерт з виживання рослин у марсіанському ґрунті. Контролює екосистему агро-сектора та регенерацію кисню.</p>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Олена -->
-        <div class="team-item">
-            <img src="фото_місія_марс/elena_bio.png" alt="Олена">
-            <div class="team-content">
-                <h3>Олена</h3>
-                <span class="role">Головний Біолог</span>
-                <p>Експерт з виживання рослин у марсіанському ґрунті. Контролює екосистему агро-сектора та регенерацію кисню.</p>
+        <hr style="border: 0; border-top: 1px solid rgba(255,87,34,0.2); margin: 40px 0;">
+
+        <!-- Блок з датчиками стану станції -->
+        <section class="section-stats">
+            <h2 class="terminal-title" style="margin-bottom: 20px;">Технічний моніторинг ГУ</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div class="stat-block">
+                    <span style="color: var(--accent); font-weight: bold;">ШЛЮЗИ:</span> ГЕРМЕТИЧНО (100%)
+                </div>
+                <div class="stat-block">
+                    <span style="color: var(--accent); font-weight: bold;">РАДІАЦІЯ:</span> 0.12 mSv (НОРМА)
+                </div>
+                <div class="stat-block">
+                    <span style="color: var(--accent); font-weight: bold;">ЗВ'ЯЗОК:</span> ЛАТЕНТНІСТЬ 14.2 ХВ (ЗЕМЛЯ)
+                </div>
+                <div class="stat-block">
+                    <span style="color: var(--accent); font-weight: bold;">ПРОЦЕСОР:</span> QUANTUM CORE i99 (4% LOAD)
+                </div>
             </div>
-        </div>
-    </div>
-</section>
-
-<hr style="border: 0; border-top: 1px solid rgba(255,87,34,0.2); margin: 40px 0;">
-
-<!-- Розділ: Технічні показники -->
-<section class="section-stats">
-    <h2 class="terminal-title" style="margin-bottom: 20px;">Технічний моніторинг ГУ</h2>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-        <div class="stat-block">
-            <span style="color: var(--accent); font-weight: bold;">ШЛЮЗИ:</span> ГЕРМЕТИЧНО (100%)
-        </div>
-        <div class="stat-block">
-            <span style="color: var(--accent); font-weight: bold;">РАДІАЦІЯ:</span> 0.12 mSv (НОРМА)
-        </div>
-        <div class="stat-block">
-            <span style="color: var(--accent); font-weight: bold;">ЗВ'ЯЗОК:</span> ЛАТЕНТНІСТЬ 14.2 ХВ (ЗЕМЛЯ)
-        </div>
-        <div class="stat-block">
-            <span style="color: var(--accent); font-weight: bold;">ПРОЦЕСОР:</span> QUANTUM CORE i99 (4% LOAD)
-        </div>
-    </div>
-</section>
-            `,
-            garden: `
-<!-- Розділ: Про Агро-сектор -->
-<section class="section-about">
-    <h2 class="terminal-title">Агро-сектор (Біо-модуль)</h2>
-    <div class="about-wrapper" style="display: flex; gap: 30px; margin-bottom: 40px; align-items: stretch; height: auto;">
-        
-        <!-- Блок з фото сектора -->
-        <div class="about-image" style="flex: 0 0 45%; max-width: 45%; overflow: hidden; border: 1px solid #4ade80; position: relative;">
-            <img src="фото_місія_марс/mars_garden.png" alt="Mars Garden" style="width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.1) brightness(0.9);">
-            <!-- Декоративний кут (зелений для агро) -->
-            <div style="position: absolute; bottom: 0; right: 0; width: 20px; height: 20px; background: #4ade80; clip-path: polygon(100% 0, 100% 100%, 0 100%);"></div>
-        </div>
-
-        <div class="about-text" style="flex: 1.2; font-family: 'Rajdhani', sans-serif; line-height: 1.6; font-size: 1.1rem;">
-            <p>Агро-сектор — це автономна екосистема, де реалізується повний цикл регенерації кисню та вирощування біомаси. Ми використовуємо <span style="color: #4ade80; font-weight: bold;">Smart Greenhouse</span> технології для забезпечення колонії свіжими продуктами.</p>
-            <p style="margin: 15px 0;">Основою модуля є системи на базі <b>Arduino</b>, що керують мікрокліматом, та експериментальні установки для електростимуляції росту рослин у марсіанському реголіті.</p>
-            <p>Завдяки автоматизації поливу та моніторингу повітря, врожайність томатів та огірків у 2.5 рази перевищує стандартні показники відкритих систем.</p>
-            <p style="margin-top: 20px; color: #4ade80; font-family: 'Orbitron'; font-size: 0.9rem; letter-spacing: 1px;">
-                <i>// СТАТУС: ФОТОСИНТЕЗ СТАБІЛЬНИЙ</i>
-            </p>
-        </div>
-    </div>
-</section>
-
-<hr style="border: 0; border-top: 1px solid rgba(74, 222, 128, 0.2); margin: 40px 0;">
-
-<!-- Розділ: Команда Агро-сектора -->
-<section class="section-team">
-    <h2 class="terminal-title" style="margin-bottom: 30px;">Спеціалісти Біо-модуля</h2>
-    <div class="team-wrapper">
-        
-        <!-- Олена -->
-        <div class="team-item">
-            <img src="фото_місія_марс/elena_bio.png" alt="Олена">
-            <div class="team-content">
-                <h3>Олена</h3>
-                <span class="role" style="color: #4ade80;">Головний Біолог</span>
-                <p>Експерт з експериментальної ботаніки. Курує дослідження впливу електричного струму на ріст культур.</p>
-            </div>
-        </div>
-
-        <!-- Мар'ян -->
-        <div class="team-item">
-            <img src="фото_місія_марс/chief_olexiu.png" alt="Мар'ян">
-            <div class="team-content">
-                <h3>Олексій</h3>
-                <span class="role" style="color: #4ade80;">Архітектор автоматизації</span>
-                <p>Розробник інфраструктури "Розумної теплиці". Спроектував систему 5-помпового зрошення та моніторингу CO2.</p>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<hr style="border: 0; border-top: 1px solid rgba(74, 222, 128, 0.2); margin: 40px 0;">
-
-<!-- Розділ: Технічні показники Саду -->
-<section class="section-stats">
-    <h2 class="terminal-title" style="margin-bottom: 20px;">Моніторинг біосфери</h2>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-        <div class="stat-block" style="border-left-color: #4ade80;">
-            <span style="color: #4ade80; font-weight: bold;">ВОЛОГІСТЬ:</span> 68% (ОПТИМАЛЬНО)
-        </div>
-        <div class="stat-block" style="border-left-color: #4ade80;">
-            <span style="color: #4ade80; font-weight: bold;">ОСВІТЛЕННЯ:</span> ФІТО-СПЕКТР (95%)
-        </div>
-        <div class="stat-block" style="border-left-color: #4ade80;">
-            <span style="color: #4ade80; font-weight: bold;">ЕЛЕКТРОСТИМУЛЯЦІЯ:</span> ACTIVE (12V/0.5A)
-        </div>
-        <div class="stat-block" style="border-left-color: #4ade80;">
-            <span style="color: #4ade80; font-weight: bold;">ЗАПАС ВОДИ:</span> 4200 Л (РЕЗЕРВ 89%)
-        </div>
-    </div>
-</section>
+        </section>
     `,
-            reactor: `
-<!-- Розділ: Про Агро-сектор -->
-<section class="section-about">
-    <h2 class="terminal-title">ЕНЕРГОБЛОК: КВАНТОВИЙ РЕАКТОР</h2>
-    <div class="about-wrapper" style="display: flex; gap: 30px; margin-bottom: 40px; align-items: stretch; height: auto;">
-        
-        <!-- Блок з фото сектора -->
-        <div class="about-image" style="flex: 0 0 45%; max-width: 45%; overflow: hidden; border: 1px solid #4ade80; position: relative;">
-            <img src="фото_місія_марс/mars_reactor.png" alt="Mars Garden" style="width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.1) brightness(0.9);">
-            <!-- Декоративний кут (зелений для агро) -->
-            <div style="position: absolute; bottom: 0; right: 0; width: 20px; height: 20px; background: #4ade80; clip-path: polygon(100% 0, 100% 100%, 0 100%);"></div>
-        </div>
 
-        <div class="about-text" style="flex: 1.2; font-family: 'Rajdhani', sans-serif; line-height: 1.6; font-size: 1.1rem;">
-            <p>
-                Енергоблок
-                <span class="accent-text">"Supernova-1"</span>
-                — це технологічне серце колонії.
-                Реактор на холодному синтезі забезпечує
-                безперебійне живлення всіх модулів
-                у секторі Рівнини Елізій.
-            </p>
+    // Розділ саду та теплиць
+    garden: `
+        <section class="section-about">
+            <h2 class="terminal-title">Агро-сектор (Біо-модуль)</h2>
+            <div class="about-wrapper" style="display: flex; gap: 30px; margin-bottom: 40px; align-items: stretch; height: auto;">
+                
+                <div class="about-image" style="flex: 0 0 45%; max-width: 45%; overflow: hidden; border: 1px solid #4ade80; position: relative;">
+                    <img src="фото_місія_марс/mars_garden.png" alt="Mars Garden" style="width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.1) brightness(0.9);">
+                    <div style="position: absolute; bottom: 0; right: 0; width: 20px; height: 20px; background: #4ade80; clip-path: polygon(100% 0, 100% 100%, 0 100%);"></div>
+                </div>
 
-            <p>
-                Завдяки впровадженню інтелектуальної
-                мережі розподілу, система автоматично
-                балансує навантаження, забезпечуючи
-                пріоритетне живлення системам
-                життєзабезпечення.
-            </p>
-
-            <p>
-                <b>Квантовий Реактор</b>
-                першим інтегрував систему
-                Arduino-моніторингу стабільності ядра,
-                що дозволяє уникнути перевантажень
-                навіть під час пікової активності бази.
-            </p>
-
-            <div class="status-line">
-                // СТАТУС: РЕАКЦІЯ СТАБІЛЬНА [NOMINAL]
+                <div class="about-text" style="flex: 1.2; font-family: 'Rajdhani', sans-serif; line-height: 1.6; font-size: 1.1rem;">
+                    <p>Агро-сектор — це автономна екосистема, де реалізується повний цикл регенерації кисню та вирощування біомаси. Ми використовуємо <span style="color: #4ade80; font-weight: bold;">Smart Greenhouse</span> технології для забезпечення колонії свіжими продуктами.</p>
+                    <p style="margin: 15px 0;">Основою модуля є системи на базі <b>Arduino</b>, що керують мікрокліматом, та експериментальні установки для електростимуляції росту рослин у марсіанському реголіті.</p>
+                    <p>Завдяки автоматизації поливу та моніторингу повітря, врожайність томатів та огірків у 2.5 рази перевищує стандартні показники відкритих систем.</p>
+                    <p style="margin-top: 20px; color: #4ade80; font-family: 'Orbitron'; font-size: 0.9rem; letter-spacing: 1px;">
+                        <i>// СТАТУС: ФОТОСИНТЕЗ СТАБІЛЬНИЙ</i>
+                    </p>
+                </div>
             </div>
+        </section>
 
-        </div>
-    </div>
-</section>
+        <hr style="border: 0; border-top: 1px solid rgba(74, 222, 128, 0.2); margin: 40px 0;">
 
-<hr style="border: 0; border-top: 1px solid rgba(74, 222, 128, 0.2); margin: 40px 0;">
+        <!-- Спеціалісти агро-сектору -->
+        <section class="section-team">
+            <h2 class="terminal-title" style="margin-bottom: 30px;">Спеціалісти Біо-модуля</h2>
+            <div class="team-wrapper">
+                <div class="team-item">
+                    <img src="фото_місія_марс/elena_bio.png" alt="Олена">
+                    <div class="team-content">
+                        <h3>Олена</h3>
+                        <span class="role" style="color: #4ade80;">Головний Біолог</span>
+                        <p>Експерт з експериментальної ботаніки. Курує дослідження впливу електричного струму на ріст культур.</p>
+                    </div>
+                </div>
 
-<!-- Розділ: Команда Агро-сектора -->
-<section class="section-team">
-    <h2 class="terminal-title" style="margin-bottom: 30px;">ІНЖЕНЕРНИЙ СКЛАД</h2>
-    <div class="team-wrapper">
-        
-       
-        <div class="team-item">
-            <img src="фото_місія_марс/alex_it.png" alt="Олексій">
-            <div class="team-content">
-                <h3>Олексій</h3>
-                <span class="role" style="color: #4ade80;">CHIEF TECHNICAL OFFICER</span>
-                <p>Відповідає за фізичну
-                        цілісність реактора та
-                        архітектуру автоматизованих
-                        систем контролю енергомережі.</p>
+                <div class="team-item">
+                    <img src="фото_місія_марс/chief_olexiu.png" alt="Мар'ян">
+                    <div class="team-content">
+                        <h3>Олексій</h3>
+                        <span class="role" style="color: #4ade80;">Архітектор автоматизації</span>
+                        <p>Розробник інфраструктури "Розумної теплиці". Спроектував систему 5-помпового зрошення та моніторингу CO2.</p>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
 
-   
-        <div class="team-item">
-            <img src="фото_місія_марс/olexiu_it.png" alt="Андрій">
-            <div class="team-content">
-                <h3>Андрій</h3>
-                <span class="role" style="color: #4ade80;">LEAD ENERGY ENGINEER</span>
-                <p>Експерт з обслуговування
-                        квантових перетворювачів.
-                        Слідкує за станом паливних
-                        елементів Гелію-3.</p>
+        <hr style="border: 0; border-top: 1px solid rgba(74, 222, 128, 0.2); margin: 40px 0;">
+
+        <!-- Показники теплиць -->
+        <section class="section-stats">
+            <h2 class="terminal-title" style="margin-bottom: 20px;">Моніторинг біосфери</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div class="stat-block" style="border-left-color: #4ade80;">
+                    <span style="color: #4ade80; font-weight: bold;">ВОЛОГІСТЬ:</span> 68% (ОПТИМАЛЬНО)
+                </div>
+                <div class="stat-block" style="border-left-color: #4ade80;">
+                    <span style="color: #4ade80; font-weight: bold;">ОСВІТЛЕННЯ:</span> ФІТО-СПЕКТР (95%)
+                </div>
+                <div class="stat-block" style="border-left-color: #4ade80;">
+                    <span style="color: #4ade80; font-weight: bold;">ЕЛЕКТРОСТИМУЛЯЦІЯ:</span> ACTIVE (12V/0.5A)
+                </div>
+                <div class="stat-block" style="border-left-color: #4ade80;">
+                    <span style="color: #4ade80; font-weight: bold;">ЗАПАС ВОДИ:</span> 4200 Л (РЕЗЕРВ 89%)
+                </div>
             </div>
-        </div>
+        </section>
+    `,
 
-    </div>
-</section>
+    // Розділ енергоблоку
+    reactor: `
+        <section class="section-about">
+            <h2 class="terminal-title">ЕНЕРГОБЛОК: КВАНТОВИЙ РЕАКТОР</h2>
+            <div class="about-wrapper" style="display: flex; gap: 30px; margin-bottom: 40px; align-items: stretch; height: auto;">
+                
+                <div class="about-image" style="flex: 0 0 45%; max-width: 45%; overflow: hidden; border: 1px solid #4ade80; position: relative;">
+                    <img src="фото_місія_марс/mars_reactor.png" alt="Mars Garden" style="width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.1) brightness(0.9);">
+                    <div style="position: absolute; bottom: 0; right: 0; width: 20px; height: 20px; background: #4ade80; clip-path: polygon(100% 0, 100% 100%, 0 100%);"></div>
+                </div>
 
-<hr style="border: 0; border-top: 1px solid rgba(74, 222, 128, 0.2); margin: 40px 0;">
+                <div class="about-text" style="flex: 1.2; font-family: 'Rajdhani', sans-serif; line-height: 1.6; font-size: 1.1rem;">
+                    <p>Енергоблок <span class="accent-text">"Supernova-1"</span> — це технологічне серце колонії. Реактор на холодному синтезі забезпечує безперебійне живлення всіх модулів у секторі Рівнини Елізій.</p>
+                    <p>Завдяки впровадженню інтелектуальної мережі розподілу, система автоматично балансує навантаження, забезпечуючи пріоритетне живлення системам життєзабезпечення.</p>
+                    <p><b>Квантовий Реактор</b> першим інтегрував систему Arduino-моніторингу стабільності ядра, що дозволяє уникнути перевантажень навіть під час пікової активності бази.</p>
+                    <div class="status-line">// СТАТУС: РЕАКЦІЯ СТАБІЛЬНА [NOMINAL]</div>
+                </div>
+            </div>
+        </section>
 
+        <hr style="border: 0; border-top: 1px solid rgba(74, 222, 128, 0.2); margin: 40px 0;">
 
-<section class="section-stats">
-    <h2 class="terminal-title" style="margin-bottom: 20px;">МОНІТОРИНГ ЕНЕРГОБЛОКУ</h2>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-        <div class="stat-block" style="border-left-color: #4ade80;">
-            <span style="color: #4ade80; font-weight: bold;">ГЕНЕРАЦІЯ:</span> 485 MW (STABLE)
-        </div>
-        <div class="stat-block" style="border-left-color: #4ade80;">
-            <span style="color: #4ade80; font-weight: bold;">ТЕМПЕРАТУРА:</span> 1200 K (NOMINAL)
-        </div>
-        <div class="stat-block" style="border-left-color: #4ade80;">
-            <span style="color: #4ade80; font-weight: bold;">ПАЛИВО:</span> HELIUM-3 (92%)
-        </div>
-        <div class="stat-block" style="border-left-color: #4ade80;">
-            <span style="color: #4ade80; font-weight: bold;">НАВАНТАЖЕННЯ:</span> 34% (NORMAL MODE)
-        </div>
-    </div>
-</section>
+        <!-- Інженери реактора -->
+        <section class="section-team">
+            <h2 class="terminal-title" style="margin-bottom: 30px;">ІНЖЕНЕРНИЙ СКЛАД</h2>
+            <div class="team-wrapper">
+                <div class="team-item">
+                    <img src="фото_місія_марс/alex_it.png" alt="Олексій">
+                    <div class="team-content">
+                        <h3>Олексій</h3>
+                        <span class="role" style="color: #4ade80;">CHIEF TECHNICAL OFFICER</span>
+                        <p>Відповідає за фізичну цілісність реактора та архітектуру автоматизованих систем контролю енергомережі.</p>
+                    </div>
+                </div>
+
+                <div class="team-item">
+                    <img src="фото_місія_марс/olexiu_it.png" alt="Андрій">
+                    <div class="team-content">
+                        <h3>Андрій</h3>
+                        <span class="role" style="color: #4ade80;">LEAD ENERGY ENGINEER</span>
+                        <p>Експерт з обслуговування квантових перетворювачів. Слідкує за станом паливних елементів Гелію-3.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr style="border: 0; border-top: 1px solid rgba(74, 222, 128, 0.2); margin: 40px 0;">
+
+        <!-- Показники реактора -->
+        <section class="section-stats">
+            <h2 class="terminal-title" style="margin-bottom: 20px;">МОНІТОРИНГ ЕНЕРГОБЛОКУ</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div class="stat-block" style="border-left-color: #4ade80;">
+                    <span style="color: #4ade80; font-weight: bold;">ГЕНЕРАЦІЯ:</span> 485 MW (STABLE)
+                </div>
+                <div class="stat-block" style="border-left-color: #4ade80;">
+                    <span style="color: #4ade80; font-weight: bold;">ТЕМПЕРАТУРА:</span> 1200 K (NOMINAL)
+                </div>
+                <div class="stat-block" style="border-left-color: #4ade80;">
+                    <span style="color: #4ade80; font-weight: bold;">ПАЛИВО:</span> HELIUM-3 (92%)
+                </div>
+                <div class="stat-block" style="border-left-color: #4ade80;">
+                    <span style="color: #4ade80; font-weight: bold;">НАВАНТАЖЕННЯ:</span> 34% (NORMAL MODE)
+                </div>
+            </div>
+        </section>
     `
-   
-        };
+};
 
-        function syncSettings() {
-            const theme = localStorage.getItem('marsTheme') || '#ff5722';
-            const volume = (localStorage.getItem('marsVol') || 70) / 100;
-            document.documentElement.style.setProperty('--accent', theme);
-            
-            const bgMap = {
-                "#ff5722":"#1a0800", "#00d4ff":"#000a1a", 
-                "#4caf50":"#051a05", "#e91e63":"#1a0008"
-            };
-            document.documentElement.style.setProperty('--bg-dark', bgMap[theme] || "#1a0800");
+// Функція, щоб підтягнути колір теми та гучність 
+function syncSettings() {
+    const theme = localStorage.getItem('marsTheme') || '#ff5722';
+    const volume = (localStorage.getItem('marsVol') || 70) / 100;
+    
+    // Ставлю колір тексту/рамок
+    document.documentElement.style.setProperty('--accent', theme);
+    
+    // Підбираю темний фон під основний колір, щоб гарно виглядало
+    const bgMap = {
+        "#ff5722":"#1a0800", "#00d4ff":"#000a1a", 
+        "#4caf50":"#051a05", "#e91e63":"#1a0008"
+    };
+    document.documentElement.style.setProperty('--bg-dark', bgMap[theme] || "#1a0800");
 
-            const sfx = document.getElementById('click-sfx');
-            sfx.volume = volume;
-        }
+    // Налаштовую гучність звуку кліку
+    const sfx = document.getElementById('click-sfx');
+    sfx.volume = volume;
+}
 
-        function updateDisplay(key, btn) {
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            
-            const sfx = document.getElementById('click-sfx');
-            sfx.currentTime = 0;
-            sfx.play().catch(()=>{});
+// Функція для зміни контенту в головному вікні при кліку на кнопки
+function updateDisplay(key, btn) {
+    // Міняю активну кнопку в меню
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    // Програю звук кліку (перемотую на початок, щоб спрацювало швидко)
+    const sfx = document.getElementById('click-sfx');
+    sfx.currentTime = 0;
+    sfx.play().catch(()=>{});
 
-            const box = document.getElementById('display-box');
-            box.style.opacity = '0';
-            
-            setTimeout(() => {
-                box.innerHTML = content[key];
-                box.style.opacity = '1';
-                box.scrollTop = 0; 
-            }, 150);
-        }
+    // Ефект плавного зникнення появи тексту
+    const box = document.getElementById('display-box');
+    box.style.opacity = '0';
+    
+    setTimeout(() => {
+        // Вставляю потрібний HTML з масиву content
+        box.innerHTML = content[key];
+        box.style.opacity = '1';
+        box.scrollTop = 0; // прокрутка вгору
+    }, 150);
+}
 
-        setInterval(() => {
-            document.getElementById('live-time').innerText = new Date().toLocaleTimeString();
-        }, 1000);
+// Оновлюю годинник кожну секунду
+setInterval(() => {
+    document.getElementById('live-time').innerText = new Date().toLocaleTimeString();
+}, 1000);
 
-        window.onload = () => {
-            syncSettings();
-            updateDisplay('main', document.querySelector('.nav-btn'));
-        };
+// Коли сторінка завантажилась застосовую налаштування і показую перший розділ
+window.onload = () => {
+    syncSettings();
+    updateDisplay('main', document.querySelector('.nav-btn'));
+};

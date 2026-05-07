@@ -4,42 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ARES Visual Archive // Mars OS</title>
-    <!-- Шрифти -->
+    
+    <!-- Підключаю купу шрифтів, щоб усе виглядало як у справжньому фантастичному терміналі -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <!-- Підключення CSS -->
+    
+    <!-- Мій файл зі стилями для цієї сторінки з фільмами -->
     <link rel="stylesheet" href="відео_код/style_video.css">
 </head>
 <body>
 
+    <!-- Верхня панелька з кнопкою повернення назад у хаб -->
     <nav class="nav-top">
         <a href="index.html" class="btn-outline"> < TERMINAL_HUB</a>
     </nav>
 
     <div class="container">
+        <!-- Шапка сторінки: заголовок архіву і статус бази даних -->
         <header class="header">
             <h1>Visual Archive</h1>
             <p>DATABASE_STATUS: SECURE // CATEGORY: MARS_MEDIA</p>
         </header>
 
-        <!-- Картки фільмів -->
+        <!-- Блок з фільмом "Марсіянин" -->
         <div class="movie-card">
             <div class="movie-thumb">
+                <!-- Картинка-постер -->
                 <img src="https://m.media-amazon.com/images/M/MV5BMTc2MTQ3MDA1Nl5BMl5BanBnXkFtZTgwODA3OTI4NjE@._V1_.jpg" alt="The Martian">
             </div>
             <div class="movie-info">
                 <h2 class="movie-title">The Martian</h2>
+                <!-- Короткі характеристики: рік, жанр, оцінка -->
                 <div class="movie-specs">
                     <span><b>YEAR:</b> 2015</span>
                     <span><b>GENRE:</b> SCI-FI</span>
                     <span><b>STATUS:</b> MASTERPIECE</span>
                 </div>
+                <!-- Опис сюжету -->
                 <p class="movie-desc">
                     Боротьба за життя біолога Марка Уотні, який залишився на самоті на Червоній планеті. Кожна хвилина фільму — це тріумф людського інтелекту над ворожим середовищем космосу.
                 </p>
+                <!-- Кнопка для переходу до перегляду -->
                 <a href="https://uakino.best/filmy/genre_adventure/90-marsyanin.html" target="_blank" class="btn-watch">INITIATE_PLAYBACK</a>
             </div>
         </div>
 
+        <!-- Блок з фільмом "Місія на Марс" -->
         <div class="movie-card">
             <div class="movie-thumb">
                 <img src="https://uakino.best/uploads/mini/poster/e0/1e44fb89e6aec9d61c1c9d58ae60ca.webp" alt="Mission to Mars">
@@ -57,6 +66,7 @@
             </div>
         </div>
 
+        <!-- Блок з фільмом "Червона планета" -->
         <div class="movie-card">
             <div class="movie-thumb">
                 <img src="https://uakino.best/uploads/mini/poster/ac/0dc79fe48c005517dcf0492485a1e2.webp" alt="Red Planet">
@@ -74,6 +84,7 @@
             </div>
         </div>
 
+        <!-- Блок з фільмом "Згадати все" -->
         <div class="movie-card">
             <div class="movie-thumb">
                 <img src="https://uakino.best/uploads/mini/poster/1a/ef305e9946a29565c785c618690093.webp" alt="Total Recall">
@@ -91,12 +102,13 @@
             </div>
         </div>
 
+        <!-- Кнопка виходу в самому низу -->
         <div class="footer">
             <a href="index.html" class="btn-big">SHUT_DOWN</a>
         </div>
     </div>
 
-    <!-- Підключення JS -->
+    <!-- Підключаю свій джаваскрипт, щоб все це працювало і пікало при кліках -->
     <script src="відео_код/code_video.js"></script>
 </body>
 </html>

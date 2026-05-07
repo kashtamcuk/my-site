@@ -3,22 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Назва моєї навігаційної системи ARES -->
     <title>ARES Navigation Protocol v2.0</title>
+    <!-- Підключив круті футуристичні шрифти для інтерфейсу -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <!-- Мій основний файл зі стилями для гри -->
     <link rel="stylesheet" href="ігра_код/style_game.css">
 </head>
 <body>
 
+    <!-- Вікно попередження, якщо сектор ще закритий -->
     <div id="access-denied">ACCESS DENIED: COMPLETE PREVIOUS SECTOR FIRST</div>
+    
+    <!-- Фон з зірками, щоб виглядало як космос -->
     <div class="stars"></div>
 
+    <!-- Головна рамка всього терміналу -->
     <div class="terminal-frame">
+        <!-- Шапка: назва модуля і годинник, який я налаштував у JS -->
         <header class="header">
             <span>ARES-CORE // NAV_UNIT_01</span>
             <span id="os-clock">00:00:00</span>
         </header>
 
-        <!-- Ліва панель статистики -->
+        <!-- Ліва панель: тут моніторимо кисень, енергію та загальний стан -->
         <aside class="side-panel">
             <div class="stat-box">
                 <div class="stat-label">STATUS:</div>
@@ -34,28 +42,32 @@
             </div>
         </aside>
 
-        <!-- Головний дисплей з орбітами -->
+        <!-- Центральна частина: тут наші орбіти та кнопки переходу на квізи -->
         <main class="main-display">
+            <!-- Декоративні кола орбіт навколо Марса -->
             <div class="orbit orbit-1"></div>
             <div class="orbit orbit-2"></div>
 
+            <!-- Точка переходу на Фобос -->
             <a href="quiz_phobos.html" class="node" id="phobos">
                 <div class="dot dot-phobos"></div>
                 <div class="label">SEC: PHOBOS_MN-1</div>
             </a>
 
+            <!-- Точка переходу на Деймос -->
             <a href="quiz_deimos.html" class="node" id="deimos">
                 <div class="dot dot-deimos"></div>
                 <div class="label">SEC: DEIMOS_MN-2</div>
             </a>
 
+            <!-- Центральна база — сам Марс -->
             <a href="quiz_mars.html" class="node" id="mars">
                 <div class="dot dot-mars"></div>
                 <div class="label label-mars">PRIMARY: MARS_BASE</div>
             </a>
         </main>
 
-        <!-- Права панель статистики -->
+        <!-- Права панель: гравітація та попередження про радіацію -->
         <aside class="side-panel right">
             <div class="stat-box">
                 <div class="stat-label">GRAVITY:</div>
@@ -63,22 +75,28 @@
             </div>
             <div class="stat-box">
                 <div class="stat-label">RADIATION:</div>
+                <!-- Зробив щоб напис блимав -->
                 <div class="blink">CRITICAL_LEVEL</div>
             </div>
+            <!-- Рядок зі статусом завантаження даних -->
             <div class="scan-status">
                 SCANNING_DATA_...<br>77% COMPLETE
             </div>
         </aside>
 
-        <!-- Футер -->
+        <!-- Футер з логами та кнопкою повернення в меню -->
         <footer class="footer">
             <div class="log-text">LOG: SHIP_STATIONARY // WAITING_COMMAND</div>
             <a href="index.html" class="exit-btn">RETURN TO BASE</a>
+            <!-- Кнопка для вмикання музики -->
             <div id="music-control">🔊</div>
         </footer>
     </div>
 
+    <!-- Фонова музика, поставив на повтор -->
     <audio id="bgMusic" loop src="загальна_озвучка/game_voce.mp3"></audio>
+    
+    <!-- Підключив логіку гри: блокування рівнів, годинник, звуки -->
     <script src="ігра_код/code_game.js"></script>
 </body>
 </html>

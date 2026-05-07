@@ -1,5 +1,5 @@
-
-        :root {
+:root {
+            /* Мої основні кольори для інтерфейсу */
             --accent: #00d4ff; 
             --glow: rgba(0, 212, 255, 0.25);
             --correct: #58cc02;
@@ -7,7 +7,7 @@
             --bg: #000810;
         }
 
-        /* Прибираємо смуги прокрутки */
+        /* Обнуляю відступи та прибираю смуги прокрутки, щоб все виглядало чисто */
         * { margin: 0; padding: 0; box-sizing: border-box; scrollbar-width: none; -ms-overflow-style: none; }
         *::-webkit-scrollbar { display: none; }
 
@@ -23,11 +23,14 @@
             transition: background 0.4s ease;
         }
 
-        /* Динамічні фони */
+        /* Ефекти для фону: зеленкуватий якщо вгадав, і червоний з блиманням якщо помилка */
         body.global-correct { background: radial-gradient(circle, rgba(0, 50, 0, 0.4) 0%, #000 100%); }
         body.global-wrong { background: radial-gradient(circle, #300 0%, #000 100%); animation: alarmFlash 0.6s infinite; }
 
+        /* Анімація тривоги (блимання) */
         @keyframes alarmFlash { 50% { opacity: 0.7; } }
+        
+        /* Анімація тряски для картки при помилці */
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
             25% { transform: translateX(-10px); }
@@ -35,6 +38,7 @@
         }
         .shake { animation: shake 0.2s ease-in-out 0s 2; }
 
+        /* Малюю сітку на фоні для космічного ефекту */
         .grid-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -45,6 +49,7 @@
             z-index: -1;
         }
 
+        /* Головна картка квізу */
         .quiz-container {
             width: 90%;
             max-width: 850px;
@@ -61,15 +66,18 @@
             flex-direction: column;
         }
 
+        /* Зміна кольору рамки контейнера залежно від відповіді */
         body.global-correct .quiz-container { border-color: var(--correct); box-shadow: 0 0 40px rgba(88,204,2,0.3); }
         body.global-wrong .quiz-container { border-color: var(--wrong); box-shadow: 0 0 40px rgba(255,75,75,0.3); }
 
+        /* Куточки для краси (рамка в стилі інтерфейсу) */
         .corner { position: absolute; width: 25px; height: 25px; border: 2px solid var(--accent); transition: 0.4s; }
         .tl { top: -2px; left: -2px; border-right: 0; border-bottom: 0; }
         .tr { top: -2px; right: -2px; border-left: 0; border-bottom: 0; }
         .bl { bottom: -2px; left: -2px; border-right: 0; border-top: 0; }
         .br { bottom: -2px; right: -2px; border-left: 0; border-top: 0; }
 
+        /* Шапка з назвою та лічильником кроків */
         .header {
             font-family: 'Orbitron';
             color: var(--accent);
@@ -82,6 +90,7 @@
             font-size: clamp(0.7rem, 2vw, 1rem);
         }
 
+        /* Стиль для самого тексту питання */
         .question-text {
             font-size: clamp(1.2rem, 3vh, 1.8rem);
             font-family: 'Orbitron';
@@ -90,14 +99,17 @@
             color: #e0faff;
         }
 
+        /* Сітка для кнопок варіантів */
         .options-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
         }
 
+        /* На мобілках кнопки стають в один ряд */
         @media (max-width: 600px) { .options-grid { grid-template-columns: 1fr; } }
 
+        /* Стиль кнопок-варіантів */
         .option-btn {
             background: rgba(255, 255, 255, 0.03);
             border: 2px solid var(--accent);
@@ -112,12 +124,15 @@
             text-align: left;
         }
 
+        /* Ефекти при наведенні та натисканні на варіант */
         .option-btn:hover:not(:disabled) { background: var(--glow); transform: translateY(-2px); }
         .option-btn:active:not(:disabled) { transform: translateY(2px); border-bottom-width: 2px; }
 
+        /* Кольори для правильної та неправильної кнопки */
         .option-btn.correct { background: #d7ffb8 !important; color: #58cc02; border-color: #58cc02; border-bottom-color: #46a302; }
         .option-btn.wrong { background: #ffdfe0 !important; color: #ff4b4b; border-color: #ff4b4b; border-bottom-color: #d13d3d; }
 
+        /* Блок з цікавим фактом, що з'являється знизу */
         .fact-panel {
             margin-top: 20px;
             padding: 15px;
@@ -130,6 +145,7 @@
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
+        /* Велика кнопка "Наступний сектор" */
         .next-btn {
             margin-top: 25px; width: 100%; background: var(--accent);
             border: none; border-bottom: 4px solid rgba(0,0,0,0.2);
@@ -141,15 +157,16 @@
         body.global-correct .next-btn { background: var(--correct); }
         body.global-wrong .next-btn { background: var(--wrong); }
 
+        /* Лінія прогресу в самому низу картки */
         #progress-fill {
             position: absolute; bottom: 0; left: 0; height: 6px;
             background: var(--accent); transition: width 0.5s; 
             width: 0%; border-radius: 0 0 0 15px;
         }
 
+        /* Іконка керування музикою */
         #music-ui {
             position: fixed; top: 20px; right: 20px;
             cursor: pointer; font-size: 1.5rem; z-index: 100;
             background: rgba(0,0,0,0.5); padding: 10px; border-radius: 50%;
         }
-    

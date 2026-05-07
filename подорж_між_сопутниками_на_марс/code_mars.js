@@ -1,5 +1,5 @@
-
-let questions = [
+// Мій масив з питаннями про Марс. Додав варіанти, правильну відповідь, факт і шлях до озвучки.
+        let questions = [
             { 
                 q: "Чому Марс називають «Червоною планетою»?", 
                 options: ["Через високу температуру", "Через оксид заліза (іржу)", "Через червоні рослини", "Це колір атмосфери"], 
@@ -72,6 +72,7 @@ let questions = [
             }
         ];
 
+        // Змінні для керування: номер питання та посилання на аудіо
         let currentIdx = 0;
         const bgMusic = document.getElementById('bg-music');
         const factAudio = document.getElementById('fact-player');
@@ -79,6 +80,7 @@ let questions = [
         const sfxError = document.getElementById('sfx-error');
         const mainCard = document.getElementById('main-card');
 
+        // Функція для рандому, щоб питання не йшли в одному порядку
         function shuffle(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -87,15 +89,17 @@ let questions = [
             return array;
         }
 
+        // Запуск при старті: колір теми, гучність і перше питання
         function init() {
             shuffle(questions);
-            // Пріоритет кольору для Марса, якщо не задано в налаштуваннях
+            // Пріоритет кольору для Марса, якщо не задано в налаштуваннях — робимо помаранчевим
             const themeColor = localStorage.getItem('marsTheme') || '#ff4d00';
             document.documentElement.style.setProperty('--accent', themeColor);
             document.documentElement.style.setProperty('--glow', themeColor + '40');
 
+            // Налаштування гучності зі сховища
             const userVol = (localStorage.getItem('marsVol') || 70) / 100;
-            bgMusic.volume = userVol * 0.2;
+            bgMusic.volume = userVol * 0.2; // роблю тихіше
             factAudio.volume = userVol;
             sfxCorrect.volume = userVol;
             sfxError.volume = userVol;
@@ -103,15 +107,19 @@ let questions = [
             showQuestion();
         }
 
+        // Відображення питання на екрані
         function showQuestion() {
             const data = questions[currentIdx];
             document.getElementById('question').innerText = data.q;
             document.getElementById('counter').innerText = `КРОК: ${currentIdx + 1} / ${questions.length}`;
+            
+            // Рухаю прогрес
             document.getElementById('progress-fill').style.width = ((currentIdx + 1) / questions.length * 100) + "%";
             
             const optionsBox = document.getElementById('options-container');
             optionsBox.innerHTML = '';
             
+            // Створюю кнопки з варіантами і теж їх мішаю
             shuffle([...data.options]).forEach(opt => {
                 const btn = document.createElement('button');
                 btn.className = 'option-btn';
@@ -120,22 +128,28 @@ let questions = [
                 optionsBox.appendChild(btn);
             });
 
+            // Ховаю кнопки та блоки, що лишилися з минулого питання
             document.getElementById('next-button').style.display = 'none';
             document.getElementById('fact-box').style.display = 'none';
             document.body.classList.remove('global-correct', 'global-wrong');
             mainCard.classList.remove('shake');
         }
 
+        // Перевірка відповіді: фарбуємо кнопки та вмикаємо звуки
         function checkChoice(selectedText, btn) {
             const data = questions[currentIdx];
             const allBtns = document.querySelectorAll('.option-btn');
+            
+            // Блокую всі кнопки після вибору
             allBtns.forEach(b => b.disabled = true);
 
             if (selectedText.includes(data.correctAnswer)) {
+                // Якщо правильно — додаю клас і звук успіху
                 btn.classList.add('correct');
                 document.body.classList.add('global-correct');
                 sfxCorrect.play().catch(()=>{});
             } else {
+                // Якщо не вгадав — трусимо екран і показуємо правильну відповідь
                 btn.classList.add('wrong');
                 document.body.classList.add('global-wrong');
                 mainCard.classList.add('shake');
@@ -145,6 +159,7 @@ let questions = [
                 });
             }
 
+            // Показую блок з фактом та вмикаю його озвучку
             document.getElementById('fact-text').innerText = data.fact;
             document.getElementById('fact-box').style.display = 'block';
             
@@ -155,7 +170,9 @@ let questions = [
             }, 400);
         }
 
+        // Перехід до наступного етапу
         function handleNext() {
+            // Зупиняю голос факту, якщо він ще грає
             factAudio.pause();
             factAudio.currentTime = 0;
 
@@ -163,6 +180,7 @@ let questions = [
                 currentIdx++;
                 showQuestion();
             } else {
+                // Фінал гри: зберігаю результат і показую повідомлення про перемогу
                 localStorage.setItem('mars_complete', 'true');
                 document.getElementById('quiz-box').innerHTML = `
                     <h2 style="color:var(--accent); text-align:center; font-family:Orbitron; margin-top:20px;">MARS SYNC SUCCESS</h2>
@@ -173,11 +191,15 @@ let questions = [
             }
         }
 
+        // Робота з іконкою звуку (пауза/плей)
         document.getElementById('music-ui').onclick = () => {
             if (bgMusic.paused) { bgMusic.play(); document.getElementById('music-ui').innerText = "🔊"; }
             else { bgMusic.pause(); document.getElementById('music-ui').innerText = "🔇"; }
         };
 
+        // Костиль для браузерів, щоб музика почала грати після першого кліку
         document.addEventListener('click', () => { if (bgMusic.paused) bgMusic.play().catch(()=>{}); }, { once: true });
+        
+        // Запуск ініціалізації після завантаження сторінки
         window.onload = init;
     

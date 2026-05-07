@@ -5,25 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mars OS - System Config</title>
     
-    <!-- Зовнішні шрифти -->
+    <!-- Підключаю шрифти з гугла, щоб термінал виглядав по-марсіанськи -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     
-    <!-- Підключення стилів -->
+    <!-- Мій файл зі стилями для сторінки налаштувань -->
     <link rel="stylesheet" href="налаштування_код/style_settings.css">
 </head>
 <body>
 
+    <!-- Ефекти фону: сітка та "шум" старого монітора -->
     <div class="bg-grid" id="bg"></div>
     <div class="scanlines" id="fx"></div>
 
     <div class="settings-window">
         <h1>System_Configuration //</h1>
 
+        <!-- Галочка для ввімкнення/вимкнення візуальних ефектів всюди не працює бо не встиг доробити-->
         <div class="setting-group">
             <span class="label">VIDEO_SIGNAL_POST_FX</span>
             <input type="checkbox" id="checkFX" onchange="toggleFX()">
         </div>
 
+        <!-- Вибір основної колірної теми інтерфейсу -->
         <div class="setting-group">
             <span class="label">VISUAL_SPECTRUM_UI</span>
             <select id="colorTheme" onchange="updateThemePreview(this.value)">
@@ -34,11 +37,13 @@
             </select>
         </div>
 
+        <!-- Повзунок для регулювання гучності звуку також не всюди працює-->
         <div class="setting-group">
             <span class="label">AUDIO_FEEDBACK_GAIN</span>
             <input type="range" id="volume" min="0" max="100" value="70" oninput="adjustVolume(this.value)">
         </div>
 
+        <!-- Вибір мови системи не встиг зробити-->
         <div class="setting-group">
             <span class="label">INTERFACE_LANGUAGE</span>
             <select id="lang">
@@ -47,17 +52,20 @@
             </select>
         </div>
 
+        <!-- Рядок статусу, куди виводяться підказки для користувача -->
         <div id="log">SYSTEM STATUS: WAITING FOR USER INPUT...</div>
 
+        <!-- Кнопки: одна зберігає налаштування, інша — просто повертає на головну -->
         <div class="button-zone">
             <button class="btn-save" onclick="saveAndExit()">[ APPLY_CHANGES ]</button>
             <button onclick="window.location.href='index.html'">[ ABORT_&_EXIT ]</button>
         </div>
 
+        <!-- Технічний декор внизу вікна -->
         <div class="decoration">TERMINAL_ID: MARS-CONF-882</div>
     </div>
 
-    <!-- Підключення логіки -->
+    <!-- Основний скрипт, де прописана логіка всіх цих кнопок і перемикачів -->
     <script src="налаштування_код/code_settings.js"></script>
 </body>
 </html>

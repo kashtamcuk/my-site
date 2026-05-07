@@ -17,11 +17,19 @@
 
 *::-webkit-scrollbar { display: none; }
 
-/* Налаштування всього екрану */
+/* Налаштування всього екрану картинка для заднього фону*/
 body, html {
     width: 100%;
     height: 100%;
-    background: #000;
+
+    background:
+        linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.65)),
+        url("fon_menu.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
     font-family: 'Orbitron', sans-serif;
     display: flex;
     justify-content: center;
@@ -29,17 +37,6 @@ body, html {
     overflow: hidden;
     color: white;
 }
-
-/* Фон з градієнтом */
-#mars-bg {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle at center, var(--bg-color-1) 0%, #000 100%);
-    z-index: -1;
-    transition: background 0.5s ease;
-}
-
-
 
 @keyframes drift {
     from { background-position: 0 0; }
@@ -62,7 +59,6 @@ body, html {
     padding: clamp(30px, 5vh, 60px) clamp(40px, 8vw, 100px);
     border: 1px solid var(--accent-color);
     box-shadow: 0 0 40px rgba(0,0,0,1), inset 0 0 30px var(--glow);
-    backdrop-filter: blur(10px); /* Розмиття фону за меню */
     text-align: center;
     z-index: 10;
     display: flex;
@@ -179,7 +175,7 @@ button.unlocked-btn {
 .bl { bottom: -5px; left: -5px; border-right: none; border-top: none; }
 .br { bottom: -5px; right: -5px; border-left: none; border-top: none; }
 
-/* Нижня панель зі статусом (координати, темп) */
+/* Нижня панель  */
 .footer-status {
     margin-top: clamp(20px, 5vh, 50px);
     font-family: 'Share Tech Mono', monospace;
@@ -191,7 +187,7 @@ button.unlocked-btn {
     border-top: 1px solid rgba(255,87,34,0.2);
 }
 
-/* Блакитний колір для цифр телеметрії */
+/* Блакитний колір для цифр */
 .telemetry { color: #00d4ff; }
 
 /* Анімація блимання (для тексту ACTIVE) */

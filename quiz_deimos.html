@@ -3,45 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Назва вкладки для місії на Деймос -->
     <title>DEIMOS Mission // ARES OS</title>
+    <!-- Підтягнув ті ж шрифти, що і в основному інтерфейсі, для стилю -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <!-- Мій файл стилів саме для цього супутника -->
     <link rel="stylesheet" href="подорж_між_сопутниками_на_марс/style_deimos.css">
 </head>
 <body>
 
+    <!-- Сітка на фоні для ефекту технологічності -->
     <div class="grid-bg"></div>
 
     <div class="quiz-container" id="main-card">
-        <!-- Декоративні кути -->
+        <!-- Декоративні кути картки, які я малював у CSS -->
         <div class="corner tl"></div><div class="corner tr"></div>
         <div class="corner bl"></div><div class="corner br"></div>
 
+        <!-- Шапка картки з назвою протоколу та лічильником кроків -->
         <header class="header">
             <span>ARES-CORE // DEIMOS_SYNC</span>
             <span id="counter">КРОК: 1 / 6</span>
         </header>
 
+        <!-- Основне вікно квізу -->
         <div id="quiz-box">
+            <!-- Сюди JS буде вставляти текст питання -->
             <div class="question-text" id="question">_</div>
+            
+            <!-- Тут будуть генеруватися кнопки з варіантами відповідей -->
             <div class="options-grid" id="options-container"></div>
             
+            <!-- Панель з цікавим фактом, яка вилазить після відповіді -->
             <div class="fact-panel" id="fact-box">
                 <span id="fact-label">[ ANALYSIS ]:</span>
                 <p id="fact-text"></p>
             </div>
 
+            <!-- Кнопка переходу далі, з'являється не відразу -->
             <button class="next-btn" id="next-button" onclick="handleNext()">Наступний сектор</button>
         </div>
 
-        <!-- Прогрес-бар внизу картки -->
+        <!-- Смужка прогресу в самому низу картки -->
         <div id="progress-fill"></div>
     </div>
 
-    <!-- Аудіо канали -->
+    <!-- Аудіо для озвучки фактів та звукових ефектів (правильно/помилка) -->
     <audio id="fact-player"></audio>
     <audio id="sfx-correct" src="загальна_озвучка/correct.mp3"></audio>
     <audio id="sfx-error" src="загальна_озвучка/error.mp3"></audio>
 
+    <!-- Підключив логіку саме для Деймоса -->
     <script src="подорж_між_сопутниками_на_марс/code_deimos.js"></script>
 </body>
 </html>

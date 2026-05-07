@@ -1,139 +1,145 @@
-
+/* Налаштування карток: відступи, колір фону та рамка */
     .future-card {
         padding: 30px;
         background: rgba(0, 15, 25, 0.8) !important;
         border: 1px solid;
         transition: 0.3s;
     }
+
+    /* Ефект при наведенні на картку: трохи збільшується і з'являється легке сяйво */
     .future-card:hover {
         transform: scale(1.02);
         box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
     }
+
+    /* Кнопки при наведенні теж стають більшими та підсвічуються */
     button:hover {
         box-shadow: 0 0 15px var(--neon-blue);
         transform: scale(1.05);
     }
 
-    /* ПАНЕЛЬ КЕРУВАННЯ ЗВУКОМ */
-.audio-control-panel {
-    position: fixed;
-    bottom: 25px;
-    left: 25px;
-    background: rgba(0, 15, 25, 0.9);
-    border: 1px solid var(--neon-blue);
-    padding: 15px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    z-index: 9999;
-    backdrop-filter: blur(8px);
-    border-left: 4px solid var(--neon-blue);
-    transition: all 0.4s ease;
-}
+    /* ПАНЕЛЬ КЕРУВАННЯ ЗВУКОМ - фіксую її в лівому нижньому куті */
+    .audio-control-panel {
+        position: fixed;
+        bottom: 25px;
+        left: 25px;
+        background: rgba(0, 15, 25, 0.8);
+        border: 1px solid var(--neon-blue);
+        padding: 15px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 9999;
+        backdrop-filter: blur(8px);
+        border-left: 4px solid var(--neon-blue);
+        transition: all 0.4s ease;
+    }
 
-.audio-control-panel.active {
-    border-color: var(--neon-orange);
-    border-left-color: var(--neon-orange);
-    box-shadow: 0 0 20px rgba(255, 95, 0, 0.2);
-}
+    /* Коли панель активна (грає музика), міняю колір на помаранчевий */
+    .audio-control-panel.active {
+        border-color: var(--neon-orange);
+        border-left-color: var(--neon-orange);
+        box-shadow: 0 0 20px rgba(255, 95, 0, 0.2);
+    }
 
-/* СТАТУС СИГНАЛУ */
-.audio-status {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.6rem;
-    letter-spacing: 2px;
-}
+    /* Текст статусу сигналу: дрібний шрифт у стилі космосу */
+    .audio-status {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.6rem;
+        letter-spacing: 2px;
+    }
 
-.status-dot {
-    width: 6px;
-    height: 6px;
-    background: #555;
-    border-radius: 50%;
-}
+    /* Маленька крапка статусу */
+    .status-dot {
+        width: 6px;
+        height: 6px;
+        background: #555;
+        border-radius: 50%;
+    }
 
-.active .status-dot {
-    background: var(--neon-orange);
-    box-shadow: 0 0 8px var(--neon-orange);
-    animation: blink 1s infinite;
-}
+    /* Анімація блимання крапки, коли сигнал активний */
+    .active .status-dot {
+        background: var(--neon-orange);
+        box-shadow: 0 0 8px var(--neon-orange);
+        animation: blink 1s infinite;
+    }
 
-/* ВІЗУАЛІЗАТОР (СМУЖКИ) */
-.visualizer {
-    display: flex;
-    align-items: flex-end;
-    gap: 4px;
-    height: 20px;
-    opacity: 0.3;
-}
+    /*смужки, що імітують звук */
+    .visualizer {
+        display: flex;
+        align-items: flex-end;
+        gap: 4px;
+        height: 20px;
+        opacity: 0.3;
+    }
 
-.active .visualizer {
-    opacity: 1;
-}
+    .active .visualizer {
+        opacity: 1;
+    }
 
-.bar {
-    width: 3px;
-    height: 4px;
-    background: var(--neon-blue);
-    transition: 0.2s;
-}
+    /* Самі смужки візуалізатора */
+    .bar {
+        width: 3px;
+        height: 4px;
+        background: var(--neon-blue);
+        transition: 0.2s;
+    }
 
-.active .bar {
-    background: var(--neon-orange);
-    animation: barGrow 1.2s infinite ease-in-out;
-}
+    /* Анімація руху смужок вгору-вниз */
+    .active .bar {
+        background: var(--neon-orange);
+        animation: barGrow 1.2s infinite ease-in-out;
+    }
 
-.bar:nth-child(2) { animation-delay: 0.2s; }
-.bar:nth-child(3) { animation-delay: 0.4s; }
-.bar:nth-child(4) { animation-delay: 0.1s; }
-.bar:nth-child(5) { animation-delay: 0.3s; }
+    /* Роблю затримку для кожної смужки, щоб вони рухалися не синхронно */
+    .bar:nth-child(2) { animation-delay: 0.2s; }
+    .bar:nth-child(3) { animation-delay: 0.4s; }
+    .bar:nth-child(4) { animation-delay: 0.1s; }
+    .bar:nth-child(5) { animation-delay: 0.3s; }
 
-/* КНОПКА */
-#playPauseBtn {
-    background: transparent;
-    border: 1px solid rgba(0, 242, 255, 0.3);
-    color: var(--neon-blue);
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.7rem;
-    padding: 8px 12px;
-    cursor: pointer;
-    transition: 0.3s;
-}
+    /* Кнопка в панелі керування звуком */
+    #playPauseBtn {
+        background: transparent;
+        border: 1px solid rgba(0, 242, 255, 0.3);
+        color: var(--neon-blue);
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.7rem;
+        padding: 8px 12px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
 
-#playPauseBtn:hover {
-    background: var(--neon-blue);
-    color: black;
-}
+    #playPauseBtn:hover {
+        background: var(--neon-blue);
+        color: black;
+    }
 
-.active #playPauseBtn {
-    border-color: var(--neon-orange);
-    color: var(--neon-orange);
-}
+    /* Стилі кнопки, коли вона в активному стані */
+    .active #playPauseBtn {
+        border-color: var(--neon-orange);
+        color: var(--neon-orange);
+    }
 
-.active #playPauseBtn:hover {
-    background: var(--neon-orange);
-    color: black;
-}
+    .active #playPauseBtn:hover {
+        background: var(--neon-orange);
+        color: rgb(255, 255, 255);
+    }
 
-/* АНІМАЦІЇ */
-@keyframes barGrow {
-    0%, 100% { height: 4px; }
-    50% { height: 20px; }
-}
+    /* АНІМАЦІЇ: для смужок і для блимання крапки статусу */
+    @keyframes barGrow {
+        0%, 100% { height: 4px; }
+        50% { height: 20px; }
+    }
 
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-}
+    @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.3; }
+    }
 
-@keyframes barGrow {
-    0%, 100% { height: 5px; }
-    50% { height: 20px; }
-}
-
-
+    /* Сітка для супутників: розбиваю на дві колонки */
     .satellites-grid {
         grid-column: span 2;
         display: grid;
@@ -142,6 +148,7 @@
         margin-bottom: 50px;
     }
 
+    /* Картка окремого супутника (Фобос/Деймос) */
     .sat-card {
         background: rgba(0, 10, 20, 0.8);
         border: 1px solid rgba(255, 255, 255, 0.1);
@@ -152,15 +159,17 @@
         transition: 0.4s;
     }
 
-    /* Кольорові теми */
+    /* Кольорові мітки зверху карток */
     .phobos { border-top: 4px solid var(--neon-orange); }
     .deimos { border-top: 4px solid var(--neon-blue); }
 
+    /* Рух картки вгору при наведенні */
     .sat-card:hover {
         transform: translateY(-10px);
         background: rgba(0, 20, 35, 0.9);
     }
 
+    /* Шапка всередині картки супутника */
     .sat-header {
         display: flex;
         align-items: center;
@@ -168,6 +177,7 @@
         margin-bottom: 25px;
     }
 
+    /* Іконка у формі шестикутника для назви супутника */
     .sat-icon {
         width: 50px;
         height: 50px;
@@ -180,77 +190,116 @@
         clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
     }
 
+    /* ФОНОВЕ ЗОБРАЖЕННЯ: стоїть мертво на весь екран, не прокручується */
+    body {
+        background-image: url('your-background.png');
+        background-size: cover; /* Розтягує картинку, щоб закрити весь екран */
+        background-position: center; /* Центрує зображення */
+        background-attachment: fixed; /* Щоб фон не совався при скролі */
+        background-repeat: no-repeat;
+        min-height: 100vh;
+        margin: 0;
+    }
+
+
+
+
+
+
+
+
+
+
+  /* Налаштовую іконки супутників: Фобос — помаранчевий, Деймос — блакитний */
     .phobos .sat-icon { border-color: var(--neon-orange); color: var(--neon-orange); }
     .deimos .sat-icon { border-color: var(--neon-blue); color: var(--neon-blue); }
 
+    /* Великі заголовки для супутників з розрядкою літер */
     .sat-title h3 {
         margin: 0;
         font-family: 'Orbitron';
         font-size: 1.8rem;
         letter-spacing: 3px;
+        /* Додаю тінь, щоб текст читався на будь-якому фоні */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+        color: #ffffff;
     }
 
+    /* Підписи під заголовками — роблю їх напівпрозорими */
     .sat-title span {
         font-size: 0.7rem;
         text-transform: uppercase;
-        opacity: 0.6;
+        opacity: 0.8; /* Трохи підняв видимість */
+        text-shadow: 1px 1px 2px #000;
+        color: #eee;
     }
 
-    /* Шкали статистики */
+    /* Блок зі смужками статистики */
     .sat-stats {
         margin-bottom: 25px;
     }
 
+    /* Рядок з назвою характеристики (наприклад, Гравітація) */
     .stat-row {
         margin-bottom: 10px;
         font-size: 0.8rem;
         font-family: 'Orbitron';
+        color: #fff;
+        text-shadow: 1px 1px 3px #ffffff;
     }
 
+    /* Фон самої смужки (сірий напівпрозорий) */
     .stat-bar {
         width: 100%;
         height: 4px;
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.2);
         margin-top: 5px;
     }
 
+    /* Внутрішня частина смужки, яка показує рівень, з ефектом свічення */
     .stat-bar div { height: 100%; box-shadow: 0 0 10px currentColor; }
 
+    /* Опис супутника: додаю лінію зліва для стилю */
     .sat-info p {
         font-size: 0.9rem;
         line-height: 1.6;
-        color: #b0e0f0;
+        color: #ffffff; /* Зробив чисто білим для контрасту */
+        text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
         margin-bottom: 15px;
         padding-left: 15px;
-        border-left: 1px solid rgba(255, 255, 255, 0.2);
+        border-left: 2px solid rgba(255, 255, 255, 0.4);
     }
 
-    /* Спеціальні зони статусу */
+    /* Блоки для небезпечних та безпечних зон */
     .danger-zone, .safe-zone {
         margin-top: 20px;
         padding: 15px;
         font-size: 0.85rem;
-        background: rgba(255, 95, 0, 0.1);
+        background: rgba(0, 0, 0, 0.6); /* Темніший фон для читабельності */
         border-left: 3px solid var(--neon-orange);
+        color: #fff;
     }
 
     .safe-zone {
-        background: rgba(0, 242, 255, 0.1);
+        background: rgba(0, 0, 0, 0.6);
         border-left-color: var(--neon-blue);
     }
 
+    /* Виділяю заголовки всередині зон статусу */
     .danger-zone span, .safe-zone span {
         display: block;
         font-family: 'Orbitron';
         font-weight: bold;
         margin-bottom: 5px;
+        text-shadow: 0 0 5px currentColor;
     }
 
+    /* Якщо екран менше 900px, супутники стають один під одним */
     @media (max-width: 900px) {
         .satellites-grid { grid-template-columns: 1fr; }
     }
 
-
+    /* Шапка місії з лініями по боках */
     .mission-header {
         display: flex;
         align-items: center;
@@ -258,13 +307,17 @@
         gap: 20px;
         margin-bottom: 10px;
     }
+
+    /* Заголовок місії з неоновим ефектом */
     .mission-header h2 {
         font-family: 'Orbitron';
         color: white;
         letter-spacing: 5px;
         margin: 0;
-        text-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+        text-shadow: 0 0 15px rgba(0, 242, 255, 0.8), 2px 2px 5px #000;
     }
+
+    /* Декоративні лінії в заголовку */
     .header-line {
         flex: 1;
         max-width: 100px;
@@ -273,7 +326,7 @@
     }
     .header-line:last-child { background: linear-gradient(to left, transparent, var(--neon-blue)); }
 
-    /* Timeline Container */
+    /* Контейнер для таймлайну (вертикальна лінія подій) */
     .timeline-container {
         grid-column: span 2;
         position: relative;
@@ -281,6 +334,8 @@
         margin: 0 auto;
         padding: 40px 0;
     }
+
+    /* Малюю саму центральну лінію таймлайну градієнтом */
     .timeline-container::before {
         content: '';
         position: absolute;
@@ -292,7 +347,7 @@
         transform: translateX(-50%);
     }
 
-    /* Елементи списку */
+    /* Налаштовую кожен окремий блок події */
     .timeline-item {
         margin-bottom: 60px;
         position: relative;
@@ -300,10 +355,13 @@
         padding: 0 50px;
         box-sizing: border-box;
     }
+
+    /* Непарні блоки (1, 3...) притискаю вліво, текст вправо */
     .timeline-item:nth-child(odd) { left: 0; text-align: right; }
+    /* Парні (2, 4...) — вправо, текст вліво */
     .timeline-item:nth-child(even) { left: 50%; text-align: left; }
 
-    /* Крапки (Вузли) */
+    /* Крапки на центральній лінії */
     .timeline-dot {
         position: absolute;
         top: 20px;
@@ -317,9 +375,10 @@
     .timeline-item:nth-child(odd) .timeline-dot { right: -6px; }
     .timeline-item:nth-child(even) .timeline-dot { left: -6px; }
 
+    /* Окремий колір для помаранчевих вузлів */
     .timeline-dot.orange { background: var(--neon-orange); box-shadow: 0 0 10px var(--neon-orange); }
 
-    /* Анімація пульсації */
+    /* Ефект пульсації для крапок, щоб привернути увагу */
     .pulse {
         position: absolute;
         width: 100%;
@@ -329,39 +388,58 @@
         animation: pulseWave 2s infinite;
         opacity: 0.5;
     }
+
     @keyframes pulseWave {
         0% { transform: scale(1); opacity: 0.5; }
         100% { transform: scale(3); opacity: 0; }
     }
 
-    /* Картки з контентом */
+    /* Картки з текстом всередині таймлайну */
     .timeline-content {
-        background: rgba(0, 15, 25, 0.8);
-        border: 1px solid rgba(0, 242, 255, 0.2);
+        background: rgba(0, 5, 10, 0.9); /* Зробив фон темнішим, щоб білий текст виділявся */
+        border: 1px solid rgba(0, 242, 255, 0.4);
         padding: 25px;
         position: relative;
         backdrop-filter: blur(10px);
         transition: 0.4s;
+        color: #ffffff;
+        text-shadow: 1px 1px 3px #000;
     }
+
+    /* Підсвітка картки при наведенні мишкою */
     .timeline-content:hover {
         border-color: var(--neon-blue);
-        box-shadow: 0 0 20px rgba(0, 242, 255, 0.15);
+        box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
         transform: translateY(-5px);
     }
-    .orange-border { border-color: rgba(255, 95, 0, 0.3); }
-    .orange-border:hover { border-color: var(--neon-orange); box-shadow: 0 0 20px rgba(255, 95, 0, 0.15); }
 
-    /* Декоративні куточки */
+    /* Варіант картки з помаранчевою рамкою */
+    .orange-border { border-color: rgba(255, 95, 0, 0.5); }
+    .orange-border:hover { 
+        border-color: var(--neon-orange); 
+        box-shadow: 0 0 20px rgba(255, 95, 0, 0.3); 
+    }
+
+
+
+
+    
+/* Декоративні куточки для оформлення карток */
     .corner {
         position: absolute;
         width: 10px;
         height: 10px;
         border: 2px solid var(--neon-blue);
     }
+
+    /* Лівий верхній кут без правої та нижньої стінки */
     .top-left { top: -2px; left: -2px; border-right: 0; border-bottom: 0; }
+    /* Правий нижній кут без лівої та верхньої стінки */
     .bottom-right { bottom: -2px; right: -2px; border-left: 0; border-top: 0; }
+    /* Якщо треба оранжевий куточок — просто додаю цей клас */
     .corner.orange { border-color: var(--neon-orange); }
 
+    /* Стиль дати на таймлайні: жирний шрифт і великий розмір */
     .timeline-date {
         font-family: 'Orbitron';
         color: white;
@@ -369,183 +447,185 @@
         font-weight: bold;
         margin-bottom: 10px;
         display: block;
+        text-shadow: 2px 2px 5px #000;
     }
 
+    /* Налаштування для телефонів: роблю таймлайн в одну колонку */
     @media (max-width: 768px) {
-        .timeline-container::before { left: 20px; }
+        .timeline-container::before { left: 20px; } /* Пересуваю лінію вбік */
         .timeline-item { width: 100%; text-align: left !important; padding-left: 50px; padding-right: 20px; }
         .timeline-dot { left: 14px !important; }
     }
 
 
-    /* Головний контейнер файлу */
-    /* --- ОСНОВНІ НАЛАШТУВАННЯ ДЛЯ РОЗДІЛУ АНОМАЛІЙ --- */
+    /* --- МОЇ НАЛАШТУВАННЯ ДЛЯ РОЗДІЛУ АНОМАЛІЙ --- */
 
-/* Контейнер кожної "архівної справи" */
-.anomaly-file {
-    grid-column: span 2;
-    background: rgba(0, 20, 30, 0.6);
-    border: 1px solid rgba(0, 242, 255, 0.15);
-    margin-bottom: 40px; /* Чітка відстань між блоками */
-    padding: 25px;
-    position: relative;
-    transition: 0.4s ease;
-    border-left: 4px solid var(--neon-blue);
-    display: block; /* Гарантує правильне відображення */
-}
-
-/* Ефект при наведенні на всю картку */
-.anomaly-file:hover {
-    background: rgba(0, 30, 45, 0.85);
-    border-color: var(--neon-blue);
-    transform: translateX(10px); /* Легке зміщення вбік */
-    box-shadow: -10px 0 20px rgba(0, 242, 255, 0.1);
-}
-
-/* Ярлик статусу (DEBUNKED, ATMOSPHERIC тощо) */
-.file-status {
-    position: absolute;
-    top: -12px;
-    right: 20px;
-    background: #020508;
-    border: 1px solid var(--neon-orange);
-    color: var(--neon-orange);
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.65rem;
-    padding: 2px 10px;
-    letter-spacing: 2px;
-    z-index: 5;
-}
-
-/* Внутрішня структура: фото + текст */
-.anomaly-body {
-    display: flex;
-    gap: 30px;
-    align-items: center;
-}
-
-/* --- КОНТЕЙНЕР ФОТО (ІКОНКИ) --- */
-.anomaly-image {
-    flex: 0 0 180px; /* Фіксований розмір */
-    height: 180px;
-    position: relative;
-    border: 1px solid var(--border);
-    overflow: hidden; /* КРИТИЧНО для ефекту збільшення (ховає те, що вилазить) */
-    cursor: zoom-in; /* Курсор-лупа */
-    background: #000;
-}
-
-/* САМЕ ФОТО ТА ЙОГО ЗБІЛЬШЕННЯ */
-.anomaly-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.8) grayscale(20%);
-    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.4s;
-}
-
-/* Ефект при наведенні на фото: ЗБІЛЬШЕННЯ */
-.anomaly-image:hover img {
-    transform: scale(1.6); /* Збільшуємо на 60% */
-    filter: brightness(1.2) grayscale(0%); /* Робимо кольоровим та яскравим */
-}
-
-/* --- ТЕКСТОВА ЧАСТИНА --- */
-.anomaly-content {
-    flex: 1;
-}
-
-.file-id {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.7rem;
-    color: var(--neon-orange);
-    display: block;
-    margin-bottom: 5px;
-    opacity: 0.8;
-}
-
-.anomaly-content h3 {
-    font-family: 'Orbitron', sans-serif;
-    margin: 0 0 12px 0;
-    font-size: 1.4rem;
-    color: #fff;
-    text-shadow: 0 0 10px rgba(0, 242, 255, 0.3);
-}
-
-.anomaly-content p {
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #b0e0f0;
-}
-
-/* Виділення важливих слів у тексті */
-.anomaly-content b, .anomaly-content strong {
-    color: var(--neon-blue);
-    font-weight: 600;
-}
-
-/* --- АНІМАЦІЯ ЛІНІЇ СКАНЕРА --- */
-.scan-bar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: var(--neon-blue);
-    box-shadow: 0 0 15px var(--neon-blue);
-    z-index: 3;
-    pointer-events: none; /* Щоб лінія не заважала натискати */
-    animation: scanAnim 3s infinite linear;
-}
-
-/* При наведенні робимо лінію прозорою, щоб не заважала розглядати деталі */
-.anomaly-image:hover .scan-bar {
-    opacity: 0.1;
-}
-
-@keyframes scanAnim {
-    0% { top: 0; }
-    100% { top: 100%; }
-}
-
-/* АДАПТИВНІСТЬ ДЛЯ МОБІЛЬНИХ ПРИСТРОЇВ */
-@media (max-width: 768px) {
-    .anomaly-body {
-        flex-direction: column;
-        text-align: center;
+    /* Контейнер для кожної справи про аномалію */
+    .anomaly-file {
+        grid-column: span 2;
+        background: rgba(0, 20, 30, 0.7); /* Темний напівпрозорий фон */
+        border: 1px solid rgba(0, 242, 255, 0.15);
+        margin-bottom: 40px; 
+        padding: 25px;
+        position: relative;
+        transition: 0.4s ease;
+        border-left: 4px solid var(--neon-blue); /* Акцентна лінія зліва */
+        display: block; 
     }
-    .anomaly-image {
-        width: 100%;
-        max-width: 300px;
-        height: 200px;
-    }
+
+    /* Коли наводжу мишкою — картка трохи зміщується вправо і стає яскравішою */
     .anomaly-file:hover {
-        transform: translateY(-5px); /* На мобільних краще вгору, ніж вбік */
+        background: rgba(0, 30, 45, 0.9);
+        border-color: var(--neon-blue);
+        transform: translateX(10px); 
+        box-shadow: -10px 0 20px rgba(0, 242, 255, 0.1);
     }
-}
+
+    /* Маленький ярлик зі статусом у верхньому правому куті */
+    .file-status {
+        position: absolute;
+        top: -12px;
+        right: 20px;
+        background: #020508;
+        border: 1px solid var(--neon-orange);
+        color: var(--neon-orange);
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.65rem;
+        padding: 2px 10px;
+        letter-spacing: 2px;
+        z-index: 5;
+    }
+
+    /* Внутрянка картки: картинка зліва, текст справа */
+    .anomaly-body {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+    }
+
+    /* Рамка для фото аномалії */
+    .anomaly-image {
+        flex: 0 0 180px; 
+        height: 180px;
+        position: relative;
+        border: 1px solid var(--border);
+        overflow: hidden; /* Щоб при збільшенні фото не вилазило за рамку */
+        cursor: zoom-in; 
+        background: #000;
+    }
+
+    /* Сама картинка: спочатку трохи темна і сірувата */
+    .anomaly-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.8) grayscale(20%);
+        transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.4s;
+    }
+
+    /* При наведенні на картинку — вона сильно збільшується і стає кольоровою */
+    .anomaly-image:hover img {
+        transform: scale(1.6); 
+        filter: brightness(1.2) grayscale(0%);
+    }
+
+    /* Текст поруч із фото */
+    .anomaly-content {
+        flex: 1;
+    }
+
+    /* Оранжевий айдішник файлу зверху */
+    .file-id {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.7rem;
+        color: var(--neon-orange);
+        display: block;
+        margin-bottom: 5px;
+        opacity: 0.8;
+    }
+
+    /* Заголовок аномалії з тінню */
+    .anomaly-content h3 {
+        font-family: 'Orbitron', sans-serif;
+        margin: 0 0 12px 0;
+        font-size: 1.4rem;
+        color: #fff;
+        text-shadow: 0 0 10px rgba(0, 242, 255, 0.3);
+    }
+
+    /* Основний опис аномалії */
+    .anomaly-content p {
+        margin: 0;
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #b0e0f0;
+        text-shadow: 1px 1px 2px #000;
+    }
+
+    /* Виділення важливих моментів блакитним кольором */
+    .anomaly-content b, .anomaly-content strong {
+        color: var(--neon-blue);
+        font-weight: 600;
+    }
+
+    /* Смужка сканера, що їздить зверху вниз по картинці */
+    .scan-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--neon-blue);
+        box-shadow: 0 0 15px var(--neon-blue);
+        z-index: 3;
+        pointer-events: none; 
+        animation: scanAnim 3s infinite linear;
+    }
+
+    /* Ховаю смужку, коли роздивляюся збільшене фото */
+    .anomaly-image:hover .scan-bar {
+        opacity: 0.1;
+    }
+
+    /* Сама анімація руху сканера */
+    @keyframes scanAnim {
+        0% { top: 0; }
+        100% { top: 100%; }
+    }
+
+    /* Адаптація для планшетів та мобілок */
+    @media (max-width: 768px) {
+        .anomaly-body {
+            flex-direction: column; /* Картинка тепер зверху, текст знизу */
+            text-align: center;
+        }
+        .anomaly-image {
+            width: 100%;
+            max-width: 300px;
+            height: 200px;
+        }
+        .anomaly-file:hover {
+            transform: translateY(-5px); /* На мобілках краще рухати вгору */
+        }
+    }
 
 
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@300;600&display=swap');
+
+
+
+
+        /* Підключаю шрифти: для заголовків і для звичайного тексту */
+ @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@300;600&display=swap');
 
         :root {
+            /* Моя палітра кольорів: оранжевий неон, блакитний і колір скла для блоків */
             --neon-orange: #ff5f00;
             --neon-blue: #00f2ff;
             --glass: rgba(0, 20, 30, 0.85);
             --border: rgba(0, 242, 255, 0.3);
         }
 
-        body {
-            background: #020508;
-            color: #e0faff;
-            font-family: 'Exo 2', sans-serif;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-            background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
-        }
-
-        /* Ефект сканування монітора */
+        /* Роблю ефект старого монітора: накладаю дрібну сітку та градієнт поверх усього */
         body::before {
             content: " ";
             position: fixed;
@@ -557,7 +637,7 @@
             pointer-events: none;
         }
 
-        /* Рухома полоса сканера */
+        /* Це смужка сканера, яка постійно їздить зверху вниз */
         .scanner-line {
             position: fixed;
             top: -100%;
@@ -569,18 +649,20 @@
             animation: scan 8s linear infinite;
         }
 
+        /* Анімація для руху сканера */
         @keyframes scan {
             0% { top: -100%; }
             100% { top: 100%; }
         }
 
+        /* Головний контейнер, щоб контент не розповзався */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 50px 20px;
         }
 
-        /* Заголовок */
+        /* Оформлення шапки сайту */
         header {
             text-align: center;
             margin-bottom: 80px;
@@ -589,6 +671,7 @@
             position: relative;
         }
 
+        /* Головний заголовок з градієнтом і великими відступами між буквами */
         h1 {
             font-family: 'Orbitron', sans-serif;
             font-size: 4rem;
@@ -599,6 +682,7 @@
             filter: drop-shadow(0 0 10px rgba(0, 242, 255, 0.5));
         }
 
+        /* Дрібний текст під заголовком (ID архіву) */
         .archive-id {
             font-family: 'Orbitron', sans-serif;
             color: var(--neon-blue);
@@ -607,14 +691,14 @@
             opacity: 0.7;
         }
 
-        /* Сітка блоків */
+        /* Сітка для карток: розбиваю на дві колонки */
         .info-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 40px;
         }
 
-        /* Стиль блоку-секції */
+        /* Стиль самих карток: додаю розмиття фону і зрізаний кут знизу */
         .section-box {
             background: var(--glass);
             border: 1px solid var(--border);
@@ -625,12 +709,14 @@
             clip-path: polygon(0 0, 100% 0, 100% 90%, 90% 100%, 0 100%);
         }
 
+        /* Ефект при наведенні: картка трохи збільшується і починає світитись */
         .section-box:hover {
             border-color: var(--neon-blue);
             box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
             transform: scale(1.02);
         }
 
+        /* Заголовки всередині карток з маленьким оранжевим квадратиком збоку */
         .section-box h2 {
             font-family: 'Orbitron', sans-serif;
             color: var(--neon-blue);
@@ -641,6 +727,7 @@
             gap: 15px;
         }
 
+        /* Той самий квадратик-індикатор біля назви секції */
         .section-box h2::before {
             content: "";
             width: 10px;
@@ -649,20 +736,24 @@
             box-shadow: 0 0 10px var(--neon-orange);
         }
 
+        /* Прибираю стандартні маркери списків */
         .data-list {
             list-style: none;
             padding: 0;
         }
 
+        /* Кожен пункт списку з оранжевою лінією зліва */
         .data-item {
             margin-bottom: 15px;
             border-left: 2px solid var(--neon-orange);
             padding-left: 15px;
             font-weight: 300;
+            color: #ffffff; 
         }
 
+        /* Маленькі підписи-мітки блакитним кольором */
         .label {
-            color: var(--neon-blue);
+            color: white;
             font-weight: 600;
             text-transform: uppercase;
             font-size: 0.85rem;
@@ -670,7 +761,7 @@
             margin-bottom: 4px;
         }
 
-        /* Спеціальні віджети */
+        /* Панель зі статистикою: вирівнюю значення по боках */
         .stat-flex {
             display: flex;
             justify-content: space-between;
@@ -679,10 +770,12 @@
             margin-top: 10px;
         }
 
+        /* Центрування чисел у статистиці */
         .stat-val {
             text-align: center;
         }
 
+        /* Великі білі цифри для статистики */
         .stat-val big {
             display: block;
             font-size: 1.8rem;
@@ -690,6 +783,7 @@
             color: white;
         }
 
+        /* Окремий блок для інформації про захід сонця */
         .sunset-box {
             background: linear-gradient(45deg, #001a33, #004d99);
             padding: 20px;
@@ -699,7 +793,9 @@
             border: 1px dashed var(--neon-blue);
         }
 
-        /* Кнопка </div> </div> <a href="index.html" class="back-link">RETURN TO BASE OFFICE</a>*/
+
+
+/* Кнопка повернення на головну: по центру, з рамкою і шрифтом */
         .back-link {
             display: block;
             width: fit-content;
@@ -712,16 +808,19 @@
             transition: 0.3s;
         }
 
+        /* Ефект для кнопки при наведенні: стає синьою з підсвіткою */
         .back-link:hover {
             background: var(--neon-blue);
-            color: black;
+            color: rgb(255, 255, 255);
             box-shadow: 0 0 20px var(--neon-blue);
         }
 
+        /* Якщо екран менше 900px, перекидаю сітку в одну колонку */
         @media (max-width: 900px) {
             .info-grid { grid-template-columns: 1fr; }
         }
 
+        /* Маленька кнопка зчитування у верхньому правому куті */
         .read-btn {
             position: absolute;
             top: 20px;
@@ -737,17 +836,20 @@
             z-index: 10;
         }
 
+        /* Трохи підсвічую кнопку при наведенні body  */
         .read-btn:hover {
             background: rgba(0, 242, 255, 0.1);
             box-shadow: 0 0 10px var(--neon-blue);
         }
 
+        /* Анімація для пульсуючої рамки (оранжевий колір) */
         @keyframes pulse-border {
             0% { box-shadow: 0 0 0px var(--neon-orange); }
             50% { box-shadow: 0 0 15px var(--neon-orange); }
             100% { box-shadow: 0 0 0px var(--neon-orange); }
         }
 
+        /* Клас для ввімкнення пульсації на елементі */
         .pulse {
             animation: pulse-border 1.5s infinite;
             color: var(--neon-orange) !important;

@@ -1,194 +1,223 @@
-  
-        :root {
-            --accent-color: #ff5722;
-            --bg-color-1: #1a0800;
-            --glow: rgba(255, 87, 34, 0.4);
-        }
+:root {
+    /* Мої основні змінні для кольорів: рудий марсіанський, фон і світіння */
+    --accent-color: #ff5722;
+    --bg-color-1: #1a0800;
+    --glow: rgba(255, 87, 34, 0.4);
+}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
+/* Прибираю стандартні відступи та міняю курсор на приціл для атмосфери */
+* { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
 
-        body {
-            background: #000;
-            color: white;
-            font-family: 'Orbitron', sans-serif;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
+body {
+    background: #000;
+    /* Додав можливість вставити фонову картинку, щоб вона стояла чітко по центру і не совалася */
+    background-image: url('fon_seting.png'); 
+    background-size: cover; /* Розтягує картинку на весь екран */
+    background-position: center; /* Центрує зображення */
+    background-attachment: fixed; /* Фіксує фон, щоб він не скролився */
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Щоб не з'являлася прокрутка самого екрана */
+}
 
-        /* Анімований фон з сіткою */
-        .bg-grid {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: 
-                linear-gradient(rgba(26, 8, 0, 0.8), rgba(0,0,0,0.9)),
-                url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
-            background-color: var(--bg-color-1);
-            z-index: -1;
-            transition: 0.8s;
-        }
 
-        .scanlines {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: repeating-linear-gradient(0deg, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 1px, transparent 1px, transparent 2px);
-            pointer-events: none; z-index: 100;
-        }
 
-        .settings-window {
-            width: 700px;
-            background: rgba(10, 5, 0, 0.95);
-            border: 1px solid var(--accent-color);
-            padding: 50px;
-            position: relative;
-            box-shadow: 0 0 50px rgba(0, 0, 0, 1), inset 0 0 20px var(--glow);
-            backdrop-filter: blur(15px);
-            clip-path: polygon(0 0, 95% 0, 100% 5%, 100% 100%, 5% 100%, 0 95%);
-        }
+/* Ефект старих ліній монітора поверх усього */
+.scanlines {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 1px, transparent 1px, transparent 2px);
+    pointer-events: none; z-index: 100;
+}
 
-        h1 {
-            font-family: 'Orbitron';
-            color: var(--accent-color);
-            text-align: left;
-            letter-spacing: 5px;
-            margin-bottom: 40px;
-            font-size: 1.5rem;
-            border-left: 5px solid var(--accent-color);
-            padding-left: 20px;
-            text-transform: uppercase;
-        }
+/* Головне вікно налаштувань */
+.settings-window {
+    width: 700px;
+    max-width: 95vw; /* Щоб не вилазило по ширині на малих екранах */
+    max-height: 95vh; /* Щоб не вилазило по висоті */
+    overflow-y: auto; /* Якщо контент не влізе, з'явиться внутрішня прокрутка */
+    background: rgba(10, 5, 0, 0.95);
+    border: 1px solid var(--accent-color);
+    padding: clamp(20px, 5%, 50px); /* Гнучкий відступ: зменшується на малих екранах */
+    position: relative;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 1), inset 0 0 20px var(--glow);
+    backdrop-filter: blur(15px);
+    /* скошенні кути вікна */
+    clip-path: polygon(0 0, 95% 0, 100% 5%, 100% 100%, 5% 100%, 0 95%);
+}
 
-        .setting-group {
-            display: grid;
-            grid-template-columns: 1fr 200px;
-            align-items: center;
-            margin-bottom: 25px;
-            padding: 15px;
-            background: rgba(255,255,255,0.02);
-            border-radius: 4px;
-            transition: 0.3s;
-        }
+h1 {
+    font-family: 'Orbitron';
+    color: var(--accent-color);
+    text-align: left;
+    letter-spacing: 5px;
+    margin-bottom: 40px;
+    font-size: 1.5rem;
+    border-left: 5px solid var(--accent-color);
+    padding-left: 20px;
+    text-transform: uppercase;
+}
 
-        .setting-group:hover {
-            background: rgba(255,87,34,0.05);
-            transform: translateX(10px);
-        }
+/* Групування кожного пункту налаштувань */
+.setting-group {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 10px; /* Додав зазор для вузьких екранів */
+    align-items: center;
+    margin-bottom: 25px;
+    padding: 15px;
+    background: rgba(255,255,255,0.02);
+    border-radius: 4px;
+    transition: 0.3s;
+}
 
-        .label {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 1rem;
-            letter-spacing: 1px;
-            color: #aaa;
-        }
+/* Ефект при наведенні: блок трохи від'їжджає вбік */
+.setting-group:hover {
+    background: rgba(255,87,34,0.05);
+    transform: translateX(10px);
+}
 
-        /* Стилізація Select */
-        select {
-            background: #000;
-            border: 1px solid var(--accent-color);
-            color: white;
-            padding: 10px;
-            font-family: 'Share Tech Mono';
-            outline: none;
-            width: 100%;
-            text-transform: uppercase;
-        }
+.label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    color: #aaa;
+}
 
-        /* Кастомний Range Slider */
-        input[type="range"] {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 8px;
-            background: #222;
-            outline: none;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
+/* Стиль для випадаючих списків */
+select {
+    background: #000;
+    border: 1px solid var(--accent-color);
+    color: white;
+    padding: 10px;
+    font-family: 'Share Tech Mono';
+    outline: none;
+    width: 100%;
+    text-transform: uppercase;
+}
 
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 20px;
-            height: 20px;
-            background: var(--accent-color);
-            cursor: pointer;
-            box-shadow: 0 0 10px var(--accent-color);
-        }
+/* Повзунок гучності */
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    background: #222;
+    outline: none;
+    border: 1px solid rgba(255,255,255,0.1);
+}
 
-        /* Кастомний Checkbox */
-        input[type="checkbox"] {
-            appearance: none;
-            width: 50px;
-            height: 25px;
-            background: #222;
-            border: 1px solid #444;
-            position: relative;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+/* Крутилка повзунка */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--accent-color);
+    cursor: pointer;
+    box-shadow: 0 0 10px var(--accent-color);
+}
 
-        input[type="checkbox"]:checked {
-            background: var(--accent-color);
-        }
+/* Мій кастомний чекбокс (перемикач) */
+input[type="checkbox"] {
+    appearance: none;
+    width: 50px;
+    height: 25px;
+    background: #222;
+    border: 1px solid #444;
+    position: relative;
+    cursor: pointer;
+    transition: 0.3s;
+    justify-self: end; /* Щоб завжди був притиснутий вправо */
+}
 
-        input[type="checkbox"]::before {
-            content: '';
-            position: absolute;
-            width: 15px; height: 15px;
-            background: white;
-            top: 4px; left: 4px;
-            transition: 0.3s;
-        }
+/* Колір чекбокса, коли він увімкнений */
+input[type="checkbox"]:checked {
+    background: var(--accent-color);
+}
 
-        input[type="checkbox"]:checked::before {
-            left: 29px;
-            background: black;
-        }
+/* Квадратик всередині чекбокса */
+input[type="checkbox"]::before {
+    content: '';
+    position: absolute;
+    width: 15px; height: 15px;
+    background: white;
+    top: 4px; left: 4px;
+    transition: 0.3s;
+}
 
-        .button-zone {
-            margin-top: 40px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
+/* Анімація пересування квадратика при кліку */
+input[type="checkbox"]:checked::before {
+    left: 29px;
+    background: black;
+}
 
-        button {
-            padding: 15px;
-            background: transparent;
-            border: 1px solid var(--accent-color);
-            color: var(--accent-color);
-            font-family: 'Orbitron';
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: 0.3s;
-            position: relative;
-        }
+/* Зона з кнопками внизу */
+.button-zone {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
 
-        button:hover {
-            background: var(--accent-color);
-            color: black;
-            box-shadow: 0 0 30px var(--accent-color);
-        }
+/* Загальний стиль для кнопок */
+button {
+    padding: 15px;
+    background: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    font-family: 'Orbitron';
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.3s;
+    position: relative;
+}
 
-        .btn-save {
-            background: rgba(255, 87, 34, 0.1);
-            font-weight: bold;
-        }
+/* Підсвітка кнопок при наведенні */
+button:hover {
+    background: var(--accent-color);
+    color: black;
+    box-shadow: 0 0 30px var(--accent-color);
+}
 
-        #log {
-            font-family: 'Share Tech Mono';
-            font-size: 0.7rem;
-            color: var(--accent-color);
-            margin-top: 20px;
-            text-align: left;
-            opacity: 0.6;
-        }
+/* Кнопка збереження трохи яскравіша */
+.btn-save {
+    background: rgba(255, 87, 34, 0.1);
+    font-weight: bold;
+}
 
-        /* Декор */
-        .decoration {
-            position: absolute;
-            bottom: 10px; right: 20px;
-            font-family: 'Share Tech Mono';
-            font-size: 10px;
-            color: var(--accent-color);
-            opacity: 0.3;
-        }
+/* Текст логів системного статусу */
+#log {
+    font-family: 'Share Tech Mono';
+    font-size: 0.7rem;
+    color: var(--accent-color);
+    margin-top: 20px;
+    text-align: left;
+    opacity: 0.6;
+}
+
+/* Маленький технічний напис у кутку для краси */
+.decoration {
+    position: absolute;
+    bottom: 10px; right: 20px;
+    font-family: 'Share Tech Mono';
+    font-size: 10px;
+    color: var(--accent-color);
+    opacity: 0.3;
+}
+
+/* Медіа-запит: якщо екран зовсім маленький, ставимо елементи один під одного */
+@media (max-width: 500px) {
+    .setting-group {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    input[type="checkbox"] {
+        justify-self: center;
+    }
+    .button-zone {
+        grid-template-columns: 1fr;
+    }
+}

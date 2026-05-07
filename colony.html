@@ -4,36 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mars OS - Colony Management</title>
+    <!-- підключення шрифтів -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <!-- Підключаю свої стилі для сторінки колонії -->
     <link rel="stylesheet" href="колонія_код/style_colony.css">
 </head>
 <body>
 
+    <!-- Блоки для фону: сама картинка Марса і зверху ефект ліній монітора -->
     <div id="mars-bg"></div>
     <div class="scanlines"></div>
 
     <div class="main-layout">
+        <!-- Бокове меню з кнопками перемикання розділів -->
         <nav>
             <button class="nav-btn active" onclick="updateDisplay('main', this)">[ 01 ] ГОЛОВНЕ УПРАВЛІННЯ</button>
             <button class="nav-btn" onclick="updateDisplay('garden', this)">[ 02 ] АГРО-СЕКТОР (САД)</button>
             <button class="nav-btn" onclick="updateDisplay('reactor', this)">[ 03 ] ЕНЕРГОБЛОК</button>
+            <!-- Кнопка, щоб вийти назад на головну сторінку системи -->
             <button class="nav-btn" onclick="window.location.href='index.html'">[ 05 ] ПОВЕРНУТИСЬ В OS</button>
         </nav>
 
+        <!-- Основне вікно терміналу -->
         <main class="terminal">
+            <!-- Шапка терміналу: статус зв'язку та годинник для краси -->
             <div class="terminal-header" style="display: flex; justify-content: space-between; font-family: 'Share Tech Mono'; color: var(--accent); margin-bottom: 10px;">
                 <span>TERMINAL_LINK: ACTIVE</span>
                 <span id="live-time">00:00:00</span>
             </div>
 
+            <!-- Сюди JS буде вставляти контент залежно від обраної кнопки -->
             <div id="display-box">
                 <!-- Контент завантажиться через colony.js -->
             </div>
         </main>
     </div>
 
+    <!-- Звуковий ефект кліку, який спрацьовує при натисканні кнопок -->
     <audio id="click-sfx" src="загальна_озвучка/click-effect.mp3"></audio>
 
+    <!-- Мій основний скрипт, який керує всією логікою колонії -->
     <script src="колонія_код/code_colony.js"></script>
 </body>
 </html>

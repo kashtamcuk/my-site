@@ -1,46 +1,62 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
+    <!-- Базові налаштування: кодування та назва сторінки -->
     <meta charset="UTF-8">
     <title>PHOBOS Protocol - Advanced Sync</title>
+    
+    <!-- Підключаю шрифти -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <!-- Мій файл зі стилями для Фобоса -->
     <link rel="stylesheet" href="подорж_між_сопутниками_на_марс/style_phobos.css">
 </head>
 <body>
 
+    <!-- Кнопка музики та фонова сітка -->
     <div id="music-ui">🔊</div>
     <div class="grid-bg"></div>
 
+    <!-- Основний блок квізу -->
     <div class="quiz-container" id="main-card">
+        <!-- Декоративні куточки для рамки -->
         <div class="corner tl"></div><div class="corner tr"></div>
         <div class="corner bl"></div><div class="corner br"></div>
 
+        <!-- Верхня панель: назва та лічильник запитань -->
         <div class="header">
             <span>ARES-CORE // PHOBOS_SYNC</span>
             <span id="counter">КРОК: 1 / 4</span>
         </div>
 
         <div id="quiz-box">
+            <!-- Сюди буде підтягуватися текст питання -->
             <div class="question-text" id="question">Завантаження протоколу...</div>
+            
+            <!-- Контейнер для варіантів відповідей -->
             <div class="options-grid" id="options-container"></div>
             
+            <!-- Панель з цікавими фактами, яка вискакує після відповіді -->
             <div class="fact-panel" id="fact-box">
                 <span style="font-weight:bold; color:var(--accent)">[ DATA ANALYSIS ]:</span>
                 <p id="fact-text"></p>
             </div>
 
+            <!-- Кнопка переходу далі -->
             <button class="next-btn" id="next-button" onclick="handleNext()">Наступний сектор</button>
         </div>
 
+        <!-- Смужка прогресу внизу -->
         <div id="progress-fill"></div>
     </div>
 
-    <!-- Аудіо ресурси -->
+    <!-- Тут всі звуки: фонова музика, озвучка фактів та ефекти (правильно/неправильно) -->
     <audio id="bg-music" loop src="game_voce.mp3"></audio>
     <audio id="fact-player"></audio>
     <audio id="sfx-correct" src="загальна_озвучка/correct.mp3"></audio>
     <audio id="sfx-error" src="загальна_озвучка/error.mp3"></audio>
 
+    <!-- Підключення логіки скрипта -->
     <script src="подорж_між_сопутниками_на_марс/code_phobos.js"></script>
 </body>
 </html>
